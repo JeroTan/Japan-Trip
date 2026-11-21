@@ -1,6 +1,6 @@
 # Japan trip guide
 
-Status: ready-for-agent
+Status: resolved
 
 ## Problem Statement
 
@@ -44,3 +44,9 @@ Booking changes, live transit or fare predictions, collecting personal travel do
 ## Further Notes
 
 The Narita hotel permits check-in after 15:00. The morning stop is provisional. The return flight leaves Narita Terminal 2 at 19:00 JST on November 28 and arrives in Manila at 23:35 PHT.
+
+The full hourly grid uses Manila time on the two flight dates and Japan time on the three intervening dates. The agenda uses local airport times. This keeps each 24-hour grid on one clock.
+
+## Verification
+
+All 22 browser tests passed from the local entry page. The nine views were checked at phone, tablet and desktop widths, and each loaded with external networking disabled. The external map and registration links require a connection.
