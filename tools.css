@@ -4,6 +4,7 @@
   line-height: 1.55;
   overflow-wrap: anywhere;
 }
+.jt-view [hidden] { display: none !important; }
 .jt-view *, .jt-view *::before, .jt-view *::after { box-sizing: border-box; }
 .jt-header { margin: 0 0 clamp(28px, 4vw, 48px); }
 .jt-header h1, .jt-section h2, .jt-empty h2, .jt-map-heading h3, .jt-stay h3, .jt-form h3 {
@@ -53,9 +54,30 @@
   font: 400 1rem/1.4 var(--sans, system-ui, sans-serif);
 }
 .jt-view select { cursor: pointer; }
-.jt-map-panel { padding: clamp(18px, 3vw, 32px); }
+.jt-route-index { padding: 10px clamp(16px, 3vw, 32px); }
+.jt-route-index summary, .jt-hotel-map summary {
+  width: fit-content;
+  padding-block: 9px;
+  color: var(--accent, #b83a2c);
+  font-weight: 650;
+  cursor: pointer;
+}
+.jt-route-index ul { margin: 0 0 10px; padding-inline-start: 22px; }
+.jt-route-index li a { display: inline-block; padding-block: 6px; }
+.jt-map-panel { scroll-margin-block-start: 12px; }
+.jt-route-notes { padding: clamp(18px, 3vw, 32px); }
+.jt-route-map, .jt-hotel-map iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: var(--paper, #f7f7f0);
+}
+.jt-route-map { height: clamp(300px, 42vw, 480px); border-block-end: 1px solid var(--line, #d5dcd5); }
+.jt-hotel-map { width: 100%; margin-top: 6px; border-top: 1px solid var(--line, #d5dcd5); }
+.jt-hotel-map iframe { height: 250px; }
+
 .jt-map-heading h3 { margin: 4px 0 0; font-size: clamp(1.45rem, 2.6vw, 2rem); }
-.jt-map-panel > p { max-width: 86ch; margin: 0 0 10px; }
+.jt-route-notes > p { max-width: 86ch; margin: 0 0 10px; }
 .jt-line {
   display: grid;
   grid-auto-flow: column;
@@ -106,8 +128,7 @@
   cursor: pointer;
 }
 .jt-btn:hover, .jt-btn[aria-expanded="true"] { color: var(--white, white); background: var(--ink, #202d2a); }
-.jt-view :is(a, button, select, input):focus-visible { outline: 3px solid var(--accent, #b83a2c); outline-offset: 3px; }
-#jt-preview iframe { display: block; width: 100%; height: clamp(230px, 40vw, 380px); margin-top: 18px; border: 1px solid var(--line, #d5dcd5); }
+.jt-view :is(a, button, select, input, summary):focus-visible { outline: 3px solid var(--accent, #b83a2c); outline-offset: 3px; }
 .jt-flights, .jt-forms, .jt-hotels, .jt-phrase-grid { display: grid; gap: 16px; }
 .jt-flights, .jt-forms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .jt-hotels, .jt-phrase-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }

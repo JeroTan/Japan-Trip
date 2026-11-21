@@ -13,8 +13,8 @@ after(async () => browser?.close());
 async function visit(t, route, options = {}) {
   const page = await browser.newPage(options);
   t.after(() => page.close());
-  const entry = pathToFileURL(path.resolve(__dirname, '..', 'index.html'));
-  entry.hash = route;
+  await page.route('https://www.google.com/maps?**', route => route.fulfill({contentType: 'text/html', body: '<p>Map fixture</p>'}));
+  const entry = pathToFileURL(path.resolve(__dirname, '..', route + '.html'));
   await page.goto(entry.href);
   page.setDefaultTimeout(2500);
   return page;
@@ -54,19 +54,61 @@ test('preparation and optional shop choices survive reloading the local guide', 
   assert.equal(await page.locator('a[href^="https://maps.app.goo.gl/"]').count(), 5);
 });
 
-test('a map only loads when requested, and switching legs clears the previous map', async t => {
-  const page = await visit(t, 'transport');
-  await page.route('https://www.google.com/maps?**', route => route.fulfill({ body: '<p>Map response</p>' }));
-  assert.equal(await page.locator('iframe').count(), 0);
-  await page.getByRole('button', {name: 'Load map'}).click();
-  const map = page.locator('iframe[title*="Centrair"]');
-  assert.match(await map.getAttribute('src'), /output=embed/);
-  assert.match(new URL(await map.getAttribute('src')).searchParams.get('saddr') || '', /Centrair/);
-  await page.getByRole('combobox', {name: 'Route leg'}).selectOption({label: 'Nov 27 · Tokyo to Narita'});
-  assert.equal(await page.locator('iframe').count(), 0);
-  await page.getByRole('button', {name: 'Load map'}).click();
-  assert.match(await page.locator('iframe').getAttribute('title'), /Tokyo to Narita/);
-  assert.ok(await page.getByRole('link', {name: 'Open directions'}).isVisible());
+test('route map is visible on arrival and changes with the selected leg, including on mobile', async t => {
+  for (const width of [375, 1280]) {
+    const page = await visit(t, 'transport', {viewport: {width, height: 800}});
+    const map = page.locator('.jt-map-panel:visible iframe');
+    assert.equal(await map.count(), 1);
+    const position = await map.boundingBox();
+    assert.ok(position.y < 400 && position.height >= 250, 'Travellers can see the map on entry');
+    const first = new URL(await map.getAttribute('src'));
+    assert.match(first.searchParams.get('saddr'), /Centrair/);
+    assert.equal(first.searchParams.get('output'), 'embed');
+    assert.equal(first.searchParams.get('dirflg'), 'r');
+    await page.getByRole('combobox', {name: 'Route leg'}).selectOption({label: 'Nov 27 · Tokyo to Narita'});
+    assert.match(await map.getAttribute('title'), /Tokyo to Narita/);
+    assert.match(new URL(await map.getAttribute('src')).searchParams.get('daddr'), /Narita Tobu/);
+    assert.ok(await page.getByRole('link', {name: 'Open directions'}).isVisible());
+    const hotel = page.locator('.jt-stay', {hasText: 'APA Hotel Nagoya Ekimae'});
+    await hotel.locator('summary').click();
+    assert.ok(await hotel.locator('iframe').isVisible());
+    assert.match(new URL(await hotel.locator('iframe').getAttribute('src')).searchParams.get('q'), /APA Hotel Nagoya/);
+  }
+});
+
+test('all route notes, phrases, entry forms and checklist items are usable with scripts disabled', async t => {
+  const options = {javaScriptEnabled: false, viewport: {width: 375, height: 800}};
+  const transport = await visit(t, 'transport', options);
+  assert.ok(await transport.locator('.jt-map-panel iframe').first().isVisible());
+  const routes = transport.locator('.jt-map-panel');
+  assert.equal(await routes.count(), 8);
+  const index = transport.locator('.jt-route-index');
+  await index.locator('summary').click();
+  const direct = index.getByRole('link', {name: 'Nov 28 · Narita hotel to Terminal 2'});
+  await direct.click();
+  assert.match(transport.url(), /#narita-terminal-2$/);
+  assert.ok(await transport.getByRole('heading', {name: 'To the Manila departure'}).isVisible());
+  for (const route of await routes.all()) {
+    assert.ok(await route.getByRole('link', {name: 'Open directions'}).isVisible());
+    assert.ok(await route.locator('li').count() >= 2);
+    assert.ok(await route.locator('p').innerText());
+    assert.ok(await route.locator('iframe').getAttribute('title'));
+  }
+  assert.equal(await transport.locator('.jt-stay iframe').count(), 3);
+  assert.equal(await transport.locator('.jt-ticket').locator('a[href="day24.html"], a[href="day28.html"]').count(), 2);
+
+  const phrases = await visit(t, 'phrases', options);
+  assert.equal(await phrases.getByRole('article').count(), 60);
+  assert.equal(await phrases.locator('article [lang="ja"]').count(), 60);
+  assert.equal(await phrases.locator('article .jt-roman').count(), 60);
+  assert.equal(await phrases.getByRole('searchbox').count(), 0);
+  assert.equal(await phrases.getByRole('button', {name: /Show phrase/}).count(), 0);
+
+  const checklist = await visit(t, 'checklist', options);
+  assert.equal(await checklist.getByRole('checkbox').count(), 15);
+  await checklist.getByRole('checkbox', {name: /Travel insurance/}).check();
+  assert.ok(await checklist.getByRole('checkbox', {name: /Travel insurance/}).isChecked());
+  assert.ok(await checklist.getByRole('link', {name: /Open Visit Japan Web/}).isVisible());
 });
 
 test('checklist saves new choices after recovering from malformed device storage', async t => {
