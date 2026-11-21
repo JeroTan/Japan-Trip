@@ -27,9 +27,9 @@ Build a local, responsive travel guide for Nagoya, Tokyo and Narita. The overvie
 
 ## Implementation Decisions
 
-- Use a static entry page and local scripts, styles and imagery. Use URL fragments for overview, each day, transport, preparation and phrases.
+- Use a separate, locally openable HTML document for the overview, each date, transport, preparation and phrases. Store trip content in those documents.
 - The updated Japan workbook supplies the agenda, flights, hotel dates/windows, terminals, checklist and hobby options. Do not copy travel documents or booking credentials into web assets.
-- Keep devices' checklist progress local. External maps and government forms open only on request.
+- Keep devices' checklist progress local. Embed route directions on entry to every day and the transport page. External government forms open on request.
 - Use a railway field-guide visual direction with legible type, light paper, dark ink, a vermilion accent, route markers and a Japan travel image.
 - Primary navigation and accessible mobile controls stay consistent across views.
 
@@ -39,7 +39,7 @@ Exercise the public browser interface with keyboard and pointer. Verify deep lin
 
 ## Out of Scope
 
-Booking changes, live transit or fare predictions, collecting personal travel documents and external deployment.
+Booking changes, live transit or fare predictions, collecting personal travel documents and collection of new trip information.
 
 ## Further Notes
 
@@ -49,4 +49,4 @@ The full hourly grid uses Manila time on the two flight dates and Japan time on 
 
 ## Verification
 
-All 22 browser tests passed from the local entry page. The nine views were checked at phone, tablet and desktop widths, and each loaded with external networking disabled. The external map and registration links require a connection.
+All 25 browser tests passed against the separate HTML pages. The nine views were checked at phone, tablet and desktop widths, and the trip content is readable with JavaScript disabled. Embedded maps and registration links require a connection.

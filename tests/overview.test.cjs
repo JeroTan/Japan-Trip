@@ -10,6 +10,7 @@ test('keyboard travelers can skip navigation, choose a date, and use the phone m
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
   const page = await browser.newPage({ viewport: { width: 375, height: 800 } });
+  await page.route('https://www.google.com/maps**', r => r.fulfill({ body: 'Map' }));
   await page.goto(entry);
   await page.keyboard.press('Tab');
   assert.equal(await page.locator(':focus').innerText(), 'Skip to content');
@@ -20,7 +21,7 @@ test('keyboard travelers can skip navigation, choose a date, and use the phone m
   assert.equal(await days.count(), 5);
   await days.filter({ hasText: 'Woven by Toyota' }).focus();
   await page.keyboard.press('Enter');
-  await page.waitForURL(entry + '#day/26');
+  await page.waitForURL(new URL('day26.html', entry).href);
   await page.reload();
   const dayHeading = await page.getByRole('heading', { level: 1 }).innerText();
 
@@ -37,7 +38,7 @@ test('keyboard travelers can skip navigation, choose a date, and use the phone m
   await page.keyboard.press('Enter');
   await navigation.getByRole('link', { name: 'Phrases' }).focus();
   await page.keyboard.press('Enter');
-  await page.waitForURL(entry + '#phrases');
+  await page.waitForURL(new URL('phrases.html', entry).href);
   await page.getByRole('heading', { level: 1, name: /phrase/i }).waitFor();
   assert.equal(await menu.getAttribute('aria-expanded'), 'false');
   await page.goBack();
@@ -48,7 +49,8 @@ test('Back restores the phrase search and the selected train route', async t => 
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
   const page = await browser.newPage();
-  await page.goto(entry + '#phrases');
+  await page.route('https://www.google.com/maps**', r => r.fulfill({ body: 'Map' }));
+  await page.goto(new URL('phrases.html', entry).href);
   const search = page.getByRole('searchbox', { name: 'Search phrases' });
   await search.fill('luggage');
   const count = await page.locator('main article').count();

@@ -3,19 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="theme-color" content="#f7f7f0">
   <title>Transport &amp; bookings · Japan field guide</title>
   <link rel="stylesheet" href="site.css">
   <link rel="stylesheet" href="tools.css">
+  <script defer src="trip.js"></script>
   <script defer src="tools.js"></script>
+  <script defer src="app.js"></script>
 </head>
 <body>
+  <svg class="guide-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="mark-train" viewBox="0 0 32 32">
+      <rect x="7" y="5" width="18" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+      <rect x="10" y="9" width="12" height="6" rx="1" fill="currentColor"/>
+      <circle cx="11.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="20.5" cy="19.5" r="1.4" fill="currentColor"/>
+      <path d="m11 24-4 5m14-5 4 5M10 27h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+  </svg>
+  <a class="guide-skip" href="#main-content">Skip to content</a>
+  <header class="guide-header">
+    <div class="guide-header-inner guide-container">
+      <a class="guide-brand" href="index.html" aria-label="Field Notes, Japan trip overview">
+        <span class="guide-mark"><svg aria-hidden="true"><use href="#mark-train"/></svg></span>
+        <span>Field Notes</span>
+        <span class="guide-brand-country" lang="ja">日本</span>
+      </a>
+      <button class="guide-menu" type="button" aria-controls="guide-nav" aria-expanded="false">
+        <svg class="guide-icon guide-menu-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="guide-icon guide-menu-close" aria-hidden="true"><use href="#i-close"/></svg>
+        Menu
+      </button>
+      <nav class="guide-nav" id="guide-nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a><a href="day24.html">Itinerary</a><a href="transport.html" aria-current="page">Transport</a><a href="phrases.html">Phrases</a><a href="checklist.html">Checklist</a>
+      </nav>
+    </div>
+  </header>
   <main id="main-content" class="guide-container" tabindex="-1" data-view="transport">
     <div class="jt-view">
       <header class="jt-header">
         <h1>Transport &amp; bookings</h1>
-        <p>Rail connections, airport transfers and hotel details for the five-day route.</p>
       </header>
       <section class="jt-section" id="routes" aria-labelledby="routes-title">
         <h2 id="routes-title">Route maps</h2>
@@ -42,7 +71,7 @@
           <article class="jt-map-panel" id="centrair-nagoya" aria-labelledby="centrair-nagoya-title">
             <iframe class="jt-route-map"
               title="Route map · Nov 24 · Centrair to Nagoya"
-              src="https://www.google.com/maps?saddr=Chubu+Centrair+International+Airport+Terminal+2&amp;daddr=APA+Hotel+Nagoya+Ekimae%2C+1-5-3+Noritake%2C+Nakamura-ku%2C+Nagoya+453-0014&amp;dirflg=r&amp;output=embed"
+              src="https://www.google.com/maps?saddr=Chubu+Centrair+International+Airport+Terminal+2&amp;daddr=APA+Hotel+Nagoya+Ekimae&amp;dirflg=r&amp;output=embed"
               loading="eager" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
             <div class="jt-route-notes">
               <header class="jt-map-heading">
@@ -57,7 +86,7 @@
               </ol>
               <p>From Terminal 2, follow signs to Access Plaza and the airport rail station. Ride Meitetsu to Nagoya, then walk to the hotel. A μ-SKY seat requires a μticket in addition to the base fare.</p>
               <div class="jt-actions">
-                <a class="jt-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=Chubu+Centrair+International+Airport+Terminal+2&amp;destination=APA+Hotel+Nagoya+Ekimae%2C+1-5-3+Noritake%2C+Nakamura-ku%2C+Nagoya+453-0014&amp;travelmode=transit" target="_blank" rel="noopener noreferrer">Open directions <span aria-hidden="true">↗</span></a>
+                <a class="jt-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=Chubu+Centrair+International+Airport+Terminal+2&amp;destination=APA+Hotel+Nagoya+Ekimae&amp;travelmode=transit" target="_blank" rel="noopener noreferrer">Open directions <span aria-hidden="true">↗</span></a>
                 <a class="jt-link" href="https://www.centrair.jp/en/access/train.html" target="_blank" rel="noopener noreferrer">Centrair rail guide <span aria-hidden="true">↗</span></a>
                 <a class="jt-link" href="https://www.centrair.jp/en/access/terminal2/" target="_blank" rel="noopener noreferrer">Terminal 2 access <span aria-hidden="true">↗</span></a>
               </div>
@@ -66,7 +95,7 @@
           <article class="jt-map-panel" id="toyota-city" aria-labelledby="toyota-city-title">
             <iframe class="jt-route-map"
               title="Route map · Nov 25 · Nagoya to Toyota City"
-              src="https://www.google.com/maps?saddr=APA+Hotel+Nagoya+Ekimae%2C+1-5-3+Noritake%2C+Nakamura-ku%2C+Nagoya+453-0014&amp;daddr=Toyota+Kaikan+Museum%2C+1+Toyota-cho%2C+Toyota+City%2C+Japan&amp;dirflg=d&amp;output=embed"
+              src="https://www.google.com/maps?saddr=APA+Hotel+Nagoya+Ekimae&amp;daddr=Toyota+Kaikan+Museum%2C+1+Toyota-cho%2C+Toyota+City%2C+Japan&amp;dirflg=d&amp;output=embed"
               loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
             <div class="jt-route-notes">
               <header class="jt-map-heading">
@@ -80,7 +109,7 @@
               </ol>
               <p>Meet the group for the planned 07:45 drive. The map leads to Toyota Kaikan on the headquarters campus. Confirm the meeting entrance for the DNA Inheritance Hall and the vehicle return with the host.</p>
               <div class="jt-actions">
-                <a class="jt-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Nagoya+Ekimae%2C+1-5-3+Noritake%2C+Nakamura-ku%2C+Nagoya+453-0014&amp;destination=Toyota+Kaikan+Museum%2C+1+Toyota-cho%2C+Toyota+City%2C+Japan&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">Open directions <span aria-hidden="true">↗</span></a>
+                <a class="jt-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Nagoya+Ekimae&amp;destination=Toyota+Kaikan+Museum%2C+1+Toyota-cho%2C+Toyota+City%2C+Japan&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">Open directions <span aria-hidden="true">↗</span></a>
                 <a class="jt-link" href="https://www.toyota.co.jp/en/about_toyota/facility/toyota_kaikan/facility/index.html" target="_blank" rel="noopener noreferrer">Toyota Kaikan visitor guide <span aria-hidden="true">↗</span></a>
               </div>
             </div>
@@ -267,13 +296,13 @@
             </dl>
             <p>Four non-smoking single rooms. From Nagoya Station, take the Taiko-dori exit or the ESCA passage to exit E7.</p>
             <div class="jt-actions">
-              <a class="jt-link" href="https://www.google.com/maps/search/?api=1&amp;query=APA+Hotel+Nagoya+Ekimae%2C+1-5-3+Noritake%2C+Nakamura-ku%2C+Nagoya+453-0014" target="_blank" rel="noopener noreferrer">Open in Maps <span aria-hidden="true">↗</span></a>
+              <a class="jt-link" href="https://www.google.com/maps/search/?api=1&amp;query=APA+Hotel+Nagoya+Ekimae" target="_blank" rel="noopener noreferrer">Open in Maps <span aria-hidden="true">↗</span></a>
               <a class="jt-link" href="https://www3.apahotel.com/en/hotel/tokai/aichi/nagoyaekimae/" target="_blank" rel="noopener noreferrer">Hotel access <span aria-hidden="true">↗</span></a>
             </div>
             <details class="jt-hotel-map">
               <summary>Show hotel map</summary>
               <iframe title="Hotel location · APA Hotel Nagoya Ekimae"
-                src="https://www.google.com/maps?q=APA+Hotel+Nagoya+Ekimae%2C+1-5-3+Noritake%2C+Nakamura-ku%2C+Nagoya+453-0014&amp;z=16&amp;output=embed"
+                src="https://www.google.com/maps?q=APA+Hotel+Nagoya+Ekimae&amp;z=16&amp;output=embed"
                 loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
             </details>
           </article>

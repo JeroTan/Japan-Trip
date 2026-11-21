@@ -1,16 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Narita to Manila · 28 November · Japan field guide</title>
-    <link rel="stylesheet" href="site.css">
-    <link rel="stylesheet" href="days.css">
-    <script defer src="trip.js"></script>
-    <script defer src="days.js"></script>
-  </head>
-  <body>
-    <main id="main-content" class="guide-container" tabindex="-1" data-view="day">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="theme-color" content="#f7f7f0">
+  <title>Narita to Manila · 28 November · Japan field guide</title>
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="days.css">
+  <script defer src="trip.js"></script>
+  <script defer src="days.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <svg class="guide-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="mark-train" viewBox="0 0 32 32">
+      <rect x="7" y="5" width="18" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+      <rect x="10" y="9" width="12" height="6" rx="1" fill="currentColor"/>
+      <circle cx="11.5" cy="19.5" r="1.4" fill="currentColor"/><circle cx="20.5" cy="19.5" r="1.4" fill="currentColor"/>
+      <path d="m11 24-4 5m14-5 4 5M10 27h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+  </svg>
+  <a class="guide-skip" href="#main-content">Skip to content</a>
+  <header class="guide-header">
+    <div class="guide-header-inner guide-container">
+      <a class="guide-brand" href="index.html" aria-label="Field Notes, Japan trip overview">
+        <span class="guide-mark"><svg aria-hidden="true"><use href="#mark-train"/></svg></span>
+        <span>Field Notes</span>
+        <span class="guide-brand-country" lang="ja">日本</span>
+      </a>
+      <button class="guide-menu" type="button" aria-controls="guide-nav" aria-expanded="false">
+        <svg class="guide-icon guide-menu-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="guide-icon guide-menu-close" aria-hidden="true"><use href="#i-close"/></svg>
+        Menu
+      </button>
+      <nav class="guide-nav" id="guide-nav" aria-label="Main navigation">
+        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="checklist.html">Checklist</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="guide-container" tabindex="-1" data-view="day">
       <article class="jd-guide">
         <header class="jd-heading">
           <div>
@@ -383,5 +414,5 @@
         </div>
       </article>
     </main>
-  </body>
+</body>
 </html>

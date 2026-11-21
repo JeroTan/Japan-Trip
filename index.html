@@ -3,15 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="theme-color" content="#f7f7f0">
   <title>Japan field guide · November 2026</title>
   <link rel="stylesheet" href="site.css">
-  <link rel="stylesheet" href="days.css">
-  <link rel="stylesheet" href="tools.css">
-  <script defer src="trip.js"></script>
-  <script defer src="days.js"></script>
-  <script defer src="tools.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -39,7 +34,7 @@
   <a class="guide-skip" href="#main-content">Skip to content</a>
   <header class="guide-header">
     <div class="guide-header-inner guide-container">
-      <a class="guide-brand" href="#overview" aria-label="Field Notes, Japan trip overview">
+      <a class="guide-brand" href="index.html" aria-label="Field Notes, Japan trip overview">
         <span class="guide-mark"><svg aria-hidden="true"><use href="#mark-train"/></svg></span>
         <span>Field Notes</span>
         <span class="guide-brand-country" lang="ja">日本</span>
@@ -50,22 +45,19 @@
         Menu
       </button>
       <nav class="guide-nav" id="guide-nav" aria-label="Main navigation">
-        <a href="#overview">Overview</a><a href="#day/24">Itinerary</a><a href="#transport">Transport</a><a href="#phrases">Phrases</a><a href="#checklist">Checklist</a>
+        <a href="index.html" aria-current="page">Overview</a><a href="day24.html">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="checklist.html">Checklist</a>
       </nav>
     </div>
   </header>
-  <main id="main-content" class="guide-container" tabindex="-1">
-    <noscript>Enable JavaScript to open the itinerary and travel tools.</noscript>
-  </main>
-  <template id="guide-overview">
+  <main id="main-content" class="guide-container" tabindex="-1" data-view="overview">
     <section class="guide-hero" aria-labelledby="guide-title">
       <div class="guide-hero-text">
         <p class="guide-date"><span aria-hidden="true"></span>24–28 November 2026</p>
         <h1 id="guide-title">Japan<br>field guide</h1>
         <p class="guide-deck">A five-day business trip through Nagoya, Tokyo and Narita, from Toyota City to Narita Market.</p>
         <div class="guide-actions">
-          <a class="guide-btn guide-primary" href="#day/24">Open itinerary <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="guide-btn guide-secondary" href="#checklist"><svg class="guide-icon" aria-hidden="true"><use href="#i-list"/></svg> Checklist</a>
+          <a class="guide-btn guide-primary" href="day24.html">Open itinerary <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="guide-btn guide-secondary" href="checklist.html"><svg class="guide-icon" aria-hidden="true"><use href="#i-list"/></svg> Checklist</a>
         </div>
       </div>
       <img class="guide-hero-art" src="assets/japan-by-rail.webp" width="1400" height="757" alt="A shinkansen passes Mount Fuji beneath a red autumn sun, framed by pines and maple leaves." fetchpriority="high">
@@ -82,7 +74,53 @@
     </section>
     <section class="guide-overview-section" aria-labelledby="days-title">
       <div class="guide-section-heading"><h2 id="days-title">Day by day</h2><span class="guide-rule"></span></div>
-      <div class="guide-day-cards"></div>
+      <div class="guide-day-cards">
+        <a class="guide-day-card" href="day24.html">
+          <div class="guide-card-top">
+            <span class="guide-day-icon"><svg class="guide-icon" aria-hidden="true"><use href="#i-land"/></svg></span>
+            <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </div>
+          <time datetime="2026-11-24">Tue · Nov 24</time>
+          <h3>Arrive in Nagoya</h3>
+          <span class="guide-card-place"><svg class="guide-icon" aria-hidden="true"><use href="#i-pin"/></svg>Manila to Nagoya</span>
+        </a>
+        <a class="guide-day-card" href="day25.html">
+          <div class="guide-card-top">
+            <span class="guide-day-icon"><svg class="guide-icon" aria-hidden="true"><use href="#i-car"/></svg></span>
+            <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </div>
+          <time datetime="2026-11-25">Wed · Nov 25</time>
+          <h3>Inside Toyota City</h3>
+          <span class="guide-card-place"><svg class="guide-icon" aria-hidden="true"><use href="#i-pin"/></svg>Toyota City &amp; Nagoya</span>
+        </a>
+        <a class="guide-day-card" href="day26.html">
+          <div class="guide-card-top">
+            <span class="guide-day-icon"><svg class="guide-icon" aria-hidden="true"><use href="#i-building"/></svg></span>
+            <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </div>
+          <time datetime="2026-11-26">Thu · Nov 26</time>
+          <h3>Woven by Toyota</h3>
+          <span class="guide-card-place"><svg class="guide-icon" aria-hidden="true"><use href="#i-pin"/></svg>Nagoya to Tokyo</span>
+        </a>
+        <a class="guide-day-card" href="day27.html">
+          <div class="guide-card-top">
+            <span class="guide-day-icon"><svg class="guide-icon" aria-hidden="true"><use href="#i-market"/></svg></span>
+            <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </div>
+          <time datetime="2026-11-27">Fri · Nov 27</time>
+          <h3>Market fieldwork</h3>
+          <span class="guide-card-place"><svg class="guide-icon" aria-hidden="true"><use href="#i-pin"/></svg>Tokyo to Narita</span>
+        </a>
+        <a class="guide-day-card" href="day28.html">
+          <div class="guide-card-top">
+            <span class="guide-day-icon"><svg class="guide-icon" aria-hidden="true"><use href="#i-takeoff"/></svg></span>
+            <svg class="guide-icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </div>
+          <time datetime="2026-11-28">Sat · Nov 28</time>
+          <h3>Return to Manila</h3>
+          <span class="guide-card-place"><svg class="guide-icon" aria-hidden="true"><use href="#i-pin"/></svg>Narita to Manila</span>
+        </a>
+      </div>
     </section>
     <section class="guide-overview-section guide-essentials" aria-labelledby="essentials-title">
       <div class="guide-section-heading"><h2 id="essentials-title">Trip essentials</h2><span class="guide-rule"></span></div>
@@ -90,22 +128,22 @@
         <article>
           <h3><svg class="guide-icon" aria-hidden="true"><use href="#i-takeoff"/></svg>Ticketed flights</h3>
           <ul><li><strong>24 Nov · Manila to Nagoya</strong><span>07:35 PHT → 12:35 JST · 5J 5038</span></li><li><strong>28 Nov · Narita to Manila</strong><span>19:00 JST → 23:35 PHT · 5J 5057</span></li></ul>
-          <a class="guide-text-link" href="#transport">Flight and transfer details <span aria-hidden="true">→</span></a>
+          <a class="guide-text-link" href="transport.html#flights">Flight and transfer details <span aria-hidden="true">→</span></a>
         </article>
         <article>
           <h3><svg class="guide-icon" aria-hidden="true"><use href="#i-bed"/></svg>Hotel stays</h3>
           <ul><li><strong>24–26 Nov · Nagoya</strong><span>APA Hotel Nagoya Ekimae</span></li><li><strong>26–27 Nov · Tokyo</strong><span>APA Hotel Kayabacho Hatchobori Ekimae</span></li><li><strong>27–28 Nov · Narita</strong><span>Narita Tobu Hotel Airport</span></li></ul>
-          <a class="guide-text-link" href="#transport">Hotel booking details <span aria-hidden="true">→</span></a>
+          <a class="guide-text-link" href="transport.html#hotels">Hotel booking details <span aria-hidden="true">→</span></a>
         </article>
         <article>
           <h3><svg class="guide-icon" aria-hidden="true"><use href="#i-list"/></svg>Traveler tools</h3>
           <ul class="guide-essentials-links">
-            <li><a href="#phrases"><strong>Japanese phrases <span aria-hidden="true">→</span></strong><span>Read the pronunciation, copy Japanese or show it in large type.</span></a></li>
-            <li><a href="#checklist"><strong>Travel checklist <span aria-hidden="true">→</span></strong><span>Entry forms, documents and reminders.</span></a></li>
+            <li><a href="phrases.html"><strong>Japanese phrases <span aria-hidden="true">→</span></strong><span>Read the pronunciation, copy Japanese or show it in large type.</span></a></li>
+            <li><a href="checklist.html"><strong>Travel checklist <span aria-hidden="true">→</span></strong><span>Entry forms, documents and reminders.</span></a></li>
           </ul>
         </article>
       </div>
     </section>
-  </template>
+  </main>
 </body>
 </html>
