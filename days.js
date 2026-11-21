@@ -188,28 +188,10 @@
     updateStop();
   }
 
-  const shops = [
-    { id: "shop-sakae-bookoff", days: [24, 25], area: "Nagoya · Sakae", name: "BOOKOFF SUPER BAZAAR Sakae-SKYLE Store", map: "https://maps.app.goo.gl/dYiwFmqSvGHA9jdFA" },
-    { id: "shop-sakae-cpla", days: [24, 25], area: "Nagoya · Sakae", name: "#C-pla 名古屋サカエチカ店", map: "https://maps.app.goo.gl/MsaYXn66Wa1KcHDb6" },
-    { id: "shop-tokyo-hololive", days: [26], area: "Tokyo Station", name: "hololive production official shop in Tokyo Station", map: "https://maps.app.goo.gl/XmUaUJQs5mVGn9ur7" },
-    { id: "shop-narita-bookoff", days: [27, 28], area: "Narita", name: "BOOKOFF AEON MALL Narita Store", map: "https://maps.app.goo.gl/7sSh4HaFAaSLP11Q9" },
-    { id: "shop-narita-fasola", days: [28], area: "Narita Airport · T1", name: "Fa-So-La TAX FREE AKIHABARA Narita Airport Terminal 1", map: "https://maps.app.goo.gl/q1QRgKrXWirfr7PM9",
-      note: 'This branch is after international security in Terminal 1. Your Terminal 2 ticket does not give access.',
-      source: "https://www.narita-airport.jp/en/shop/shop-search/t1sw03_t0002m/" }
-  ];
-  const checklistKey = "japan-guide-2026-11-checklist";
-  let sessionChecklist = {};
-
-  function checklist() {
-    try {
-      const value = JSON.parse(localStorage.getItem(checklistKey));
-      if (value && typeof value === "object" && !Array.isArray(value)) return value;
-    } catch { /* Private browsing can limit local storage. */ }
-    return sessionChecklist;
-  }
+  const { shops, progress } = window.JapanTrip;
 
   function shopList(date) {
-    const saved = checklist();
+    const saved = progress.read();
     return `<section class="jd-shops" aria-labelledby="jd-shops-title">
       <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
       <p class="jd-shop-intro">Tick a stop when you’ve visited.</p>
@@ -228,9 +210,7 @@
     panel.addEventListener("change", change => {
       const checkbox = change.target;
       if (checkbox.type !== "checkbox") return;
-      sessionChecklist = { ...checklist(), [checkbox.value]: checkbox.checked };
-      try { localStorage.setItem(checklistKey, JSON.stringify(sessionChecklist)); }
-      catch { /* Keep progress in memory when device storage is unavailable. */ }
+      progress.set(checkbox.value, checkbox.checked);
     });
   }
 

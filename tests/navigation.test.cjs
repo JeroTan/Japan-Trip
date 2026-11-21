@@ -40,3 +40,19 @@ test('marking a hobby stop on a day also updates the travel checklist', async t 
   await page.reload();
   assert.equal(await shop().isChecked(), false);
 });
+
+test('checklist choices stay available across views when device storage is blocked', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage();
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'localStorage', {
+      get() { throw new DOMException('Storage is disabled', 'SecurityError'); }
+    });
+  });
+  await page.goto(entry + '#day/24');
+  const shop = () => page.getByRole('checkbox', { name: /Sakae[-– ]SKYLE/i });
+  await shop().check();
+  await page.goto(entry + '#checklist');
+  assert.equal(await shop().isChecked(), true);
+});

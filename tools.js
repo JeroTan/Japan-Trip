@@ -190,26 +190,12 @@
     ['etravel-out', 'Outbound eTravel QR', 'Register the Manila departure and save the QR.'],
     ['etravel-back', 'Return eTravel QR', 'Register the Manila arrival and save its QR separately.']
   ];
-  const shops = [
-    ['shop-sakae-bookoff', 'BOOKOFF SUPER BAZAAR Sakae-SKYLE Store', 'Nagoya · Nov 24 or 25', 'https://maps.app.goo.gl/dYiwFmqSvGHA9jdFA'],
-    ['shop-sakae-cpla', '#C-pla 名古屋サカエチカ店', 'Nagoya · Nov 24 or 25', 'https://maps.app.goo.gl/MsaYXn66Wa1KcHDb6'],
-    ['shop-tokyo-hololive', 'hololive production official shop in Tokyo Station', 'Tokyo · Nov 26', 'https://maps.app.goo.gl/XmUaUJQs5mVGn9ur7'],
-    ['shop-narita-bookoff', 'BOOKOFF AEON MALL Narita Store', 'Narita · Nov 27 or 28', 'https://maps.app.goo.gl/7sSh4HaFAaSLP11Q9'],
-    ['shop-narita-fasola', 'Fa-So-La TAX FREE AKIHABARA', 'Narita Airport T1 · Nov 28. This branch is beyond T1 security. Skip it for the T2 departure.', 'https://maps.app.goo.gl/q1QRgKrXWirfr7PM9']
-  ];
-  const progressKey = 'japan-guide-2026-11-checklist';
-  let progressInMemory = {};
-  let storageAvailable = true;
-  function readProgress() {
-    if (!storageAvailable) return progressInMemory;
-    try {
-      const saved = JSON.parse(localStorage.getItem(progressKey) || '{}');
-      if (saved && typeof saved === 'object' && !Array.isArray(saved)) progressInMemory = saved;
-    } catch {
-      // A browser may restrict storage for locally opened pages.
-    }
-    return progressInMemory;
-  }
+  const { shops: hobbyStops, progress } = window.JapanTrip;
+  const shops = hobbyStops.map(shop => {
+    const when = 'Nov ' + shop.days.join(' or ');
+    const detail = [shop.area, when].join(' · ') + (shop.note ? '. ' + shop.note : '');
+    return [shop.id, shop.name, detail, shop.map];
+  });
 
   function checkGroup(title, items, group, checked) {
     const rows = items.map(([id, name, note, url]) => `<li>
@@ -221,7 +207,7 @@
   }
 
   function checklist(main) {
-    const checked = readProgress();
+    const checked = progress.read();
     main.innerHTML = `<div class="jt-view">${header('Trip checklist', 'Get your documents ready, save your entry QRs and mark the optional shops you visit.')}
       <section class="jt-section"><h2>Entry forms</h2><div class="jt-forms">
         <article class="jt-form"><span class="jt-meta">Japan arrival</span><h3>Visit Japan Web</h3>
@@ -241,20 +227,13 @@
       const total = items => items.filter(([id]) => main.querySelector(`input[value="${id}"]`).checked).length;
       main.querySelector('#jt-prep-count').textContent = `${total(preparations)} of ${preparations.length} ready`;
       main.querySelector('#jt-shops-count').textContent = `${total(shops)} of ${shops.length} visited`;
-      main.querySelector('#jt-storage').textContent = storageAvailable
+      main.querySelector('#jt-storage').textContent = !progress.sessionOnly
         ? 'Checklist progress is saved in this browser.'
         : 'This browser is keeping progress for this session only.';
     }
     main.querySelector('.jt-view').addEventListener('change', event => {
       if (event.target.type !== 'checkbox') return;
-      const progress = {...readProgress(), [event.target.value]: event.target.checked};
-      progressInMemory = progress;
-      try {
-        localStorage.setItem(progressKey, JSON.stringify(progress));
-        storageAvailable = true;
-      } catch {
-        storageAvailable = false;
-      }
+      progress.set(event.target.value, event.target.checked);
       counts();
     });
     counts();
