@@ -17,12 +17,13 @@ after(async () => { await browser?.close(); });
 
 async function openDay(number, options = {}) {
   const page = await browser.newPage(options);
-  await page.goto(entry + "#day/" + number);
+  await page.route("https://www.google.com/maps?**", route => route.fulfill({ contentType: "text/html", body: "<p>Map</p>" }));
+  await page.goto(new URL("day" + number + ".html", entry).href);
   return page;
 }
 
 test("the Tokyo-to-Narita agenda distinguishes the morning stop from the hotel booking", async () => {
-  const page = await openDay(27);
+  const page = await openDay(27, { javaScriptEnabled: false });
   try {
     const text = await page.locator("main").innerText();
     assert.match(text, /08:30–09:00/);
@@ -47,7 +48,7 @@ test("travelers can switch dates and read both flight clocks and terminals", asy
     assert.match(text, /5J 5038/);
     assert.match(text, /Centrair Terminal 2/);
     await page.getByRole("navigation", { name: "Trip dates" }).getByRole("link", { name: /28 November/ }).click();
-    await page.waitForURL(url => url.hash === "#day/28");
+    await page.waitForURL(new URL("day28.html", entry).href);
     text = await read();
     assert.match(text, /19:00 JST/);
     assert.match(text, /18:00 PHT/);
@@ -65,15 +66,15 @@ test("travelers can switch dates and read both flight clocks and terminals", asy
 });
 
 test("all five days have a complete hourly view and an abridged agenda", async () => {
-  const page = await openDay(24);
+  const page = await openDay(24, { javaScriptEnabled: false });
   page.setDefaultTimeout(2500);
   try {
     const dates = [24, 25, 26, 27, 28];
     const events = ["Check-in and immigration", "Toyota DNA Inheritance Hall", "Toma-san meets PMH and RY", "VegieCorp sorting facility", "Resume car-rental fieldwork"];
     for (const [index, day] of dates.entries()) {
       if (day !== 24) await page.getByRole("navigation", { name: "Trip dates" }).getByRole("link", { name: new RegExp(day + " November") }).click();
-      await page.getByRole("navigation", { name: "Trip dates" }).locator('a[aria-current="date"][href="#day/' + day + '"]').waitFor();
-      const toggle = page.getByRole("button", { name: "All 24 hours" });
+      await page.getByRole("navigation", { name: "Trip dates" }).locator('a[aria-current="date"][href="day' + day + '.html"]').waitFor();
+      const toggle = page.getByText("All 24 hours", { exact: true });
       await toggle.focus();
       await page.keyboard.press("Enter");
       const hourly = page.getByRole("list", { name: "Hourly timetable" });
@@ -83,7 +84,7 @@ test("all five days have a complete hourly view and an abridged agenda", async (
       assert.match(await hours.first().innerText(), /00:00/);
       assert.match(await hours.last().innerText(), /23:00/);
       assert.match(await hourly.innerText(), new RegExp(events[index]));
-      await page.getByRole("button", { name: "Agenda" }).click();
+      await page.getByText("All 24 hours", { exact: true }).click();
       assert.equal(await hourly.count(), 0);
     }
   } finally {
@@ -91,33 +92,62 @@ test("all five days have a complete hourly view and an abridged agenda", async (
   }
 });
 
-test("route legs and known stops respond to selection, and maps load only on request", async () => {
-  const page = await openDay(26);
-  page.setDefaultTimeout(2500);
-  try {
-    const legs = page.getByLabel("Route leg", { exact: true });
-    await legs.selectOption({ label: "Nagoya Station → Tokyo Station" });
-    const directions = new URL(await page.getByRole("link", { name: "Open directions" }).getAttribute("href"));
-    assert.match(directions.searchParams.get("origin"), /Nagoya Station/);
-    assert.match(directions.searchParams.get("destination"), /Tokyo Station/);
+test("route directions are visible above the agenda and change with the selected leg", async t => {
+  for (const width of [375, 1280]) {
+    const page = await openDay(26, { viewport: { width, height: 850 } });
+    t.after(() => page.close());
+    const card = page.getByRole("region", { name: "Route guide" });
+    const iframe = card.locator("iframe").first();
+    const route = async () => new URL(await iframe.getAttribute("src")).searchParams;
+    const defaults = await route();
+    assert.match(defaults.get("saddr"), /Nagoya Station/);
+    assert.match(defaults.get("daddr"), /Tokyo Station/);
+    assert.equal(defaults.get("dirflg"), "r");
+    assert.equal(defaults.get("output"), "embed");
+    const mapBox = await iframe.boundingBox();
+    const agendaBox = await page.getByRole("list", { name: "Agenda" }).boundingBox();
+    assert.ok(mapBox.height >= 180 && mapBox.y < 850 && mapBox.y < agendaBox.y);
+    await card.getByRole("combobox", { name: "Route leg", exact: true }).selectOption({ label: "Tokyo Station → APA Tokyo" });
+    const directions = new URL(await card.getByRole("link", { name: "Open directions" }).getAttribute("href"));
+    const updated = await route();
+    assert.equal(updated.get("saddr"), directions.searchParams.get("origin"));
+    assert.equal(updated.get("daddr"), directions.searchParams.get("destination"));
+    assert.match(updated.get("daddr"), /Kayabacho Hatchobori Ekimae/);
     assert.equal(directions.searchParams.get("travelmode"), "transit");
-    const stop = page.getByLabel("Map stop", { exact: true });
+    const stop = card.getByLabel("Map stop");
     await stop.selectOption({ label: "APA Tokyo" });
-    const mapLink = page.getByRole("link", { name: "Open place in Maps" });
-    assert.match(new URL(await mapLink.getAttribute("href")).searchParams.get("query"), /Kayabacho Hatchobori Ekimae/);
-    assert.equal(await page.locator("iframe").count(), 0);
-    await page.route("https://www.google.com/maps?**", route => route.fulfill({ contentType: "text/plain", body: "Map" }));
-    await page.getByRole("button", { name: "Show map" }).click();
-    const iframe = page.locator('iframe[title="Map of APA Tokyo"]');
-    await iframe.waitFor();
-    assert.match(new URL(await iframe.getAttribute("src")).searchParams.get("q"), /Kayabacho Hatchobori Ekimae/);
+    const place = new URL(await card.getByRole("link", { name: "Open place in Maps" }).getAttribute("href"));
+    const stopMap = card.locator('iframe[title="Map of APA Tokyo"]');
+    assert.equal(new URL(await stopMap.getAttribute("src")).searchParams.get("q"), place.searchParams.get("query"));
     await stop.selectOption({ label: "Tokyo Station" });
-    await page.locator('iframe[title="Map of Tokyo Station"]').waitFor();
-    await page.getByRole("button", { name: "Hide map" }).click();
-    assert.equal(await page.locator("iframe").count(), 0);
-  } finally {
-    await page.close();
+    await card.locator('iframe[title="Map of Tokyo Station"]').waitFor();
+    await stop.selectOption({ label: "Choose a stop" });
+    assert.equal(await card.locator("iframe").count(), 1);
   }
+});
+
+test("travelers can unfold known stop maps in the agenda and hobby list without scripts", async t => {
+  const page = await openDay(26, { javaScriptEnabled: false });
+  t.after(() => page.close());
+  const routes = page.getByRole("list", { name: "Route legs" });
+  await routes.getByRole("link", { name: "APA Tokyo → Woven by Toyota", exact: true }).click();
+  const route = page.frame({ name: "jd-route-map" });
+  await route.waitForURL(url => /Nihonbashi Muromachi Mitsui Tower/.test(url.searchParams.get("daddr")));
+  const agenda = page.getByRole("list", { name: "Agenda" });
+  const woven = agenda.getByRole("listitem").filter({ has: page.getByRole("heading", { name: "Travel to Woven by Toyota" }) });
+  const place = woven.locator("iframe");
+  assert.equal(await place.isVisible(), false);
+  await woven.getByText("Map of Woven by Toyota", { exact: true }).click();
+  assert.equal(await place.isVisible(), true);
+  const address = new URL(await place.getAttribute("src")).searchParams.get("q");
+  assert.match(address, /Nihonbashi Muromachi Mitsui Tower/);
+  const link = woven.getByRole("link", { name: /Open Woven by Toyota in Maps/ });
+  assert.equal(new URL(await link.getAttribute("href")).searchParams.get("query"), address);
+  const hobby = page.getByRole("region", { name: "Optional hobby stops" });
+  await hobby.locator("summary").click();
+  const shopMap = hobby.locator("iframe");
+  assert.equal(await shopMap.isVisible(), true);
+  assert.match(new URL(await shopMap.getAttribute("src")).searchParams.get("q"), /hololive production official shop in Tokyo Station/);
 });
 
 test("optional shops retain their original links, dates and saved selections after navigation and reload", async () => {
@@ -180,8 +210,7 @@ for (const visit of [
     const place = page.getByRole("link", { name: "Open place in Maps" });
     assert.equal(new URL(await place.getAttribute("href")).searchParams.get("query"), visit.address);
     assert.match(await page.getByRole("region", { name: "Route guide" }).innerText(), visit.hostNote);
-    await page.getByRole("button", { name: "Show map" }).click();
-    const map = page.locator("iframe");
+    const map = page.getByRole("region", { name: "Route guide" }).locator('iframe[title="Map of ' + visit.stop + '"]');
     assert.equal(new URL(await map.getAttribute("src")).searchParams.get("q"), visit.address);
 
     await page.getByRole("link", { name: "Transport", exact: true }).click();
@@ -190,8 +219,8 @@ for (const visit of [
     assert.equal(transportRoute.get("destination"), visit.address);
     assert.equal(transportRoute.get("travelmode"), visit.mode);
     assert.match(await page.locator("main").innerText(), visit.hostNote);
-    await page.getByRole("button", { name: "Load map" }).click();
-    assert.equal(new URL(await map.getAttribute("src")).searchParams.get("daddr"), visit.address);
+    const transportMap = page.locator('main iframe[src*="daddr="]:visible');
+    assert.equal(new URL(await transportMap.getAttribute("src")).searchParams.get("daddr"), visit.address);
   });
 }
 
@@ -205,7 +234,7 @@ test("daily train and shuttle directions use the planned travel modes", async t 
     [28, "Narita Tobu Hotel Airport → Narita Terminal 2", "driving"]
   ]) {
     await page.getByRole("navigation", { name: "Trip dates" }).getByRole("link", { name: new RegExp(day + " November") }).click();
-    await page.getByLabel("Route leg").selectOption({ label: leg });
+    await page.getByRole("combobox", { name: "Route leg", exact: true }).selectOption({ label: leg });
     const link = await page.getByRole("link", { name: "Open directions" }).getAttribute("href");
     assert.equal(new URL(link).searchParams.get("travelmode"), mode, leg);
   }
@@ -216,10 +245,10 @@ test("phone travelers can jump directly to the day's map or hobby list by keyboa
   page.setDefaultTimeout(2500);
   try {
     const jump = page.getByRole("navigation", { name: "On this day" });
-    await jump.getByRole("button", { name: "Route guide" }).focus();
+    await jump.getByRole("link", { name: /Route guide/ }).focus();
     await page.keyboard.press("Enter");
     assert.equal(await page.evaluate(() => document.activeElement.textContent), "Route guide");
-    await jump.getByRole("button", { name: "Hobby stops" }).click();
+    await jump.getByRole("link", { name: /Hobby stops/ }).click();
     assert.equal(await page.evaluate(() => document.activeElement.textContent), "Optional hobby stops");
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   } finally {
@@ -230,7 +259,7 @@ test("phone travelers can jump directly to the day's map or hobby list by keyboa
 test("the full timetable carries multi-hour activities into otherwise empty hours", async () => {
   const page = await openDay(25);
   try {
-    await page.getByRole("button", { name: "All 24 hours" }).click();
+    await page.getByText("All 24 hours", { exact: true }).click();
     const rows = page.getByRole("list", { name: "Hourly timetable" }).getByRole("listitem");
     assert.match(await rows.nth(8).innerText(), /Drive to Toyota City HQ/);
     assert.match(await rows.nth(14).innerText(), /AI Driven Development team/);
@@ -246,7 +275,7 @@ test("Toyota City agenda and hourly titles fit a 320px phone with doubled text",
   t.after(() => page.close());
   await page.addStyleTag({ content: "html { font-size: 200%; }" });
   for (const view of ["Agenda", "All 24 hours"]) {
-    await page.getByRole("button", { name: view }).click();
+    if (view === "All 24 hours") await page.getByText(view, { exact: true }).click();
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, view);
   }
 });
@@ -254,7 +283,7 @@ test("Toyota City agenda and hourly titles fit a 320px phone with doubled text",
 test("flight days use a Manila-time axis through both partial flight hours", async t => {
   const page = await openDay(24);
   t.after(() => page.close());
-  const hourly = page.getByRole("button", { name: "All 24 hours" });
+  const hourly = page.getByText("All 24 hours", { exact: true });
   await hourly.click();
   const rows = page.getByRole("list", { name: "Hourly timetable" }).getByRole("listitem");
   const row = hour => rows.nth(hour).innerText();
@@ -272,6 +301,6 @@ test("flight days use a Manila-time axis through both partial flight hours", asy
   assert.match(await row(18), /18:00 PHT \(19:00 JST\)[\s\S]*Fly Narita to Manila/);
   assert.match(await row(19), /In flight.*5J 5057/);
   assert.match(await row(23), /In flight.*5J 5057[\s\S]*23:35 PHT[\s\S]*Land at Manila/);
-  await page.getByRole("button", { name: "Agenda" }).click();
+  await page.getByText("All 24 hours", { exact: true }).click();
   assert.match(await page.locator("main").innerText(), /19:00 JST[\s\S]*Fly Narita to Manila/);
 });
