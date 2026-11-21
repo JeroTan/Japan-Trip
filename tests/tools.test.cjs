@@ -100,7 +100,9 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   const phrases = await visit(t, 'phrases', options);
   assert.equal(await phrases.getByRole('article').count(), 60);
   assert.equal(await phrases.locator('article .jt-script[lang="ja"]').count(), 60);
-  assert.equal(await phrases.locator('article .jt-kana[lang="ja"]').count(), 60);
+  assert.equal(await phrases.locator('article [lang="ja"]').count(), 60);
+  const secondhand = phrases.getByRole('article').filter({ hasText: 'Is this secondhand?' });
+  assert.equal(await secondhand.locator('ruby rt').textContent(), 'ちゅうこひん');
   assert.equal(await phrases.locator('article .jt-roman').count(), 60);
   assert.equal(await phrases.getByRole('searchbox').count(), 0);
   assert.equal(await phrases.getByRole('button', {name: /Show phrase/}).count(), 0);
@@ -133,7 +135,6 @@ test('phrase search, situation filter, large display, keyboard focus and Japanes
   await query.fill('荷物を預かって');
   const results = page.getByRole('article');
   assert.equal(await results.count(), 1);
-  assert.match(await results.locator('.jt-kana').innerText(), /にもつをあずかっていただけますか/);
   assert.deepEqual(await results.locator('ruby rt').allTextContents(), ['にもつ', 'あず']);
   await query.fill('にもつをあずかって');
   assert.equal(await results.count(), 1);
@@ -143,7 +144,7 @@ test('phrase search, situation filter, large display, keyboard focus and Japanes
   const dialog = page.getByRole('dialog');
   assert.ok(await dialog.isVisible());
   assert.deepEqual(await dialog.locator('ruby rt').allTextContents(), ['にもつ', 'あず']);
-  assert.equal(await dialog.locator('.jt-dialog-kana [lang="ja"]').innerText(), 'にもつをあずかっていただけますか。');
+  assert.equal(await dialog.locator('[lang="ja"]').count(), 1);
   await page.keyboard.press('Escape');
   assert.equal(await dialog.count(), 0);
   assert.ok(await show.evaluate(el => el === document.activeElement));

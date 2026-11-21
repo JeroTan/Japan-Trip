@@ -115,8 +115,11 @@
       const cards = [];
       for (const element of section.querySelectorAll('.jt-phrase')) {
         const heading = element.querySelector('h3').textContent;
-        const searchable = searchText([name, heading, plainJapanese(element.querySelector('.jt-script')),
-          element.querySelector('.jt-kana').textContent, element.querySelector('.jt-roman').textContent].join(' '));
+        const japanese = element.querySelector('.jt-script');
+        const kana = japanese.cloneNode(true);
+        for (const ruby of kana.querySelectorAll('ruby')) ruby.replaceWith(ruby.querySelector('rt').textContent);
+        const searchable = searchText([name, heading, plainJapanese(japanese), kana.textContent,
+          element.querySelector('.jt-roman').textContent].join(' '));
         const controls = actions.content.cloneNode(true);
         controls.querySelector('[data-show]').setAttribute('aria-label', 'Show ' + heading + ' in large type');
         controls.querySelector('[data-copy]').setAttribute('aria-label', 'Copy Japanese for ' + heading);
@@ -157,13 +160,9 @@
       if (!button) return;
       const card = button.closest('.jt-phrase');
       const japanese = card.querySelector('.jt-script');
-      const kana = card.querySelector('.jt-kana');
       const english = card.querySelector('h3').textContent;
       if (button.hasAttribute('data-show')) {
         dialog.querySelector('.jt-dialog-ja').replaceChildren(...japanese.cloneNode(true).childNodes);
-        const reading = dialog.querySelector('.jt-dialog-kana');
-        reading.hidden = kana === japanese;
-        reading.querySelector('[lang="ja"]').textContent = kana.textContent;
         dialog.querySelector('.jt-dialog-roman').textContent = card.querySelector('.jt-roman').textContent;
         dialog.querySelector('h2').textContent = english;
         opener = button;
