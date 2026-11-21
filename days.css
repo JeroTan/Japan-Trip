@@ -1,0 +1,164 @@
+/* Daily itinerary and the day's route card */
+.jd-guide {
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.5;
+  min-width: 0;
+}
+.jd-guide *, .jd-guide *::after, .jd-guide *::before { box-sizing: border-box; }
+.jd-guide h1, .jd-guide h2, .jd-guide h3, .jd-guide p, .jd-guide ol, .jd-guide ul { margin: 0; }
+.jd-guide a { color: inherit; }
+.jd-guide :is(button, select, input) { font: inherit; }
+.jd-guide :is(a, button, select, input):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.jd-guide button, .jd-guide select, .jd-guide input { cursor: pointer; }
+.jd-guide .jd-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px;
+  border-bottom: 1px solid var(--ink);
+  padding: 0 0 clamp(24px, 3vw, 40px);
+}
+.jd-guide .jd-kicker, .jd-guide .jd-shop-area, .jd-guide .jd-route label {
+  font: 600 .73rem/1.5 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .085em;
+}
+.jd-guide .jd-kicker { color: var(--accent); }
+.jd-kicker span { padding: 0 .4em; color: var(--muted); }
+.jd-heading h1 {
+  font: 500 clamp(3rem, 6vw, 5.3rem)/1.03 var(--serif);
+  letter-spacing: -.055em;
+  margin: 12px 0 13px;
+}
+.jd-heading .jd-intro { max-width: 63ch; color: var(--muted); font-size: 1.06rem; }
+.jd-dates {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(43px, 1fr));
+  align-self: end;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+.jd-dates a {
+  min-height: 62px;
+  padding: 7px 9px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  text-decoration: none;
+}
+.jd-dates a + a { border-left: 1px solid var(--line); }
+.jd-dates a:hover { background: var(--paper); }
+.jd-dates a[aria-current] { color: var(--white); background: var(--accent); }
+.jd-dates span { font: 500 .64rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+.jd-dates b { font: 500 1.45rem/1.2 var(--serif); }
+.jd-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(290px, .92fr);
+  align-items: start;
+  gap: clamp(24px, 5vw, 72px);
+  margin-top: clamp(28px, 3.5vw, 48px);
+}
+.jd-schedule, .jd-side { min-width: 0; }
+.jd-schedule-head { display: flex; align-items: center; gap: 16px; justify-content: space-between; }
+.jd-guide h2 { font: 500 2.1rem/1.18 var(--serif); letter-spacing: -.035em; }
+.jd-views { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; background: var(--white); padding: 3px; }
+.jd-views button { min-height: 38px; border: 0; border-radius: 2px; padding: 3px 11px; color: var(--muted); background: transparent; font-weight: 600; font-size: .83rem; }
+.jd-views button:hover { color: var(--ink); background: var(--paper); }
+.jd-views button[aria-pressed="true"] { color: var(--white); background: var(--ink); }
+.jd-schedule .jd-schedule-note { color: var(--muted); margin: 11px 0 22px; font-size: .9rem; }
+.jd-agenda, .jd-hours, .jd-shops ul { list-style: none; padding: 0; }
+.jd-event, .jd-hour { display: grid; grid-template-columns: minmax(100px, 8rem) minmax(0, 1fr); border-top: 1px solid var(--line); gap: 10px; }
+.jd-event:last-child, .jd-hour:last-child { border-bottom: 1px solid var(--line); }
+.jd-event { padding: 20px 0; }
+.jd-event-time, .jd-hour-label, .jd-hour-exact { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.jd-event-time { font-size: .83rem; color: var(--muted); padding-top: 3px; }
+.jd-event-copy { position: relative; min-width: 0; padding-left: 19px; }
+.jd-event-copy::before { content: ""; position: absolute; width: 7px; height: 7px; left: 0; top: .58rem; border-radius: 50%; background: var(--muted); }
+.jd-event-copy h3 { display: inline; font: 650 1.04rem/1.43 var(--sans); letter-spacing: -.014em; }
+.jd-event-copy p { color: var(--muted); font-size: .92rem; margin-top: 5px; line-height: 1.55; }
+.jd-status { display: inline-block; vertical-align: .09em; margin: 3px 0 0 7px; border: 1px solid var(--line); padding: 2px 5px; border-radius: 2px; color: var(--accent); font: 600 .66rem/1.35 var(--mono); text-transform: uppercase; letter-spacing: .04em; }
+.jd-event-copy:has(.jd-status)::before { background: var(--accent); }
+.jd-hour { padding: 10px 0; }
+.jd-hour-label, .jd-hour-exact { font-size: .84rem; }
+.jd-hour-exact { color: var(--muted); display: block; margin-bottom: 2px; }
+.jd-hour .jd-event-copy { padding: 0; }
+.jd-hour .jd-event-copy::before { display: none; }
+.jd-hour .jd-hour-entry + .jd-hour-entry { margin-top: 12px; }
+.jd-empty { color: var(--muted); font-size: .83rem; }
+.jd-side { display: grid; gap: 24px; }
+.jd-route { background: var(--white); border: 1px solid var(--ink); }
+.jd-route-head { background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 20px; }
+.jd-route-head h2, .jd-shops h2 { font-size: 1.62rem; }
+.jd-route-head svg { opacity: .85; flex: none; }
+.jd-route-head circle { fill: var(--ink); }
+.jd-route-body { padding: 16px 20px 14px; }
+.jd-route label { display: block; color: var(--muted); margin: 0 0 6px; }
+.jd-route select {
+  width: 100%;
+  display: block;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 7px;
+  color: var(--ink);
+  font-size: .92rem;
+  background: var(--paper);
+}
+.jd-map-link, .jd-shop-links a { display: inline-flex; gap: .4em; align-items: center; min-height: 44px; text-decoration: none; font-size: .83rem; font-weight: 650; }
+.jd-map-link:hover, .jd-shop-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.jd-map-link span, .jd-shop-links a span { color: var(--accent); }
+.jd-route .jd-route-note { font-size: .86rem; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+.jd-stop-panel { padding-top: 14px; border-top: 1px solid var(--line); }
+.jd-map-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 14px; margin-top: 6px; }
+.jd-guide .jd-map-toggle { padding: 0; min-height: 44px; border: none; color: var(--ink); background: none; text-decoration: underline; text-underline-offset: .22em; font-size: .83rem; font-weight: 650; }
+#jd-map-frame iframe { width: 100%; height: 220px; border: 1px solid var(--line); margin-top: 8px; }
+.jd-shops { border-top: 2px solid var(--ink); padding-top: 15px; }
+.jd-shops .jd-shop-intro { color: var(--muted); font-size: .9rem; margin: 4px 0 11px; }
+.jd-shops li { padding-top: 12px; border-top: 1px solid var(--line); }
+.jd-guide .jd-shop-area { color: var(--muted); font-size: .66rem; }
+.jd-shops label { display: flex; align-items: center; gap: 9px; min-height: 44px; font-weight: 600; line-height: 1.4; cursor: pointer; }
+.jd-shops input { width: 19px; height: 19px; flex: none; margin: 0; accent-color: var(--accent); }
+.jd-shops label:has(input:checked) span { color: var(--muted); text-decoration: line-through; }
+.jd-shops .jd-shop-note { color: var(--muted); margin: 3px 0; font-size: .86rem; }
+.jd-shop-links { display: flex; flex-wrap: wrap; gap: 0 13px; padding-left: 28px; }
+@media (max-width: 900px) {
+  .jd-columns { grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr); gap: 24px; }
+  .jd-event, .jd-hour { grid-template-columns: 98px minmax(0, 1fr); }
+  .jd-route-head, .jd-route-body { padding-left: 15px; padding-right: 15px; }
+}
+@media (max-width: 720px) {
+  .jd-guide .jd-heading { grid-template-columns: 1fr; gap: 18px; }
+  .jd-dates { width: min(100%, 330px); }
+  .jd-dates a { min-height: 48px; }
+  .jd-columns { grid-template-columns: 1fr; }
+  .jd-event { padding: 15px 0; }
+  .jd-event, .jd-hour { grid-template-columns: minmax(94px, 24%) minmax(0, 1fr); gap: 7px; }
+  .jd-event-copy { padding-left: 13px; }
+  .jd-event-copy::before { width: 5px; height: 5px; }
+  .jd-schedule-head { flex-wrap: wrap; gap: 8px; }
+  .jd-guide .jd-heading h1 { font-size: clamp(2.65rem, 9vw, 3.9rem); }
+  .jd-heading .jd-intro { font-size: 1rem; }
+  .jd-schedule .jd-schedule-note { margin-bottom: 14px; }
+  .jd-side { margin: 8px 0; }
+}
+@media (max-width: 350px) {
+  .jd-event, .jd-hour { grid-template-columns: 90px minmax(0, 1fr); }
+}
+@media print {
+  .jd-dates, .jd-views, .jd-map-actions, #jd-map-frame { display: none; }
+  .jd-columns { display: block; }
+  .jd-side { margin-top: 24px; }
+  .jd-event, .jd-hour, .jd-shop-links { break-inside: avoid; }
+}
+
+.jd-jump { display: none; }
+.jd-guide [tabindex="-1"] { scroll-margin-top: 90px; }
+.jd-guide [tabindex="-1"]:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media screen and (max-width: 720px) {
+  .jd-jump { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 19px; border-bottom: 1px solid var(--line); }
+  .jd-jump button { padding: 0; border: 0; min-height: 44px; background: transparent; color: var(--ink); font: 600 .85rem var(--sans); }
+  .jd-jump span { color: var(--accent); }
+}
+.jd-hour .jd-continuation { color: var(--muted); font-size: .87rem; }
+.jd-continuation + .jd-hour-entry { margin-top: 9px; }
