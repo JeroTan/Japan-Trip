@@ -26,6 +26,35 @@
   const menu = document.querySelector('.guide-menu');
   const mobileLayout = window.matchMedia('(max-width: 680px)');
   const routeTitles = { overview: 'Overview', transport: 'Transport', phrases: 'Phrases', checklist: 'Checklist' };
+  const visits = new Map();
+  let currentVisit;
+  let nextVisit = Date.now();
+  history.scrollRestoration = 'manual';
+
+  // Each browser-history entry remembers its own filter, map leg and scroll position.
+  // Checkbox progress is trip-wide and is read fresh from the checklist on every visit.
+  function rememberVisit() {
+    if (!currentVisit) return;
+    const controls = [...main.querySelectorAll('select[id], input[type="search"][id]')]
+      .map(control => [control.id, control.value]);
+    visits.set(currentVisit, {
+      controls,
+      fullDay: Boolean(main.querySelector('button[data-view="hours"][aria-pressed="true"]')),
+      mapOpen: Boolean(main.querySelector('button[aria-expanded="true"][aria-controls]')),
+      scroll: window.scrollY
+    });
+  }
+
+  function restoreVisit(visit) {
+    for (const [id, value] of visit.controls) {
+      const control = document.getElementById(id);
+      if (!control || control.value === value) continue;
+      control.value = value;
+      control.dispatchEvent(new Event(control.matches('select') ? 'change' : 'input', { bubbles: true }));
+    }
+    if (visit.fullDay) main.querySelector('button[data-view="hours"]')?.click();
+    if (visit.mapOpen) main.querySelector('button[aria-expanded="false"][aria-controls]')?.click();
+  }
 
   function setMenu(open) {
     menu.setAttribute('aria-expanded', String(open));
@@ -33,6 +62,10 @@
   }
 
   function showRoute(moveFocus) {
+    rememberVisit();
+    currentVisit = history.state?.guideVisit || ++nextVisit;
+    if (!history.state?.guideVisit) history.replaceState({ guideVisit: currentVisit }, '');
+    const visit = visits.get(currentVisit);
     const requested = location.hash.slice(1) || 'overview';
     const day = /^day\/(2[4-8])$/.exec(requested);
     const route = (day || Object.hasOwn(routeTitles, requested)) ? requested : 'overview';
@@ -53,9 +86,10 @@
     }
     document.title = (day ? 'November ' + day[1] + ' itinerary' : routeTitles[route]) + ' · Japan field guide';
     setMenu(false);
+    if (visit) restoreVisit(visit);
     if (moveFocus) {
       main.focus({ preventScroll: true });
-      window.scrollTo(0, 0);
+      window.scrollTo(0, visit?.scroll || 0);
     }
   }
 

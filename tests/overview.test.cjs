@@ -43,3 +43,22 @@ test('keyboard travelers can skip navigation, choose a date, and use the phone m
   await page.goBack();
   await page.getByRole('heading', { level: 1, name: dayHeading }).waitFor();
 });
+
+test('Back restores the phrase search and the selected train route', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage();
+  await page.goto(entry + '#phrases');
+  const search = page.getByRole('searchbox', { name: 'Search phrases' });
+  await search.fill('luggage');
+  const count = await page.locator('main article').count();
+  const navigation = page.getByRole('navigation', { name: 'Main navigation' });
+  await navigation.getByRole('link', { name: 'Transport' }).click();
+  const leg = page.getByRole('combobox', { name: 'Route leg' });
+  await leg.selectOption({ label: 'Nov 27 · Tokyo to Narita' });
+  await page.goBack();
+  assert.equal(await search.inputValue(), 'luggage');
+  assert.equal(await page.locator('main article').count(), count);
+  await page.goForward();
+  assert.match(await leg.locator('option:checked').innerText(), /Tokyo to Narita/);
+});
