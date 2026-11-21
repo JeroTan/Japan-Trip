@@ -168,7 +168,12 @@
 .jt-filters label { display: grid; gap: 6px; }
 .jt-results-count { margin: 12px 0 20px; }
 .jt-phrase h3 { font: 650 1rem/1.35 var(--sans, system-ui, sans-serif); margin: 0; }
-.jt-script, .jt-dialog-ja { font-family: "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif; }
+.jt-script, .jt-kana-line [lang="ja"], .jt-dialog-ja { font-family: "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif; }
+.jt-view ruby { ruby-position: over; }
+.jt-view rt { font-size: max(.72rem, .53em); font-weight: 400; }
+.jt-kana-line { margin: 4px 0; color: var(--ink); line-height: 1.65; }
+.jt-reading-label { margin-inline-end: .3em; font: 600 .8rem var(--sans); color: var(--muted); }
+.jt-dialog-kana { font-size: clamp(1.1rem, 3vw, 1.65rem); margin-block-end: .5em; }
 .jt-script { margin: 16px 0 3px; font-size: clamp(1.22rem, 1.7vw, 1.55rem); line-height: 1.5; }
 .jt-roman, .jt-dialog-roman { color: var(--muted, #52645f); }
 .jt-roman { margin: 0 0 12px; font-size: .91rem; }

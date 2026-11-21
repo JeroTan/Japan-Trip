@@ -66,7 +66,15 @@
   }
 
   function searchText(value) {
-    return value.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '').trim();
+    return value.normalize('NFKC').toLowerCase()
+      .replace(/[ァ-ヶ]/g, kana => String.fromCharCode(kana.charCodeAt(0) - 0x60))
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[’']/g, '').trim();
+  }
+
+  function plainJapanese(script) {
+    const copy = script.cloneNode(true);
+    copy.querySelectorAll('rt').forEach(reading => reading.remove());
+    return copy.textContent;
   }
 
   async function copyJapanese(text, button) {
@@ -107,7 +115,8 @@
       const cards = [];
       for (const element of section.querySelectorAll('.jt-phrase')) {
         const heading = element.querySelector('h3').textContent;
-        const searchable = searchText(name + ' ' + element.textContent);
+        const searchable = searchText([name, heading, plainJapanese(element.querySelector('.jt-script')),
+          element.querySelector('.jt-kana').textContent, element.querySelector('.jt-roman').textContent].join(' '));
         const controls = actions.content.cloneNode(true);
         controls.querySelector('[data-show]').setAttribute('aria-label', 'Show ' + heading + ' in large type');
         controls.querySelector('[data-copy]').setAttribute('aria-label', 'Copy Japanese for ' + heading);
@@ -147,10 +156,14 @@
       const button = event.target.closest('[data-copy], [data-show]');
       if (!button) return;
       const card = button.closest('.jt-phrase');
-      const japanese = card.querySelector('[lang="ja"]');
+      const japanese = card.querySelector('.jt-script');
+      const kana = card.querySelector('.jt-kana');
       const english = card.querySelector('h3').textContent;
       if (button.hasAttribute('data-show')) {
-        dialog.querySelector('.jt-dialog-ja').textContent = japanese.textContent;
+        dialog.querySelector('.jt-dialog-ja').replaceChildren(...japanese.cloneNode(true).childNodes);
+        const reading = dialog.querySelector('.jt-dialog-kana');
+        reading.hidden = kana === japanese;
+        reading.querySelector('[lang="ja"]').textContent = kana.textContent;
         dialog.querySelector('.jt-dialog-roman').textContent = card.querySelector('.jt-roman').textContent;
         dialog.querySelector('h2').textContent = english;
         opener = button;
@@ -158,23 +171,23 @@
         return;
       }
 
-      const copied = await copyJapanese(japanese.textContent, button);
+      const raw = plainJapanese(japanese);
+      const copied = await copyJapanese(raw, button);
       button.textContent = copied ? 'Copied' : 'Copy';
       card.querySelector('.jt-copy-hint')?.remove();
       const status = main.querySelector('#jt-copy-status');
       if (copied) {
         status.textContent = 'Copied Japanese for ' + english + '.';
       } else {
-        const range = document.createRange();
-        range.selectNodeContents(japanese);
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(range);
-        const hint = document.createElement('small');
+        const hint = document.createElement('textarea');
         hint.className = 'jt-copy-hint';
-        hint.textContent = 'Japanese selected. Use your device’s Copy command.';
+        hint.setAttribute('aria-label', 'Japanese phrase to copy');
+        hint.readOnly = true;
+        hint.value = raw;
         card.append(hint);
-        status.textContent = hint.textContent;
+        hint.focus();
+        hint.select();
+        status.textContent = 'Japanese selected. Use your device’s Copy command.';
       }
     });
 

@@ -99,7 +99,8 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
 
   const phrases = await visit(t, 'phrases', options);
   assert.equal(await phrases.getByRole('article').count(), 60);
-  assert.equal(await phrases.locator('article [lang="ja"]').count(), 60);
+  assert.equal(await phrases.locator('article .jt-script[lang="ja"]').count(), 60);
+  assert.equal(await phrases.locator('article .jt-kana[lang="ja"]').count(), 60);
   assert.equal(await phrases.locator('article .jt-roman').count(), 60);
   assert.equal(await phrases.getByRole('searchbox').count(), 0);
   assert.equal(await phrases.getByRole('button', {name: /Show phrase/}).count(), 0);
@@ -129,16 +130,20 @@ test('phrase search, situation filter, large display, keyboard focus and Japanes
   const page = await visit(t, 'phrases', {viewport: {width: 375, height: 800}});
   const query = page.getByRole('searchbox', {name: 'Search phrases'});
   await page.getByRole('combobox', {name: 'Situation'}).selectOption({label: 'At the hotel'});
-  await query.fill('luggage');
+  await query.fill('荷物を預かって');
   const results = page.getByRole('article');
   assert.equal(await results.count(), 1);
-  assert.match(await results.innerText(), /荷物を預かっていただけますか/);
+  assert.match(await results.locator('.jt-kana').innerText(), /にもつをあずかっていただけますか/);
+  assert.deepEqual(await results.locator('ruby rt').allTextContents(), ['にもつ', 'あず']);
+  await query.fill('にもつをあずかって');
+  assert.equal(await results.count(), 1);
   const show = results.getByRole('button', {name: /Show/});
   await show.focus();
   await show.press('Enter');
   const dialog = page.getByRole('dialog');
   assert.ok(await dialog.isVisible());
-  assert.equal(await dialog.locator('[lang="ja"]').innerText(), '荷物を預かっていただけますか。');
+  assert.deepEqual(await dialog.locator('ruby rt').allTextContents(), ['にもつ', 'あず']);
+  assert.equal(await dialog.locator('.jt-dialog-kana [lang="ja"]').innerText(), 'にもつをあずかっていただけますか。');
   await page.keyboard.press('Escape');
   assert.equal(await dialog.count(), 0);
   assert.ok(await show.evaluate(el => el === document.activeElement));
