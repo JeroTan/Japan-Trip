@@ -1,8 +1,10 @@
 # Transport, bookings, preparation and Japanese phrases
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: None
 
-- [ ] The travel guide includes flights, all three hotels and check-in/out limits, practical route modes and selectable maps with external directions.
-- [ ] Preparation includes official entry links, eTravel windows and a locally saved checklist.
-- [ ] The phrasebook supports search, category filters, copy and accessible large-type display, including return of keyboard focus.
+- [x] The travel guide includes flights, all three hotels and check-in/out limits, practical route modes and selectable maps with external directions.
+- [x] Preparation includes official entry links, eTravel windows and a locally saved checklist.
+- [x] The phrasebook supports search, category filters, copy and accessible large-type display, including return of keyboard focus.
+
+Verified in the standalone guide with Chrome at phone and desktop widths. The transport page includes eight route legs, both flights and all three stays. The two eTravel windows match the workbook and the government’s 72-hour rule. Browser checks cover deferred map loading, stored progress, Japanese clipboard contents and keyboard use of the phrase display.
