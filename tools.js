@@ -118,8 +118,11 @@
         const japanese = element.querySelector('.jt-script');
         const kana = japanese.cloneNode(true);
         for (const ruby of kana.querySelectorAll('ruby')) ruby.replaceWith(ruby.querySelector('rt').textContent);
+        const romaji = element.querySelector('.jt-roman').textContent;
+        // Also accept searches that omit long vowels, such as "chukohin".
+        const shortVowels = romaji.replace(/([aeiou])\1|ou/gi, pair => pair[0]);
         const searchable = searchText([name, heading, plainJapanese(japanese), kana.textContent,
-          element.querySelector('.jt-roman').textContent].join(' '));
+          romaji, shortVowels].join(' '));
         const controls = actions.content.cloneNode(true);
         controls.querySelector('[data-show]').setAttribute('aria-label', 'Show ' + heading + ' in large type');
         controls.querySelector('[data-copy]').setAttribute('aria-label', 'Copy Japanese for ' + heading);

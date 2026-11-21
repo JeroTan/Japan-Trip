@@ -104,6 +104,11 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   const secondhand = phrases.getByRole('article').filter({ hasText: 'Is this secondhand?' });
   assert.equal(await secondhand.locator('ruby rt').textContent(), 'ちゅうこひん');
   assert.equal(await phrases.locator('article .jt-roman').count(), 60);
+  assert.equal(await secondhand.locator('.jt-roman').textContent(), 'Kore wa chuukohin desu ka?');
+  const readings = await phrases.locator('article .jt-roman').allTextContents();
+  assert.ok(readings.every(line => /^[\x20-\x7e]+$/.test(line)));
+  assert.ok(readings.includes('Kono densha wa Toukyou-eki ni ikimasu ka?'));
+  assert.ok(readings.includes('Pasupooto o nakushimashita.'));
   assert.equal(await phrases.getByRole('searchbox').count(), 0);
   assert.equal(await phrases.getByRole('button', {name: /Show phrase/}).count(), 0);
 
@@ -159,4 +164,11 @@ test('phrase search, situation filter, large display, keyboard focus and Japanes
   await page.getByRole('button', {name:'Clear filters'}).click();
   await query.fill('arigato');
   assert.match(await page.getByRole('article').first().innerText(), /Thank you/);
+  for (const spelling of ['chuukohin', 'chūkohin', 'chukohin']) {
+    await query.fill(spelling);
+    assert.equal(await results.count(), 1);
+    assert.match(await results.innerText(), /Is this secondhand/);
+  }
+  await results.getByRole('button', {name: /Show/}).click();
+  assert.equal(await dialog.locator('.jt-dialog-roman').textContent(), 'Kore wa chuukohin desu ka?');
 });
