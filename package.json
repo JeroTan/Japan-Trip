@@ -1,0 +1,10 @@
+{
+  "name": "japan-trip-guide",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.mjs tests/*.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}
