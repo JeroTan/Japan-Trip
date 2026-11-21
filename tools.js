@@ -1,6 +1,8 @@
 (() => {
   'use strict';
 
+  const { destinations, shops: hobbyStops, progress } = window.JapanTrip;
+
   const sources = {
     nagoya: 'https://www3.apahotel.com/en/hotel/tokai/aichi/nagoyaekimae/',
     tokyo: 'https://www3.apahotel.com/hotel/syutoken/tokyo/kayabacho-hatchobori-ekimae/',
@@ -71,7 +73,7 @@
       label: 'Nov 26 · Hotel to Woven by Toyota', mode: 'Walk or taxi', title: 'The Woven office visit',
       stops: ['APA Kayabacho', 'Nihonbashi Muromachi Mitsui Tower'],
       description: 'Woven’s Tokyo headquarters is in Nihonbashi Muromachi Mitsui Tower, connected to Mitsukoshimae Station at exit A8. Confirm the reception point with the host before setting off.',
-      origin: hotels[1].title + ', ' + hotels[1].address, destination: 'Nihonbashi Muromachi Mitsui Tower, 3-2-1 Nihonbashi Muromachi, Tokyo, Japan', mapMode: 'walking',
+      origin: hotels[1].title + ', ' + hotels[1].address, destination: destinations.woven, mapMode: 'walking',
       links: [['Woven office directions', 'https://www.woven.toyota/en/company/']]
     },
     {
@@ -85,7 +87,7 @@
       label: 'Nov 27 · Hotel to Narita Market', mode: 'Road transfer', title: 'The market site visit',
       stops: ['Narita Tobu', 'Narita City Wholesale Market'],
       description: 'The city wholesale market is in Tenjinmine, near the airport. Confirm the market, entrance and transport with the host for the 10:00 visit. Get the sorting facility’s address separately.',
-      origin: hotels[2].title, destination: 'Narita City Wholesale Market, 80-1 Tenjinmine, Narita, Chiba, Japan', mapMode: 'driving',
+      origin: hotels[2].title, destination: destinations.market, mapMode: 'driving',
       links: [['Official market access', 'https://www.city.narita.chiba.jp/business/page0139_00039.html']]
     },
     {
@@ -190,7 +192,6 @@
     ['etravel-out', 'Outbound eTravel QR', 'Register the Manila departure and save the QR.'],
     ['etravel-back', 'Return eTravel QR', 'Register the Manila arrival and save its QR separately.']
   ];
-  const { shops: hobbyStops, progress } = window.JapanTrip;
   const shops = hobbyStops.map(shop => {
     const when = 'Nov ' + shop.days.join(' or ');
     const detail = [shop.area, when].join(' · ') + (shop.note ? '. ' + shop.note : '');

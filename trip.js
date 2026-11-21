@@ -1,6 +1,11 @@
-// Used by both the dated itineraries and the trip checklist.
+// Shared trip data and checklist progress.
 (() => {
   'use strict';
+
+  const destinations = {
+    woven: 'Nihonbashi Muromachi Mitsui Tower, 3-2-1 Nihonbashi Muromachi, Tokyo, Japan',
+    market: 'Narita City Wholesale Market, 80-1 Tenjinmine, Narita, Chiba, Japan'
+  };
 
   const shops = [
     {
@@ -36,11 +41,18 @@
 
   function read() {
     if (sessionOnly) return inMemory;
+    let raw;
     try {
-      const stored = JSON.parse(localStorage.getItem(key) || '{}');
-      if (stored && typeof stored === 'object' && !Array.isArray(stored)) inMemory = stored;
+      raw = localStorage.getItem(key);
     } catch {
       sessionOnly = true;
+      return inMemory;
+    }
+    try {
+      const stored = JSON.parse(raw);
+      inMemory = stored && typeof stored === 'object' && !Array.isArray(stored) ? stored : {};
+    } catch {
+      inMemory = {};
     }
     return inMemory;
   }
@@ -55,5 +67,5 @@
     }
   }
 
-  window.JapanTrip = { shops, progress: { read, set, get sessionOnly() { return sessionOnly; } } };
+  window.JapanTrip = { destinations, shops, progress: { read, set, get sessionOnly() { return sessionOnly; } } };
 })();

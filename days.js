@@ -2,6 +2,8 @@
 (function () {
   "use strict";
 
+  const { destinations, shops, progress } = window.JapanTrip;
+
   const days = {
     24: {
       weekday: "Tuesday", city: "Manila to Nagoya", flightNumber: "5J 5038",
@@ -96,29 +98,30 @@
     nagoyaStation: ["Nagoya Station", "Nagoya Station, Aichi, Japan"],
     tokyoStation: ["Tokyo Station", "Tokyo Station, Tokyo, Japan"],
     tokyoHotel: ["APA Tokyo", "APA Hotel Kayabacho Hatchobori Ekimae, Tokyo, Japan"],
-    woven: ["Woven by Toyota", "Woven by Toyota, Tokyo, Japan"],
+    woven: ["Woven by Toyota", destinations.woven],
     naritaHotel: ["Narita Tobu Hotel Airport", "Narita Tobu Hotel Airport, 320-1 Tokko, Narita, Japan"],
-    market: ["Narita Market", "Narita Market, Narita, Chiba, Japan"],
+    market: ["Narita Market", destinations.market],
     naritaT2: ["Narita Terminal 2", "Narita International Airport Terminal 2, Narita, Japan"]
   };
 
   const routes = {
     24: {
-      legs: [["centrair", "nagoyaHotel"]], extraStops: ["naia"]
+      legs: [["centrair", "nagoyaHotel", "transit"]], extraStops: ["naia"]
     },
     25: {
       legs: [["nagoyaHotel", "toyotaHQ", "driving"], ["toyotaHQ", "dnaHall"], ["dnaHall", "kaikan"]],
       note: "Confirm the meeting entrances and Nagoya HQ return point with the team."
     },
     26: {
-      legs: [["nagoyaHotel", "nagoyaStation"], ["nagoyaStation", "tokyoStation", "transit"], ["tokyoStation", "tokyoHotel"], ["tokyoHotel", "woven"]]
+      legs: [["nagoyaHotel", "nagoyaStation", "walking"], ["nagoyaStation", "tokyoStation", "transit"], ["tokyoStation", "tokyoHotel", "transit"], ["tokyoHotel", "woven", "walking"]],
+      note: "The Woven map points to Nihonbashi Muromachi Mitsui Tower. Confirm the reception point with the host."
     },
     27: {
-      legs: [["tokyoHotel", "tokyoStation"], ["tokyoStation", "naritaHotel"], ["naritaHotel", "market"]],
-      note: "Confirm the sorting facility and car-rental station addresses with the team."
+      legs: [["tokyoHotel", "tokyoStation"], ["tokyoStation", "naritaHotel", "transit"], ["naritaHotel", "market", "driving"]],
+      note: "The map shows Narita City Wholesale Market. Confirm the market and its entrance with the host, along with the sorting facility and car-rental station addresses."
     },
     28: {
-      legs: [["naritaHotel", "naritaT2"]], extraStops: ["naia"],
+      legs: [["naritaHotel", "naritaT2", "driving"]], extraStops: ["naia"],
       note: "The route from the hotel to Terminal 2 is for reference. Confirm the pickup location and time after fieldwork."
     }
   };
@@ -188,8 +191,6 @@
     updateStop();
   }
 
-  const { shops, progress } = window.JapanTrip;
-
   function shopList(date) {
     const saved = progress.read();
     return `<section class="jd-shops" aria-labelledby="jd-shops-title">
@@ -223,36 +224,48 @@
     return `<ol class="jd-agenda">${day.events.map(event => `<li class="jd-event"><span class="jd-event-time">${event[0]}</span>${eventCopy(event)}</li>`).join("")}</ol>`;
   }
 
+  function hourlyTime(localTime, zone) {
+    let axisTime = localTime;
+    let label = localTime;
+    if (zone === "PHT" && !localTime.endsWith("PHT")) {
+      const japanClocks = localTime.match(/\d{2}:\d{2}/g);
+      axisTime = localTime.replace(/ JST$/, "").replace(/\d{2}(?=:)/g, hour =>
+        String((Number(hour) + 23) % 24).padStart(2, "0"));
+      label = axisTime + " PHT (" + japanClocks.join("–") + " JST)";
+    }
+    const [start, end] = axisTime.match(/\d{2}:\d{2}/g);
+    return { label, start, end };
+  }
+
   function hourly(day) {
+    const zone = day.flightNumber ? "PHT" : "JST";
     const hours = Array.from({ length: 24 }, () => ({ starts: [], ongoing: [] }));
-    day.events.forEach(event => {
-      const [start, end] = event[0].match(/\d{2}:\d{2}/g);
-      const startHour = Number(start.slice(0, 2));
-      hours[startHour].starts.push(event);
-      if (end) {
-        const endHour = Number(end.slice(0, 2)) + (end.endsWith(":00") ? 0 : 1);
-        for (let hour = startHour + 1; hour < endHour; hour++) {
-          hours[hour].ongoing.push(event[1] + " · until " + end);
-        }
-      }
-    });
+    const entries = day.events.map(event => ({ event, ...hourlyTime(event[0], zone) }));
+
+    function carryUntil(start, end, label) {
+      const firstHour = Number(start.slice(0, 2)) + 1;
+      const endHour = Number(end.slice(0, 2)) + (end.endsWith(":00") ? 0 : 1);
+      for (let hour = firstHour; hour < endHour; hour++) hours[hour].ongoing.push(label);
+    }
+    for (const entry of entries) {
+      const { event, start, end } = entry;
+      hours[Number(start.slice(0, 2))].starts.push(entry);
+      if (end) carryUntil(start, end, event[1] + " · until " + end + " " + zone);
+    }
     if (day.flightNumber) {
-      const [takeoff, landing] = day.events.filter(event => event[3] === "Ticketed");
-      const arrivalHour = Number(landing[0].slice(0, 2));
-      for (let hour = Number(takeoff[0].slice(0, 2)) + 1; hour < arrivalHour; hour++) {
-        hours[hour].ongoing.push("In flight · " + day.flightNumber + " · lands " + landing[0]);
-      }
+      const [takeoff, landing] = entries.filter(({ event }) => event[3] === "Ticketed");
+      carryUntil(takeoff.start, landing.start, "In flight · " + day.flightNumber + " · lands " + landing.label);
     }
     return `<ol class="jd-hours" aria-label="Hourly timetable">${hours.map(({ starts, ongoing }, hour) => {
-      const clock = String(hour).padStart(2, "0") + ":00";
+      const clock = String(hour).padStart(2, "0") + ":00 " + zone;
       const carried = ongoing.map(label => `<p class="jd-continuation">${label}</p>`).join("");
-      const beginning = starts.map(event => `<div class="jd-hour-entry"><span class="jd-hour-exact">${event[0]}</span>${eventCopy(event)}</div>`).join("");
+      const beginning = starts.map(({ event, label }) => `<div class="jd-hour-entry"><span class="jd-hour-exact">${label}</span>${eventCopy(event)}</div>`).join("");
       const detail = carried + beginning || '<span class="jd-empty">No new entry</span>';
       return `<li class="jd-hour"><span class="jd-hour-label">${clock}</span><div>${detail}</div></li>`;
     }).join("")}</ol>`;
   }
 
-  function timetableControls(main, day) {
+  function timetableControls(main, day, agendaClock) {
     const controls = main.querySelector(".jd-views");
     controls.addEventListener("click", click => {
       const selected = click.target.closest("button");
@@ -260,7 +273,10 @@
       for (const button of controls.querySelectorAll("button")) {
         button.setAttribute("aria-pressed", String(button === selected));
       }
-      main.querySelector(".jd-schedule-body").innerHTML = selected.dataset.view === "hours" ? hourly(day) : agenda(day);
+      const showHours = selected.dataset.view === "hours";
+      main.querySelector(".jd-clock").textContent = showHours && day.flightNumber
+        ? "Hours shown in Manila time (PHT). Japan is one hour ahead." : agendaClock;
+      main.querySelector(".jd-schedule-body").innerHTML = showHours ? hourly(day) : agenda(day);
     });
   }
 
@@ -288,11 +304,11 @@
             <button type="button" data-view="hours" aria-pressed="false">All 24 hours</button>
           </div>
         </div>
-        <p class="jd-schedule-note">${clock} Work visits and transfers are provisional.</p>
+        <p class="jd-schedule-note"><span class="jd-clock">${clock}</span> Work visits and transfers are provisional.</p>
         <div class="jd-schedule-body">${agenda(day)}</div>
       </section><aside class="jd-side" aria-label="Day resources">${routeCard(date)}${shopList(date)}</aside></div>
     </article>`;
-    timetableControls(main, day);
+    timetableControls(main, day, clock);
     routeControls(main, date);
     shopControls(main);
     main.querySelector(".jd-jump").addEventListener("click", click => {

@@ -154,6 +154,63 @@ test("optional shops retain their original links, dates and saved selections aft
   }
 });
 
+for (const visit of [
+  {
+    day: 26, hotel: "APA Tokyo", stop: "Woven by Toyota", mode: "walking",
+    address: "Nihonbashi Muromachi Mitsui Tower, 3-2-1 Nihonbashi Muromachi, Tokyo, Japan",
+    hostNote: /confirm.*reception.*host/i
+  },
+  {
+    day: 27, hotel: "Narita Tobu Hotel Airport", stop: "Narita Market", mode: "driving",
+    address: "Narita City Wholesale Market, 80-1 Tenjinmine, Narita, Chiba, Japan",
+    hostNote: /confirm.*market.*host/i
+  }
+]) {
+  test(visit.stop + " uses the same destination in day and transport maps", async t => {
+    const page = await openDay(visit.day);
+    t.after(() => page.close());
+    await page.route("https://www.google.com/maps?**", route => route.fulfill({ body: "Map" }));
+    const leg = page.getByRole("combobox", { name: "Route leg" });
+    const directions = page.getByRole("link", { name: "Open directions" });
+    await leg.selectOption({ label: visit.hotel + " → " + visit.stop });
+    const dayRoute = new URL(await directions.getAttribute("href")).searchParams;
+    assert.equal(dayRoute.get("destination"), visit.address);
+    assert.equal(dayRoute.get("travelmode"), visit.mode);
+    await page.getByLabel("Map stop").selectOption({ label: visit.stop });
+    const place = page.getByRole("link", { name: "Open place in Maps" });
+    assert.equal(new URL(await place.getAttribute("href")).searchParams.get("query"), visit.address);
+    assert.match(await page.getByRole("region", { name: "Route guide" }).innerText(), visit.hostNote);
+    await page.getByRole("button", { name: "Show map" }).click();
+    const map = page.locator("iframe");
+    assert.equal(new URL(await map.getAttribute("src")).searchParams.get("q"), visit.address);
+
+    await page.getByRole("link", { name: "Transport", exact: true }).click();
+    await leg.selectOption({ label: "Nov " + visit.day + " · Hotel to " + visit.stop });
+    const transportRoute = new URL(await directions.getAttribute("href")).searchParams;
+    assert.equal(transportRoute.get("destination"), visit.address);
+    assert.equal(transportRoute.get("travelmode"), visit.mode);
+    assert.match(await page.locator("main").innerText(), visit.hostNote);
+    await page.getByRole("button", { name: "Load map" }).click();
+    assert.equal(new URL(await map.getAttribute("src")).searchParams.get("daddr"), visit.address);
+  });
+}
+
+test("daily train and shuttle directions use the planned travel modes", async t => {
+  const page = await openDay(24);
+  t.after(() => page.close());
+  for (const [day, leg, mode] of [
+    [24, "Centrair Terminal 2 → APA Nagoya", "transit"],
+    [26, "Tokyo Station → APA Tokyo", "transit"],
+    [27, "Tokyo Station → Narita Tobu Hotel Airport", "transit"],
+    [28, "Narita Tobu Hotel Airport → Narita Terminal 2", "driving"]
+  ]) {
+    await page.getByRole("navigation", { name: "Trip dates" }).getByRole("link", { name: new RegExp(day + " November") }).click();
+    await page.getByLabel("Route leg").selectOption({ label: leg });
+    const link = await page.getByRole("link", { name: "Open directions" }).getAttribute("href");
+    assert.equal(new URL(link).searchParams.get("travelmode"), mode, leg);
+  }
+});
+
 test("phone travelers can jump directly to the day's map or hobby list by keyboard", async () => {
   const page = await openDay(25, { viewport: { width: 375, height: 800 } });
   page.setDefaultTimeout(2500);
@@ -179,15 +236,42 @@ test("the full timetable carries multi-hour activities into otherwise empty hour
     assert.match(await rows.nth(14).innerText(), /AI Driven Development team/);
     assert.match(await rows.nth(15).innerText(), /AI Driven Development team/);
     assert.doesNotMatch(await rows.nth(19).innerText(), /Buffer time/);
-    await page.goto(entry + "#day/24");
-    await page.getByRole("heading", { name: "Manila to Nagoya", level: 1 }).waitFor();
-    await page.getByRole("button", { name: "All 24 hours" }).click();
-    assert.match(await rows.nth(10).innerText(), /In flight.*5J 5038/);
-    await page.goto(entry + "#day/28");
-    await page.getByRole("heading", { name: "Narita to Manila", level: 1 }).waitFor();
-    await page.getByRole("button", { name: "All 24 hours" }).click();
-    assert.match(await rows.nth(21).innerText(), /In flight.*5J 5057/);
   } finally {
     await page.close();
   }
+});
+
+test("Toyota City agenda and hourly titles fit a 320px phone with doubled text", async t => {
+  const page = await openDay(25, { viewport: { width: 320, height: 760 } });
+  t.after(() => page.close());
+  await page.addStyleTag({ content: "html { font-size: 200%; }" });
+  for (const view of ["Agenda", "All 24 hours"]) {
+    await page.getByRole("button", { name: view }).click();
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, view);
+  }
+});
+
+test("flight days use a Manila-time axis through both partial flight hours", async t => {
+  const page = await openDay(24);
+  t.after(() => page.close());
+  const hourly = page.getByRole("button", { name: "All 24 hours" });
+  await hourly.click();
+  const rows = page.getByRole("list", { name: "Hourly timetable" }).getByRole("listitem");
+  const row = hour => rows.nth(hour).innerText();
+  assert.match(await row(3), /03:00 PHT[\s\S]*Leave for NAIA/);
+  assert.match(await row(7), /07:35 PHT[\s\S]*Fly Manila to Nagoya/);
+  assert.match(await row(10), /In flight.*5J 5038/);
+  assert.match(await row(11), /In flight.*5J 5038[\s\S]*11:35 PHT \(12:35 JST\)[\s\S]*Land at Nagoya/);
+  assert.doesNotMatch(await row(12), /In flight|Land at Nagoya/);
+  assert.match(await row(12), /12:15–13:15 PHT[\s\S]*Lunch/);
+  assert.match(await row(13), /Lunch.*until 13:15/);
+  await page.getByRole("navigation", { name: "Trip dates" }).getByRole("link", { name: /28 November/ }).click();
+  await hourly.click();
+  assert.match(await row(8), /08:00–08:30 PHT[\s\S]*Planned Narita hotel checkout/);
+  assert.doesNotMatch(await row(17), /In flight|Fly Narita/);
+  assert.match(await row(18), /18:00 PHT \(19:00 JST\)[\s\S]*Fly Narita to Manila/);
+  assert.match(await row(19), /In flight.*5J 5057/);
+  assert.match(await row(23), /In flight.*5J 5057[\s\S]*23:35 PHT[\s\S]*Land at Manila/);
+  await page.getByRole("button", { name: "Agenda" }).click();
+  assert.match(await page.locator("main").innerText(), /19:00 JST[\s\S]*Fly Narita to Manila/);
 });

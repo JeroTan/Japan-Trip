@@ -73,7 +73,7 @@
 .jd-event { padding: 20px 0; }
 .jd-event-time, .jd-hour-label, .jd-hour-exact { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .jd-event-time { font-size: .83rem; color: var(--muted); padding-top: 3px; }
-.jd-event-copy { position: relative; min-width: 0; padding-left: 19px; }
+.jd-event-copy { position: relative; min-width: 0; padding-left: 19px; overflow-wrap: anywhere; }
 .jd-event-copy::before { content: ""; position: absolute; width: 7px; height: 7px; left: 0; top: .58rem; border-radius: 50%; background: var(--muted); }
 .jd-event-copy h3 { display: inline; font: 650 1.04rem/1.43 var(--sans); letter-spacing: -.014em; }
 .jd-event-copy p { color: var(--muted); font-size: .92rem; margin-top: 5px; line-height: 1.55; }

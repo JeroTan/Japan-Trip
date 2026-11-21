@@ -69,6 +69,20 @@ test('a map only loads when requested, and switching legs clears the previous ma
   assert.ok(await page.getByRole('link', {name: 'Open directions'}).isVisible());
 });
 
+test('checklist saves new choices after recovering from malformed device storage', async t => {
+  const page = await visit(t, 'checklist');
+  const passport = page.getByRole('checkbox', { name: /Passport and Japan visa/ });
+  const hotel = page.getByRole('checkbox', { name: /Three hotel confirmations/ });
+  await passport.check();
+  await page.evaluate(() => localStorage.setItem('japan-guide-2026-11-checklist', '{'));
+  await page.reload();
+  assert.equal(await passport.isChecked(), false);
+  await hotel.check();
+  await page.reload();
+  assert.equal(await hotel.isChecked(), true);
+  assert.equal(await passport.isChecked(), false);
+});
+
 test('phrase search, situation filter, large display, keyboard focus and Japanese copy work', async t => {
   const page = await visit(t, 'phrases', {viewport: {width: 375, height: 800}});
   const query = page.getByRole('searchbox', {name: 'Search phrases'});
