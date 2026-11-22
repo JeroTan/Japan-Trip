@@ -37,7 +37,7 @@
         Menu
       </button>
       <nav class="guide-nav" id="guide-nav" aria-label="Main navigation">
-        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="etiquette.html">Etiquette</a><a href="how-to.html">How to</a><a href="checklist.html">Checklist</a>
+        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="etiquette.html">Etiquette</a><a href="how-to.html">How to</a><a href="items.html">Items to look for</a><a href="checklist.html">Checklist</a>
       </nav>
     </div>
   </header>
@@ -61,6 +61,7 @@
           <a href="#jd-route-title">Route guide ↓</a>
           <a href="#jd-schedule-title">Itinerary ↓</a>
           <a href="#jd-shops-title">Hobby stops ↓</a>
+          <a href="#souvenirs">Souvenir stops ↓</a>
         </nav>
         <section class="jd-route" aria-labelledby="jd-route-title">
           <div class="jd-route-head">
@@ -388,36 +389,74 @@
               </ol>
             </div>
           </section>
-          <section class="jd-shops" aria-labelledby="jd-shops-title">
-            <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
-            <p class="jd-shop-intro">From APA Hotel Nagoya Ekimae, walk to Nagoya Station and take the Higashiyama Line toward Fujigaoka. Get off at Sakae after two stops. For Sakaechika, follow signs to the inclined elevator near the West Gate. <a href="https://prd.kotsu.city.nagoya.jp/rp/reader/trp0000713.htm" target="_blank" rel="noopener noreferrer">Station elevator guide ↗</a></p>
-            <ul>
-              <li id="shop-sakae-bookoff">
-                <p class="jd-shop-area">Nagoya · Sakae</p>
-                <label><input type="checkbox" value="shop-sakae-bookoff"><span>BOOKOFF SUPER BAZAAR Sakae-SKYLE Store</span></label>
-                <div class="jd-shop-links">
-                  <a href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Nagoya+Ekimae&amp;destination=BOOKOFF+SUPER+BAZAAR+Sakae-SKYLE+Store&amp;travelmode=transit" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to BOOKOFF Sakae-SKYLE">Directions from hotel ↗</a>
-                  <a href="https://maps.app.goo.gl/dYiwFmqSvGHA9jdFA" target="_blank" rel="noopener noreferrer" aria-label="Map for BOOKOFF SUPER BAZAAR Sakae-SKYLE Store">Shop pin ↗</a>
-                </div>
-                <details class="jd-stop-map" open>
-                  <summary>Subway route from hotel to BOOKOFF Sakae-SKYLE</summary>
-                  <iframe title="Directions from APA Hotel Nagoya Ekimae to BOOKOFF Sakae-SKYLE" src="https://www.google.com/maps?saddr=APA+Hotel+Nagoya+Ekimae&amp;daddr=BOOKOFF+SUPER+BAZAAR+Sakae-SKYLE+Store&amp;dirflg=r&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <div class="jd-shop-column">
+            <section class="jd-shops" aria-labelledby="jd-shops-title">
+              <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
+              <p class="jd-shop-intro">From APA Hotel Nagoya Ekimae, walk to Nagoya Station and take the Higashiyama Line toward Fujigaoka. Get off at Sakae after two stops. For Sakaechika, follow signs to the inclined elevator near the West Gate. <a href="https://prd.kotsu.city.nagoya.jp/rp/reader/trp0000713.htm" target="_blank" rel="noopener noreferrer">Station elevator guide ↗</a></p>
+              <ul>
+                <li id="shop-sakae-bookoff">
+                  <p class="jd-shop-area">Nagoya · Sakae</p>
+                  <label><input type="checkbox" value="shop-sakae-bookoff"><span>BOOKOFF SUPER BAZAAR Sakae-SKYLE Store</span></label>
+                  <div class="jd-shop-links">
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Nagoya+Ekimae&amp;destination=BOOKOFF+SUPER+BAZAAR+Sakae-SKYLE+Store&amp;travelmode=transit" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to BOOKOFF Sakae-SKYLE">Directions from hotel ↗</a>
+                    <a href="https://maps.app.goo.gl/dYiwFmqSvGHA9jdFA" target="_blank" rel="noopener noreferrer" aria-label="Map for BOOKOFF SUPER BAZAAR Sakae-SKYLE Store">Shop pin ↗</a>
+                  </div>
+                  <details class="jd-stop-map" open>
+                    <summary>Subway route from hotel to BOOKOFF Sakae-SKYLE</summary>
+                    <iframe title="Directions from APA Hotel Nagoya Ekimae to BOOKOFF Sakae-SKYLE" src="https://www.google.com/maps?saddr=APA+Hotel+Nagoya+Ekimae&amp;daddr=BOOKOFF+SUPER+BAZAAR+Sakae-SKYLE+Store&amp;dirflg=r&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                  </details>
+                </li>
+                <li id="shop-sakae-cpla">
+                  <p class="jd-shop-area">Nagoya · Sakae</p>
+                  <label><input type="checkbox" value="shop-sakae-cpla"><span>#C-pla 名古屋サカエチカ店</span></label>
+                  <div class="jd-shop-links">
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Nagoya+Ekimae&amp;destination=%23C-pla+%E5%90%8D%E5%8F%A4%E5%B1%8B%E3%82%B5%E3%82%AB%E3%82%A8%E3%83%81%E3%82%AB%E5%BA%97&amp;travelmode=transit" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to #C-pla Sakaechika">Directions from hotel ↗</a>
+                    <a href="https://maps.app.goo.gl/MsaYXn66Wa1KcHDb6" target="_blank" rel="noopener noreferrer" aria-label="Map for #C-pla 名古屋サカエチカ店">Shop pin ↗</a>
+                  </div>
+                  <details class="jd-stop-map" open>
+                    <summary>Subway route from hotel to #C-pla Sakaechika</summary>
+                    <iframe title="Directions from APA Hotel Nagoya Ekimae to #C-pla Sakaechika" src="https://www.google.com/maps?saddr=APA+Hotel+Nagoya+Ekimae&amp;daddr=%23C-pla+%E5%90%8D%E5%8F%A4%E5%B1%8B%E3%82%B5%E3%82%AB%E3%82%A8%E3%83%81%E3%82%AB%E5%BA%97&amp;dirflg=r&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                  </details>
+                </li>
+              </ul>
+            </section>
+            <section class="jd-souvenirs" aria-labelledby="souvenirs">
+              <h2 id="souvenirs" tabindex="-1">Optional souvenir stops in Nagoya</h2>
+              <p>After hotel check-in, rest and dinner, choose the hotel stop or head to Sakae. The Sakae shops below are local branches of brands in the video. <a href="items.html">See all 15 items from the video</a>.</p>
+              <section aria-labelledby="noritake-seven">
+                <h3 id="noritake-seven">7-Eleven by the hotel</h3>
+                <p>Walk about <strong>110 m / 2 minutes</strong> from APA Hotel Nagoya Ekimae to the Noritake 1-chome branch at 1-1-7 Noritake. Look here for snack packs, pancake sandwiches or a clear umbrella. <a href="https://location.sevenbank.co.jp/sevenbank/spot/detail?code=0000033104">Branch location</a>.</p>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85%E5%89%8D+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E6%9D%91%E5%8C%BA%E5%89%87%E6%AD%A61%E4%B8%81%E7%9B%AE5-3&amp;destination=%E3%82%BB%E3%83%96%E3%83%B3-%E3%82%A4%E3%83%AC%E3%83%96%E3%83%B3+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%89%87%E6%AD%A6%EF%BC%91%E4%B8%81%E7%9B%AE%E5%BA%97&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">APA Nagoya → 7-Eleven Noritake ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · APA Nagoya → 7-Eleven Noritake</summary>
+                  <iframe title="Walking directions · APA Nagoya → 7-Eleven Noritake" src="https://www.google.com/maps?saddr=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E5%90%8D%E5%8F%A4%E5%B1%8B%E9%A7%85%E5%89%8D+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E6%9D%91%E5%8C%BA%E5%89%87%E6%AD%A61%E4%B8%81%E7%9B%AE5-3&amp;daddr=%E3%82%BB%E3%83%96%E3%83%B3-%E3%82%A4%E3%83%AC%E3%83%96%E3%83%B3+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%89%87%E6%AD%A6%EF%BC%91%E4%B8%81%E7%9B%AE%E5%BA%97&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                 </details>
-              </li>
-              <li id="shop-sakae-cpla">
-                <p class="jd-shop-area">Nagoya · Sakae</p>
-                <label><input type="checkbox" value="shop-sakae-cpla"><span>#C-pla 名古屋サカエチカ店</span></label>
-                <div class="jd-shop-links">
-                  <a href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Nagoya+Ekimae&amp;destination=%23C-pla+%E5%90%8D%E5%8F%A4%E5%B1%8B%E3%82%B5%E3%82%AB%E3%82%A8%E3%83%81%E3%82%AB%E5%BA%97&amp;travelmode=transit" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to #C-pla Sakaechika">Directions from hotel ↗</a>
-                  <a href="https://maps.app.goo.gl/MsaYXn66Wa1KcHDb6" target="_blank" rel="noopener noreferrer" aria-label="Map for #C-pla 名古屋サカエチカ店">Shop pin ↗</a>
-                </div>
-                <details class="jd-stop-map" open>
-                  <summary>Subway route from hotel to #C-pla Sakaechika</summary>
-                  <iframe title="Directions from APA Hotel Nagoya Ekimae to #C-pla Sakaechika" src="https://www.google.com/maps?saddr=APA+Hotel+Nagoya+Ekimae&amp;daddr=%23C-pla+%E5%90%8D%E5%8F%A4%E5%B1%8B%E3%82%B5%E3%82%AB%E3%82%A8%E3%83%81%E3%82%AB%E5%BA%97&amp;dirflg=r&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+              </section>
+              <section aria-labelledby="sakae-floor-guide">
+                <h3 id="sakae-floor-guide">One Sakae stop for four shops</h3>
+                <p>Use the <a href="#shop-sakae-bookoff">subway directions and embedded map from the hotel to BOOKOFF</a>. At 3-4-5 Sakae, use the elevators and check the wing on the directory. In <strong>SKYLE</strong>, UNIQLO is on 5F, GU on 6F and BOOKOFF on 8F. In the adjoining <strong>NOVA</strong> wing, Zoff eyewear is on 2F and Sakae Loft spans 3F–6F. Head to Loft 5F for pens. Aim to visit these shops before 20:00. <a href="https://skyle.jp/floor/">Building directory</a> · <a href="https://www.loft.co.jp/shop_list/detail.php?shop_id=525">Loft departments</a> · <a href="https://www.zoff.co.jp/shop/store/11294/">Zoff Sakae</a>.</p>
+                <p>For matcha, cross the main intersection to <strong>Nagoya Sakae Mitsukoshi</strong> and go to the food floor, B1, for the Ippodo counter. For capsule toys, follow the <a href="#shop-sakae-cpla">hotel route to #C-pla in the Sakaechika underground mall</a>. <a href="https://www.mitsukoshi.mistore.jp/nagoya/shops/foods/foods.html">Mitsukoshi food directory</a>.</p>
+              </section>
+              <section aria-labelledby="donki-sakae">
+                <h3 id="donki-sakae">Don Quijote Sakae Main Store</h3>
+                <p>From the <a href="#shop-sakae-bookoff">hotel-to-BOOKOFF subway route</a>, continue on foot along Otsu-dori, about <strong>250 m / 7 minutes</strong> from BOOKOFF. Look for ANESSA sunscreen, KAI nail clippers, kitchenware or luggage. The Sakae branch at 3-17-15 Nishiki lists 24-hour opening. <a href="https://www.donki.com/en/store/shop_detail.php?shop_id=348">Store details</a>.</p>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=BOOKOFF+SUPER+BAZAAR+%E6%A0%84%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%AB%E5%BA%97&amp;destination=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86+%E6%A0%84%E6%9C%AC%E5%BA%97&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">BOOKOFF Sakae → Don Quijote ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · BOOKOFF Sakae → Don Quijote</summary>
+                  <iframe title="Walking directions · BOOKOFF Sakae → Don Quijote" src="https://www.google.com/maps?saddr=BOOKOFF+SUPER+BAZAAR+%E6%A0%84%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%AB%E5%BA%97&amp;daddr=%E3%83%89%E3%83%B3%E3%83%BB%E3%82%AD%E3%83%9B%E3%83%BC%E3%83%86+%E6%A0%84%E6%9C%AC%E5%BA%97&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                 </details>
-              </li>
-            </ul>
-          </section>
+              </section>
+              <section aria-labelledby="sakae-stickers">
+                <h3 id="sakae-stickers">B-SIDE LABEL stickers</h3>
+                <p>For the shortest stop, check <strong>Sakae Loft</strong> in the same complex as BOOKOFF. If you want the dedicated Nagoya shop in Osu, allow about <strong>1.3 km / 20 minutes each way</strong> from BOOKOFF. It closes at 20:00. <a href="https://bside-label.com/archives/53380">Loft stockist listing</a> · <a href="https://bside-label.com/shop">B-SIDE LABEL shop directory</a>.</p>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=BOOKOFF+SUPER+BAZAAR+%E6%A0%84%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%AB%E5%BA%97&amp;destination=B-SIDE+LABEL+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%BA%97&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">BOOKOFF Sakae → B-SIDE LABEL Nagoya ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · BOOKOFF Sakae → B-SIDE LABEL Nagoya</summary>
+                  <iframe title="Walking directions · BOOKOFF Sakae → B-SIDE LABEL Nagoya" src="https://www.google.com/maps?saddr=BOOKOFF+SUPER+BAZAAR+%E6%A0%84%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%AB%E5%BA%97&amp;daddr=B-SIDE+LABEL+%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%BA%97&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </details>
+              </section>
+            </section>
+          </div>
         </div>
       </article>
     </main>

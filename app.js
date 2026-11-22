@@ -34,7 +34,7 @@
       menu.focus();
     }
   });
-  window.matchMedia('(max-width: 850px)').addEventListener('change', () => setMenu(false));
+  window.matchMedia('(max-width: 980px)').addEventListener('change', () => setMenu(false));
 
   // A full navigation can bypass the browser's back/forward cache, especially with maps.
   function rememberControls() {

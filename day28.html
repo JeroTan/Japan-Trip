@@ -37,7 +37,7 @@
         Menu
       </button>
       <nav class="guide-nav" id="guide-nav" aria-label="Main navigation">
-        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="etiquette.html">Etiquette</a><a href="how-to.html">How to</a><a href="checklist.html">Checklist</a>
+        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="etiquette.html">Etiquette</a><a href="how-to.html">How to</a><a href="items.html">Items to look for</a><a href="checklist.html">Checklist</a>
       </nav>
     </div>
   </header>
@@ -61,6 +61,7 @@
           <a href="#jd-route-title">Route guide ↓</a>
           <a href="#jd-schedule-title">Itinerary ↓</a>
           <a href="#jd-shops-title">Hobby stops ↓</a>
+          <a href="#souvenirs">Souvenir stops ↓</a>
         </nav>
         <section class="jd-route" aria-labelledby="jd-route-title">
           <div class="jd-route-head">
@@ -388,42 +389,53 @@
               </ol>
             </div>
           </section>
-          <section class="jd-shops" aria-labelledby="jd-shops-title">
-            <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
-            <p class="jd-shop-intro">Tick a stop when you’ve visited.</p>
-            <ul>
-              <li id="shop-narita-bookoff">
-                <p class="jd-shop-area">Narita</p>
-                <label><input type="checkbox" value="shop-narita-bookoff"><span>BOOKOFF AEON MALL Narita Store</span></label>
-                <p class="jd-shop-note">The map shows a taxi or car route from Narita Tobu Hotel Airport. In the mall, find BOOKOFF on <strong>1F, unit 183</strong>. For the hotel shuttle, check the AEON Mall timetable and use Entrance G for the return. The last listed pickup is 19:40. Arrange another way back if you stay later. After checkout, confirm where you will leave fieldwork and allow for bag drop before the 19:00 flight.</p>
-                <div class="jd-shop-links">
-                  <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Narita+Tobu+Hotel+Airport&amp;destination=BOOKOFF+AEON+MALL+Narita+Store&amp;travelmode=driving" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to BOOKOFF AEON MALL Narita">Directions from hotel ↗</a>
-                  <a href="https://maps.app.goo.gl/7sSh4HaFAaSLP11Q9" target="_blank" rel="noopener noreferrer" aria-label="Map for BOOKOFF AEON MALL Narita Store">Shop pin ↗</a>
-                  <a class="jd-map-link" href="https://www.tobuhotel.co.jp/narita/access/pdf/from_narita_station_2.pdf" target="_blank" rel="noopener noreferrer">Hotel shuttle times ↗</a>
-                  <a class="jd-map-link" href="https://narita.aeonmall.jp/shop/34bc0239-d251-42dc-9157-c28ac888caaa" target="_blank" rel="noopener noreferrer">BOOKOFF mall directory ↗</a>
-                </div>
-                <details class="jd-stop-map" open>
-                  <summary>Driving route from hotel to BOOKOFF AEON MALL Narita</summary>
-                  <iframe title="Directions from Narita Tobu Hotel Airport to BOOKOFF AEON MALL Narita" src="https://www.google.com/maps?saddr=Narita+Tobu+Hotel+Airport&amp;daddr=BOOKOFF+AEON+MALL+Narita+Store&amp;dirflg=d&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                </details>
-              </li>
-              <li id="shop-narita-fasola">
-                <p class="jd-shop-area">Narita Airport · T1</p>
-                <label><input type="checkbox" value="shop-narita-fasola"><span>Fa-So-La TAX FREE AKIHABARA Narita Airport Terminal 1</span></label>
-                <p class="jd-shop-note">This branch is after international security in Terminal 1. Your Terminal 2 ticket does not give access.</p>
-                <p class="jd-shop-note">For your booked flight, <a href="#to-terminal-2">use directions to Terminal 2</a>. The same retailer lists a separate T2 shop in the Main Building, 3F after security. <a class="jd-map-link" href="https://www.narita-airport.jp/en/shop/shop-search/t2mn03_t0006g/" target="_blank" rel="noopener noreferrer">Official T2 shop and floor map ↗</a></p>
-                <div class="jd-shop-links">
-                  <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Narita+Tobu+Hotel+Airport&amp;destination=Narita+International+Airport+Terminal+2%2C+Japan&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">Directions from hotel to your T2 departure ↗</a>
-                  <a href="https://maps.app.goo.gl/q1QRgKrXWirfr7PM9" target="_blank" rel="noopener noreferrer" aria-label="Original pin for the restricted Terminal 1 shop">T1 shop pin ↗</a>
-                  <a href="https://www.narita-airport.jp/en/shop/shop-search/t1sw03_t0002m/" target="_blank" rel="noopener noreferrer">Airport listing ↗</a>
-                </div>
-                <details class="jd-stop-map">
-                  <summary>Original Terminal 1 shop pin (restricted access)</summary>
-                  <iframe title="Map of Fa-So-La TAX FREE AKIHABARA Narita Airport Terminal 1" src="https://www.google.com/maps?q=Fa-So-La+TAX+FREE+AKIHABARA+Narita+Airport+Terminal+1%2C+Narita+Airport%2C+Japan&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-                </details>
-              </li>
-            </ul>
-          </section>
+          <div class="jd-shop-column">
+            <section class="jd-shops" aria-labelledby="jd-shops-title">
+              <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
+              <p class="jd-shop-intro">Tick a stop when you’ve visited.</p>
+              <ul>
+                <li id="shop-narita-bookoff">
+                  <p class="jd-shop-area">Narita</p>
+                  <label><input type="checkbox" value="shop-narita-bookoff"><span>BOOKOFF AEON MALL Narita Store</span></label>
+                  <p class="jd-shop-note">The map shows a taxi or car route from Narita Tobu Hotel Airport. In the mall, find BOOKOFF on <strong>1F, unit 183</strong>. For the hotel shuttle, check the AEON Mall timetable and use Entrance G for the return. The last listed pickup is 19:40. Arrange another way back if you stay later. After checkout, confirm where you will leave fieldwork and allow for bag drop before the 19:00 flight.</p>
+                  <div class="jd-shop-links">
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Narita+Tobu+Hotel+Airport&amp;destination=BOOKOFF+AEON+MALL+Narita+Store&amp;travelmode=driving" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to BOOKOFF AEON MALL Narita">Directions from hotel ↗</a>
+                    <a href="https://maps.app.goo.gl/7sSh4HaFAaSLP11Q9" target="_blank" rel="noopener noreferrer" aria-label="Map for BOOKOFF AEON MALL Narita Store">Shop pin ↗</a>
+                    <a class="jd-map-link" href="https://www.tobuhotel.co.jp/narita/access/pdf/from_narita_station_2.pdf" target="_blank" rel="noopener noreferrer">Hotel shuttle times ↗</a>
+                    <a class="jd-map-link" href="https://narita.aeonmall.jp/shop/34bc0239-d251-42dc-9157-c28ac888caaa" target="_blank" rel="noopener noreferrer">BOOKOFF mall directory ↗</a>
+                  </div>
+                  <details class="jd-stop-map" open>
+                    <summary>Driving route from hotel to BOOKOFF AEON MALL Narita</summary>
+                    <iframe title="Directions from Narita Tobu Hotel Airport to BOOKOFF AEON MALL Narita" src="https://www.google.com/maps?saddr=Narita+Tobu+Hotel+Airport&amp;daddr=BOOKOFF+AEON+MALL+Narita+Store&amp;dirflg=d&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                  </details>
+                </li>
+                <li id="shop-narita-fasola">
+                  <p class="jd-shop-area">Narita Airport · T1</p>
+                  <label><input type="checkbox" value="shop-narita-fasola"><span>Fa-So-La TAX FREE AKIHABARA Narita Airport Terminal 1</span></label>
+                  <p class="jd-shop-note">This branch is after international security in Terminal 1. Your Terminal 2 ticket does not give access.</p>
+                  <p class="jd-shop-note">For your booked flight, <a href="#to-terminal-2">use directions to Terminal 2</a>. The same retailer lists a separate T2 shop in the Main Building, 3F after security. <a class="jd-map-link" href="https://www.narita-airport.jp/en/shop/shop-search/t2mn03_t0006g/" target="_blank" rel="noopener noreferrer">Official T2 shop and floor map ↗</a></p>
+                  <div class="jd-shop-links">
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;origin=Narita+Tobu+Hotel+Airport&amp;destination=Narita+International+Airport+Terminal+2%2C+Japan&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">Directions from hotel to your T2 departure ↗</a>
+                    <a href="https://maps.app.goo.gl/q1QRgKrXWirfr7PM9" target="_blank" rel="noopener noreferrer" aria-label="Original pin for the restricted Terminal 1 shop">T1 shop pin ↗</a>
+                    <a href="https://www.narita-airport.jp/en/shop/shop-search/t1sw03_t0002m/" target="_blank" rel="noopener noreferrer">Airport listing ↗</a>
+                  </div>
+                  <details class="jd-stop-map">
+                    <summary>Original Terminal 1 shop pin (restricted access)</summary>
+                    <iframe title="Map of Fa-So-La TAX FREE AKIHABARA Narita Airport Terminal 1" src="https://www.google.com/maps?q=Fa-So-La+TAX+FREE+AKIHABARA+Narita+Airport+Terminal+1%2C+Narita+Airport%2C+Japan&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                  </details>
+                </li>
+              </ul>
+            </section>
+            <section class="jd-souvenirs" aria-labelledby="souvenirs">
+              <h2 id="souvenirs" tabindex="-1">Optional souvenirs at Narita Terminal 2</h2>
+              <p>Check in, drop bags and check your boarding time first. Both shops below are in your booked departure terminal. <a href="items.html">See all 15 items from the video</a>.</p>
+              <section aria-labelledby="airport-gifts">
+                <h3 id="airport-gifts">Stickers before security, chocolate after</h3>
+                <p><strong>B-SIDE LABEL SKY</strong> is on <strong>4F of the T2 main building, before security</strong>. If you have time after bag drop, use the elevator up from departures. <a href="#to-terminal-2">Directions from Narita Tobu Hotel Airport to T2</a> · <a href="https://www.narita-airport.jp/en/shop/shop-search/t2mn04_t000fd/">Sticker shop and indoor map</a>.</p>
+                <p><strong>JAL PLAZA Gate 91</strong> lists ROYCE’ soft chocolate. It is on <strong>3F of the T2 satellite, after international security</strong>. Stop only if the satellite is convenient for your assigned gate and boarding time. Ask about a cold pack for the flight. <a href="https://www.narita-airport.jp/en/shop/shop-search/t2sl03_t0006m/">Chocolate shop and indoor map</a>.</p>
+              </section>
+            </section>
+          </div>
         </div>
       </article>
     </main>

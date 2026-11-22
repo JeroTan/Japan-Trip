@@ -5,7 +5,7 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
 const entry = name => pathToFileURL(path.join(__dirname, '..', name + '.html')).href;
-const views = ['index', 'day24', 'day25', 'day26', 'day27', 'day28', 'transport', 'phrases', 'etiquette', 'how-to', 'checklist'];
+const views = ['index', 'day24', 'day25', 'day26', 'day27', 'day28', 'transport', 'phrases', 'etiquette', 'how-to', 'items', 'checklist'];
 
 test('all trip views open from a local file at phone and desktop sizes', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
@@ -77,9 +77,47 @@ test('all HTML documents contain readable trip content and request no indexing w
     assert.equal(await navigation.getByRole('link', {name:'Overview'}).isVisible(), true);
     assert.equal(await navigation.getByRole('link', {name:'Etiquette'}).getAttribute('href'), 'etiquette.html');
     assert.equal(await navigation.getByRole('link', {name:'How to', exact:true}).getAttribute('href'), 'how-to.html');
+    assert.equal(await navigation.getByRole('link', {name:'Items to look for'}).getAttribute('href'), 'items.html');
     if (/^day|^transport$/.test(view)) {
       const route = main.locator('iframe[src*="saddr="][src*="daddr="]').first();
       assert.ok(await route.isVisible(), view + ' has embedded directions without toggling a control');
     }
   }
+});
+
+test('souvenir chapters lead to the nearby shops and the walking directions work without scripts', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({javaScriptEnabled:false, viewport:{width:375,height:812}});
+  await page.route('https://www.google.com/maps**', r => r.fulfill({body:'Map'}));
+  await page.goto(entry('items'));
+  const chapters = page.getByRole('list', {name:'Souvenirs in video order'}).getByRole('listitem');
+  assert.equal(await chapters.count(), 15);
+  const links = await chapters.locator('a.souvenir-time').evaluateAll(anchors => anchors.map(a => new URL(a.href).searchParams.get('t')));
+  assert.deepEqual(links, [62,185,270,348,395,473,535,623,712,847,940,990,1022,1057,1132].map(t => t + 's'));
+  await page.getByRole('link', {name:'RAILYARD, the featured shop'}).click();
+  assert.ok(page.url().endsWith('day26.html#akihabara-railyard'));
+  const shop = page.getByRole('region', {name:'Akihabara · GENERAL STORE RAILYARD'});
+  await shop.getByText('Walking map · APA Tokyo → RAILYARD', {exact:true}).click();
+  const frame = shop.locator('details[open] iframe');
+  assert.ok(await frame.isVisible());
+  const map = new URL(await frame.getAttribute('src'));
+  const directions = new URL(await shop.getByRole('link', {name:'APA Tokyo → RAILYARD ↗'}).getAttribute('href'));
+  assert.equal(map.searchParams.get('saddr'), directions.searchParams.get('origin'));
+  assert.equal(map.searchParams.get('daddr'), directions.searchParams.get('destination'));
+  assert.equal(map.searchParams.get('dirflg'), 'w');
+});
+
+test('the first subway ride links to its approach tunes and distinguishes the JR departure signal', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({javaScriptEnabled:false, viewport:{width:375,height:812}});
+  await page.goto(entry('how-to'));
+  await page.getByRole('link', {name:'Follow your first ride from Nagoya to Sakae'}).click();
+  const commute = page.getByRole('region', {name:'How to ride the train'});
+  assert.match(await commute.innerText(), /Fushimi \(H09\).*Sakae \(H10\)/);
+  await commute.getByRole('link', {name:'Hear the two Higashiyama tunes'}).click();
+  assert.ok(page.url().endsWith('etiquette.html#train-jingles'));
+  assert.equal(await page.locator('a[href$=".wmv"]').count(), 2);
+  assert.ok(await page.getByText(/the melody signals departure/).isVisible());
 });

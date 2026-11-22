@@ -37,7 +37,7 @@
         Menu
       </button>
       <nav class="guide-nav" id="guide-nav" aria-label="Main navigation">
-        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="etiquette.html">Etiquette</a><a href="how-to.html">How to</a><a href="checklist.html">Checklist</a>
+        <a href="index.html">Overview</a><a href="day24.html" aria-current="page">Itinerary</a><a href="transport.html">Transport</a><a href="phrases.html">Phrases</a><a href="etiquette.html">Etiquette</a><a href="how-to.html">How to</a><a href="items.html">Items to look for</a><a href="checklist.html">Checklist</a>
       </nav>
     </div>
   </header>
@@ -61,6 +61,7 @@
           <a href="#jd-route-title">Route guide ↓</a>
           <a href="#jd-schedule-title">Itinerary ↓</a>
           <a href="#jd-shops-title">Hobby stops ↓</a>
+          <a href="#souvenirs">Souvenir stops ↓</a>
         </nav>
         <section class="jd-route" aria-labelledby="jd-route-title">
           <div class="jd-route-head">
@@ -449,27 +450,67 @@
               </ol>
             </div>
           </section>
-          <section class="jd-shops" aria-labelledby="jd-shops-title">
-            <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
-            <p class="jd-shop-intro">Tick a stop when you’ve visited.</p>
-            <ul>
-              <li id="shop-tokyo-hololive">
-                <p class="jd-shop-area">Tokyo Station</p>
-                <label><input type="checkbox" value="shop-tokyo-hololive"><span>hololive production official shop in Tokyo Station</span></label>
-                <p class="jd-shop-note">Allow about 20 minutes on foot from APA Hotel Kayabacho Hatchobori Ekimae, plus time inside the station. At the Yaesu North entrance by Daimaru, stay outside the ticket gates. Follow Tokyo Gift Palette toward Sanrio (1F, C36). Take the passenger elevator beside Sanrio to B1, then follow Tokyo Character Street to <strong>C30, next to Pretty Cure</strong>. The shop moved on Nov 13 and opens at 10:00, after the planned 09:30 station arrival.</p>
-                <div class="jd-shop-links">
-                  <a href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Kayabacho+Hatchobori+Ekimae&amp;destination=hololive+production+official+shop+in+Tokyo+Station&amp;travelmode=walking" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to hololive Tokyo Station">Directions from hotel ↗</a>
-                  <a href="https://maps.app.goo.gl/XmUaUJQs5mVGn9ur7" target="_blank" rel="noopener noreferrer" aria-label="Map for hololive production official shop in Tokyo Station">Shop pin ↗</a>
-                  <a class="jd-map-link" href="https://www.tokyoeki-1bangai.co.jp/assets/pdf/floorMap_chara.pdf" target="_blank" rel="noopener noreferrer">Character Street floor map ↗</a>
-                  <a class="jd-map-link" href="https://www.tokyoeki-1bangai.co.jp/assets/pdf/floorMap.pdf" target="_blank" rel="noopener noreferrer">Station elevator map ↗</a>
-                </div>
-                <details class="jd-stop-map" open>
-                  <summary>Walking route from hotel to hololive Tokyo Station</summary>
-                  <iframe title="Directions from APA Hotel Kayabacho Hatchobori Ekimae to hololive Tokyo Station" src="https://www.google.com/maps?saddr=APA+Hotel+Kayabacho+Hatchobori+Ekimae&amp;daddr=hololive+production+official+shop+in+Tokyo+Station&amp;dirflg=w&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <div class="jd-shop-column">
+            <section class="jd-shops" aria-labelledby="jd-shops-title">
+              <h2 id="jd-shops-title" tabindex="-1">Optional hobby stops</h2>
+              <p class="jd-shop-intro">Tick a stop when you’ve visited.</p>
+              <ul>
+                <li id="shop-tokyo-hololive">
+                  <p class="jd-shop-area">Tokyo Station</p>
+                  <label><input type="checkbox" value="shop-tokyo-hololive"><span>hololive production official shop in Tokyo Station</span></label>
+                  <p class="jd-shop-note">Allow about 20 minutes on foot from APA Hotel Kayabacho Hatchobori Ekimae, plus time inside the station. At the Yaesu North entrance by Daimaru, stay outside the ticket gates. Follow Tokyo Gift Palette toward Sanrio (1F, C36). Take the passenger elevator beside Sanrio to B1, then follow Tokyo Character Street to <strong>C30, next to Pretty Cure</strong>. The shop moved on Nov 13 and opens at 10:00, after the planned 09:30 station arrival.</p>
+                  <div class="jd-shop-links">
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;origin=APA+Hotel+Kayabacho+Hatchobori+Ekimae&amp;destination=hololive+production+official+shop+in+Tokyo+Station&amp;travelmode=walking" target="_blank" rel="noopener noreferrer" aria-label="Directions from hotel to hololive Tokyo Station">Directions from hotel ↗</a>
+                    <a href="https://maps.app.goo.gl/XmUaUJQs5mVGn9ur7" target="_blank" rel="noopener noreferrer" aria-label="Map for hololive production official shop in Tokyo Station">Shop pin ↗</a>
+                    <a class="jd-map-link" href="https://www.tokyoeki-1bangai.co.jp/assets/pdf/floorMap_chara.pdf" target="_blank" rel="noopener noreferrer">Character Street floor map ↗</a>
+                    <a class="jd-map-link" href="https://www.tokyoeki-1bangai.co.jp/assets/pdf/floorMap.pdf" target="_blank" rel="noopener noreferrer">Station elevator map ↗</a>
+                  </div>
+                  <details class="jd-stop-map" open>
+                    <summary>Walking route from hotel to hololive Tokyo Station</summary>
+                    <iframe title="Directions from APA Hotel Kayabacho Hatchobori Ekimae to hololive Tokyo Station" src="https://www.google.com/maps?saddr=APA+Hotel+Kayabacho+Hatchobori+Ekimae&amp;daddr=hololive+production+official+shop+in+Tokyo+Station&amp;dirflg=w&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                  </details>
+                </li>
+              </ul>
+            </section>
+            <section class="jd-souvenirs" aria-labelledby="souvenirs">
+              <h2 id="souvenirs" tabindex="-1">Optional souvenir stops in Tokyo</h2>
+              <p>Tokyo Station fits the arrival route. Akihabara and Ginza are separate outings if work and the 18:00 dinner leave enough time. Walking estimates below are one way. <a href="items.html">See all 15 items from the video</a>.</p>
+              <section aria-labelledby="station-gifts">
+                <h3 id="station-gifts">Tokyo Station · snacks and railway gifts</h3>
+                <p>For Yoku Moku cookie tins, follow <strong>First Avenue Tokyo Station, B1</strong>, outside the JR gates on the Yaesu side. You can use the <a href="#shop-tokyo-hololive">hotel directions to the hololive shop</a> in the same shopping area. <a href="https://www.tokyoeki-1bangai.co.jp/shop/detail/?cd=000197">Yoku Moku shop and floor map</a>.</p>
+                <p>For a train-melody toy, look for <strong>TRAINIART TOKYO</strong> in Gransta Tokyo, B1 on the Marunouchi side, <strong>inside the conventional JR fare gates</strong>. It opens at 10:00, after your planned 09:30 arrival. Use it if you are already inside while it is open. Entering from outside requires a valid ticket for admission or travel. JR lists a related departure-bell capsule series here. Ask what is in stock. <a href="https://www.gransta.jp/mall/gransta_tokyo/trainiarttokyo/">TRAINIART floor map</a> · <a href="https://media.jreast.co.jp/articles/5741">JR melody toy</a>.</p>
+              </section>
+              <section aria-labelledby="akihabara-railyard">
+                <h3 id="akihabara-railyard">Akihabara · GENERAL STORE RAILYARD</h3>
+                <p>This is the shop the video names for the train-melody player. Look <strong>outside JR Akihabara Station’s Showa-dori ticket gate</strong>. The walk from the Woven meeting building is about <strong>1.5 km / 21 minutes</strong>. From the Tokyo hotel it’s about <strong>2.7 km / 39 minutes</strong>. Ask which tunes they have before buying. <a href="https://shop.jr-cross.co.jp/eki/spot/detail?code=1063200">JR store listing and hours</a>.</p>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E6%97%A5%E6%9C%AC%E6%A9%8B%E5%AE%A4%E7%94%BA%E4%B8%89%E4%BA%95%E3%82%BF%E3%83%AF%E3%83%BC+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA&amp;destination=GENERAL+STORE+RAILYARD+%E7%A7%8B%E8%91%89%E5%8E%9F&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">Woven office → RAILYARD ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · Woven office → RAILYARD</summary>
+                  <iframe title="Walking directions · Woven office → RAILYARD" src="https://www.google.com/maps?saddr=%E6%97%A5%E6%9C%AC%E6%A9%8B%E5%AE%A4%E7%94%BA%E4%B8%89%E4%BA%95%E3%82%BF%E3%83%AF%E3%83%BC+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA&amp;daddr=GENERAL+STORE+RAILYARD+%E7%A7%8B%E8%91%89%E5%8E%9F&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
                 </details>
-              </li>
-            </ul>
-          </section>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%8C%85%E5%A0%B4%E7%94%BA%E5%85%AB%E4%B8%81%E5%A0%80%E9%A7%85%E5%89%8D&amp;destination=GENERAL+STORE+RAILYARD+%E7%A7%8B%E8%91%89%E5%8E%9F&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">APA Tokyo → RAILYARD ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · APA Tokyo → RAILYARD</summary>
+                  <iframe title="Walking directions · APA Tokyo → RAILYARD" src="https://www.google.com/maps?saddr=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%8C%85%E5%A0%B4%E7%94%BA%E5%85%AB%E4%B8%81%E5%A0%80%E9%A7%85%E5%89%8D&amp;daddr=GENERAL+STORE+RAILYARD+%E7%A7%8B%E8%91%89%E5%8E%9F&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </details>
+              </section>
+              <section aria-labelledby="uniqlo-ginza">
+                <h3 id="uniqlo-ginza">Ginza · UNIQLO flagship</h3>
+                <p>For the video’s UTme! custom shirts, the Ginza flagship at <strong>6-9-5 Ginza</strong> is about <strong>1.9 km / 28 minutes</strong> on foot from APA Kayabacho Hatchobori Ekimae. Ask about the print queue before ordering. <a href="https://utme.uniqlo.com/tips/19903/">UNIQLO customization locations</a>.</p>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%8C%85%E5%A0%B4%E7%94%BA%E5%85%AB%E4%B8%81%E5%A0%80%E9%A7%85%E5%89%8D&amp;destination=%E3%83%A6%E3%83%8B%E3%82%AF%E3%83%AD+%E9%8A%80%E5%BA%A7%E5%BA%97+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A76%E4%B8%81%E7%9B%AE9-5&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">APA Tokyo → UNIQLO Ginza ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · APA Tokyo → UNIQLO Ginza</summary>
+                  <iframe title="Walking directions · APA Tokyo → UNIQLO Ginza" src="https://www.google.com/maps?saddr=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%8C%85%E5%A0%B4%E7%94%BA%E5%85%AB%E4%B8%81%E5%A0%80%E9%A7%85%E5%89%8D&amp;daddr=%E3%83%A6%E3%83%8B%E3%82%AF%E3%83%AD+%E9%8A%80%E5%BA%A7%E5%BA%97+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A76%E4%B8%81%E7%9B%AE9-5&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </details>
+                <p>For Onitsuka Tiger shoes in the same neighborhood, the brand lists a <strong>Ginza Yellow Concept Store at 5-6-2 Ginza</strong>. This branch specializes in the Yellow Collection. Ask the shop about sizes and customization. <a href="https://www.onitsukatiger.com/jp/en-gl/brand/yellow-collection/store">Onitsuka Tiger store guide</a>.</p>
+                <a class="jd-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E3%83%A6%E3%83%8B%E3%82%AF%E3%83%AD+%E9%8A%80%E5%BA%A7%E5%BA%97+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A76%E4%B8%81%E7%9B%AE9-5&amp;destination=%E3%82%AA%E3%83%8B%E3%83%84%E3%82%AB%E3%82%BF%E3%82%A4%E3%82%AC%E3%83%BC+%E9%8A%80%E5%BA%A7+%E3%82%A4%E3%82%A8%E3%83%AD%E3%83%BC%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88%E3%82%B9%E3%83%88%E3%82%A2+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A75%E4%B8%81%E7%9B%AE6-2&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">UNIQLO Ginza → Onitsuka Tiger ↗</a>
+                <details class="jd-stop-map">
+                  <summary>Walking map · UNIQLO Ginza → Onitsuka Tiger</summary>
+                  <iframe title="Walking directions · UNIQLO Ginza to Onitsuka Tiger Ginza Yellow Concept Store" src="https://www.google.com/maps?saddr=%E3%83%A6%E3%83%8B%E3%82%AF%E3%83%AD+%E9%8A%80%E5%BA%A7%E5%BA%97+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A76%E4%B8%81%E7%9B%AE9-5&amp;daddr=%E3%82%AA%E3%83%8B%E3%83%84%E3%82%AB%E3%82%BF%E3%82%A4%E3%82%AC%E3%83%BC+%E9%8A%80%E5%BA%A7+%E3%82%A4%E3%82%A8%E3%83%AD%E3%83%BC%E3%82%B3%E3%83%B3%E3%82%BB%E3%83%97%E3%83%88%E3%82%B9%E3%83%88%E3%82%A2+%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A75%E4%B8%81%E7%9B%AE6-2&amp;dirflg=w&amp;output=embed&amp;hl=en" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+                </details>
+              </section>
+            </section>
+          </div>
         </div>
       </article>
     </main>

@@ -60,7 +60,7 @@
   gap: clamp(24px, 5vw, 72px);
   margin-top: clamp(28px, 3.5vw, 48px);
 }
-.jd-schedule, .jd-shops { min-width: 0; }
+.jd-schedule, .jd-shop-column { min-width: 0; }
 .jd-guide h2 { font: 500 2.1rem/1.18 var(--serif); letter-spacing: -.035em; }
 .jd-full-day { margin-top: 6px; }
 .jd-full-day summary, .jd-stop-map summary {
@@ -176,3 +176,9 @@
 }
 .jd-hour .jd-continuation { color: var(--muted); font-size: .87rem; }
 .jd-continuation + .jd-hour-entry { margin-top: 9px; }
+
+.jd-souvenirs { margin-top: 1.6rem; padding-top: 1rem; border-top: 2px solid var(--ink); }
+.jd-souvenirs h2 { font-size: 1.62rem; }
+.jd-souvenirs section { margin-top: 1.1rem; padding-top: .8rem; border-top: 1px solid var(--line); }
+.jd-souvenirs h3 { margin: 0; font: 650 1rem/1.4 var(--sans); }
+.jd-souvenirs p { margin-top: .5rem; font-size: .92rem; }
