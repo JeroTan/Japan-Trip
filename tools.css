@@ -192,7 +192,6 @@
   .jt-flights, .jt-forms, .jt-hotels { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 560px) {
-  main[data-view="transport"] .jt-header { margin-bottom: 10px; }
   .jt-map-select { display: grid; gap: 6px; }
   .jt-filters, .jt-phrase-grid { grid-template-columns: minmax(0, 1fr); }
   .jt-line { display: block; margin: 20px 0 16px; }

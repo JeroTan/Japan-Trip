@@ -121,7 +121,7 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
 
 test('Sakae travelers can compare the subway and GO Taxi and open directions for each shop', async t => {
   const page = await visit(t, 'transport', {viewport: {width: 375, height: 812}});
-  await page.getByRole('navigation', {name: 'Nagoya hotel to Sakae'}).getByRole('link', {name: 'Subway'}).click();
+  await page.getByRole('combobox', {name: 'Route leg'}).selectOption({label: 'Nagoya hotel to Sakae · Subway'});
   const subway = page.getByRole('article', {name: 'Nagoya hotel to Sakae by subway'});
   await subway.waitFor();
   assert.match(await subway.innerText(), /¥210/);
