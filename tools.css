@@ -266,12 +266,12 @@
 .souvenir-intro figure { margin: 0; }
 .souvenir-intro img { display: block; width: 100%; height: auto; border-radius: 5px; }
 .souvenir-intro figcaption { margin-top: .4rem; color: var(--muted); font-size: .8rem; }
-.souvenir-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 5vw, 4rem); margin: 0; padding: 0; list-style-position: inside; }
+.souvenir-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 5vw, 4rem); margin: 0; padding: 0; list-style: none; }
 .souvenir-list li { border-top: 1px solid var(--line); padding: 1.2rem 0 1.6rem; }
-.souvenir-list li::marker { color: var(--accent); font: 650 1rem var(--mono); }
-.souvenir-list h2 { display: inline; font: 500 clamp(1.35rem, 2vw, 1.85rem)/1.2 var(--serif); }
+.souvenir-list h3 { margin: 0; font: 500 clamp(1.35rem, 2vw, 1.85rem)/1.2 var(--serif); }
 .souvenir-list p { margin: .5rem 0 0; }
-.souvenir-time { display: block; width: fit-content; margin-top: .35rem; padding-block: .2rem; color: var(--muted); font: 550 .82rem var(--mono); }
+.souvenir-sources { padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+.souvenir-sources h2 { margin: 0; font-size: 1rem; }
 .souvenir-near { font-size: .92rem; }
 @media (max-width: 700px) {
   .souvenir-intro, .souvenir-list { grid-template-columns: 1fr; }

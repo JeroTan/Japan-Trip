@@ -85,17 +85,22 @@ test('all HTML documents contain readable trip content and request no indexing w
   }
 });
 
-test('souvenir chapters lead to the nearby shops and the walking directions work without scripts', async t => {
+test('the standalone shopping guide keeps sources at the end and opens nearby shop directions without scripts', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
   const page = await browser.newPage({javaScriptEnabled:false, viewport:{width:375,height:812}});
   await page.route('https://www.google.com/maps**', r => r.fulfill({body:'Map'}));
   await page.goto(entry('items'));
-  const chapters = page.getByRole('list', {name:'Souvenirs in video order'}).getByRole('listitem');
-  assert.equal(await chapters.count(), 15);
-  const links = await chapters.locator('a.souvenir-time').evaluateAll(anchors => anchors.map(a => new URL(a.href).searchParams.get('t')));
-  assert.deepEqual(links, [62,185,270,348,395,473,535,623,712,847,940,990,1022,1057,1132].map(t => t + 's'));
-  await page.getByRole('link', {name:'RAILYARD, the featured shop'}).click();
+  const sources = page.getByRole('region', {name:'Sources'});
+  assert.equal(await page.locator('main section').last().getAttribute('aria-labelledby'), 'shopping-sources');
+  assert.equal(await page.locator('main a[href*="youtu"]').count(), 1);
+  assert.equal(await sources.locator('a[href*="youtu"]').count(), 1);
+  const items = page.locator('.souvenir-list');
+  assert.doesNotMatch((await items.allInnerTexts()).join(' '), /the video|the creator|timestamp|featured shop/i);
+  for (const id of ['imo-kenpi','ninja-meshi','oao','white-tees','vintage-watches','palm-shaver','bonsai']) {
+    assert.ok(await items.locator('#' + id).isVisible(), id);
+  }
+  await page.getByRole('link', {name:'RAILYARD in Akihabara'}).click();
   assert.ok(page.url().endsWith('day26.html#akihabara-railyard'));
   const shop = page.getByRole('region', {name:'Akihabara · GENERAL STORE RAILYARD'});
   await shop.getByText('Walking map · APA Tokyo → RAILYARD', {exact:true}).click();
