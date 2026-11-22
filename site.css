@@ -191,6 +191,10 @@ a { color: inherit; }
 .guide-text-link { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; margin-top: 6px; text-decoration: none; font-weight: 650; font-size: 13px; }
 .guide-essentials-links a { display: block; min-height: 44px; text-decoration: none; }
 .guide-essentials-grid a strong span { margin-left: 4px; color: var(--accent); }
+@media (min-width: 1081px) and (max-width: 1279px) {
+  .guide-header-inner { gap: 16px; }
+  .guide-nav { gap: 12px; }
+}
 @media (max-width: 1080px) {
   .guide-day-cards { gap: 9px; }
   .guide-day-card { padding-inline: 13px; }
@@ -209,7 +213,7 @@ a { color: inherit; }
   .guide-stop-meta { font-size: 11px; }
   .guide-brand-country { display: none; }
 }
-@media (max-width: 980px) {
+@media (max-width: 1080px) {
   .guide-header-inner { position: relative; align-items: center; min-height: 61px; gap: 16px; }
   .guide-brand { min-height: 44px; font-size: 20px; }
   .guide-mark { width: 33px; height: 33px; }
@@ -273,7 +277,7 @@ a { color: inherit; }
   .guide-btn, .guide-day-card { transition: none; }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1080px) {
   html:not(.nav-ready) .guide-menu { display: none; }
   html:not(.nav-ready) .guide-header-inner { flex-wrap: wrap; padding-block: 8px; }
   html:not(.nav-ready) .guide-nav { position: static; display: flex; flex-wrap: wrap; width: 100%; gap: 2px; padding: 0; border: 0; box-shadow: none; }

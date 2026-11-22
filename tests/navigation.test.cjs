@@ -5,7 +5,7 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
 const entry = name => pathToFileURL(path.join(__dirname, '..', name + '.html')).href;
-const views = ['index', 'day24', 'day25', 'day26', 'day27', 'day28', 'transport', 'phrases', 'etiquette', 'how-to', 'items', 'checklist'];
+const views = ['index', 'day24', 'day25', 'day26', 'day27', 'day28', 'transport', 'toyota', 'phrases', 'etiquette', 'how-to', 'items', 'checklist'];
 
 test('all trip views open from a local file at phone and desktop sizes', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
@@ -75,6 +75,7 @@ test('all HTML documents contain readable trip content and request no indexing w
     assert.match(await page.locator('head meta[name="robots"]').getAttribute('content'), /\bnoindex\b/);
     const navigation = page.getByRole('navigation', {name: 'Main navigation'});
     assert.equal(await navigation.getByRole('link', {name:'Overview'}).isVisible(), true);
+    assert.equal(await navigation.getByRole('link', {name:'Toyota history'}).getAttribute('href'), 'toyota.html');
     assert.equal(await navigation.getByRole('link', {name:'Etiquette'}).getAttribute('href'), 'etiquette.html');
     assert.equal(await navigation.getByRole('link', {name:'How to', exact:true}).getAttribute('href'), 'how-to.html');
     assert.equal(await navigation.getByRole('link', {name:'Items to look for'}).getAttribute('href'), 'items.html');

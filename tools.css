@@ -297,3 +297,14 @@
   .train-step-photos { grid-template-columns: minmax(0,1fr); }
   .train-step-photos img { height: 190px; }
 }
+
+.history-article { max-width: 68rem; margin-inline: auto; }
+.history-intro { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
+.history-intro figure { margin: 0; }
+.history-intro img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.history-intro figcaption { margin-top: .5rem; color: var(--muted); font-size: .84rem; }
+.history-copy { max-width: 68ch; margin-inline: auto; font-size: 1.06rem; line-height: 1.7; }
+.history-visit { padding-top: 1.4rem; border-top: 1px solid var(--line); }
+@media (max-width: 720px) {
+  .history-intro { grid-template-columns: 1fr; }
+}
