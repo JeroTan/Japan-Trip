@@ -81,7 +81,7 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   const transport = await visit(t, 'transport', options);
   assert.ok(await transport.locator('.jt-map-panel iframe').first().isVisible());
   const routes = transport.locator('.jt-map-panel');
-  assert.equal(await routes.count(), 8);
+  assert.equal(await routes.count(), 10);
   const index = transport.locator('.jt-route-index');
   await index.locator('summary').click();
   const direct = index.getByRole('link', {name: 'Nov 28 · Narita hotel to Terminal 2'});
@@ -89,9 +89,9 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   assert.match(transport.url(), /#narita-terminal-2$/);
   assert.ok(await transport.getByRole('heading', {name: 'To the Manila departure'}).isVisible());
   for (const route of await routes.all()) {
-    assert.ok(await route.getByRole('link', {name: 'Open directions'}).isVisible());
+    assert.ok(await route.getByRole('link', {name: /directions/i}).first().isVisible());
     assert.ok(await route.locator('li').count() >= 2);
-    assert.ok(await route.locator('p').innerText());
+    assert.ok(await route.locator('p').first().innerText());
     assert.ok(await route.locator('iframe').getAttribute('title'));
   }
   assert.equal(await transport.locator('.jt-stay iframe').count(), 3);
@@ -117,6 +117,33 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   await checklist.getByRole('checkbox', {name: /Travel insurance/}).check();
   assert.ok(await checklist.getByRole('checkbox', {name: /Travel insurance/}).isChecked());
   assert.ok(await checklist.getByRole('link', {name: /Open Visit Japan Web/}).isVisible());
+});
+
+test('Sakae travelers can compare the subway and GO Taxi and open directions for each shop', async t => {
+  const page = await visit(t, 'transport', {viewport: {width: 375, height: 812}});
+  await page.getByRole('navigation', {name: 'Nagoya hotel to Sakae'}).getByRole('link', {name: 'Subway'}).click();
+  const subway = page.getByRole('article', {name: 'Nagoya hotel to Sakae by subway'});
+  await subway.waitFor();
+  assert.match(await subway.innerText(), /¥210/);
+  assert.match(await subway.innerText(), /inclined elevator/i);
+  await subway.getByRole('link', {name: 'Compare GO Taxi'}).click();
+  const taxi = page.getByRole('article', {name: 'Nagoya hotel to Sakae by GO Taxi'});
+  await taxi.waitFor();
+  assert.match(await taxi.innerText(), /pickup pin/i);
+  await page.reload();
+  await taxi.waitFor();
+  for (const [panel, mode] of [[taxi, 'driving'], [subway, 'transit']]) {
+    if (mode === 'transit') await taxi.getByRole('link', {name: 'Compare subway'}).click();
+    const frame = new URL(await panel.locator('iframe').getAttribute('src'));
+    assert.equal(frame.searchParams.get('saddr'), 'APA Hotel Nagoya Ekimae');
+    assert.equal(frame.searchParams.get('dirflg'), mode === 'transit' ? 'r' : 'd');
+    for (const [label, dest] of [['BOOKOFF directions', /BOOKOFF/], ['#C-pla directions', /#C-pla/]]) {
+      const url = new URL(await panel.getByRole('link', {name: label}).getAttribute('href'));
+      assert.equal(url.searchParams.get('origin'), 'APA Hotel Nagoya Ekimae');
+      assert.match(url.searchParams.get('destination'), dest);
+      assert.equal(url.searchParams.get('travelmode'), mode);
+    }
+  }
 });
 
 test('checklist saves new choices after recovering from malformed device storage', async t => {
