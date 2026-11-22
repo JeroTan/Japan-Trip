@@ -6,6 +6,24 @@ const { chromium } = require('playwright');
 
 const entry = pathToFileURL(path.join(__dirname, '..', 'index.html')).href;
 
+test('the phone menu opens the room and bathroom control instructions', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({viewport:{width:375,height:812}});
+  await page.goto(entry);
+  await page.getByRole('button', {name:'Menu', exact:true}).click();
+  await page.getByRole('navigation', {name:'Main navigation'}).getByRole('link', {name:'How to', exact:true}).click({timeout:3000});
+  const room = page.getByRole('region', {name:'Warm your hotel room'});
+  assert.match(await room.innerText(), /bedside/i);
+  assert.ok((await room.locator('ruby').allTextContents()).some(label => label.includes('暖房')));
+  const bath = page.getByRole('region', {name:'Use the shower and warm the bathroom'});
+  for (const name of ['Get warm shower water', 'Warm the bathroom air', 'Warm the toilet seat']) {
+    assert.ok(await bath.getByRole('heading', {name}).isVisible());
+  }
+  await page.getByRole('button', {name:'Menu', exact:true}).click();
+  assert.equal(await page.getByRole('link', {name:'How to', exact:true}).getAttribute('aria-current'), 'page');
+});
+
 test('the mobile menu opens a side-by-side Philippines and Japan shopping guide', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());

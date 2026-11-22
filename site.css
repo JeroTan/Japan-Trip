@@ -209,8 +209,7 @@ a { color: inherit; }
   .guide-stop-meta { font-size: 11px; }
   .guide-brand-country { display: none; }
 }
-@media (max-width: 680px) {
-  :root { --guide-gutter: clamp(16px, 5vw, 26px); }
+@media (max-width: 850px) {
   .guide-header-inner { position: relative; align-items: center; min-height: 61px; gap: 16px; }
   .guide-brand { min-height: 44px; font-size: 20px; }
   .guide-mark { width: 33px; height: 33px; }
@@ -224,6 +223,9 @@ a { color: inherit; }
   .guide-nav a { min-height: 44px; padding: 6px 13px; }
   .guide-nav a[aria-current] { background: var(--guide-sage); border-radius: 2px; }
   .guide-nav a[aria-current]::after { inset: 9px auto 9px 0; height: auto; width: 3px; }
+}
+@media (max-width: 680px) {
+  :root { --guide-gutter: clamp(16px, 5vw, 26px); }
   .guide-hero { display: flex; flex-direction: column; align-items: stretch; gap: 23px; padding: 29px 0 23px; }
   .guide-date { margin-bottom: 12px; }
   .guide-hero h1 { font-size: clamp(62px, 11.5vw, 78px); margin-bottom: 13px; }
@@ -271,7 +273,7 @@ a { color: inherit; }
   .guide-btn, .guide-day-card { transition: none; }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 850px) {
   html:not(.nav-ready) .guide-menu { display: none; }
   html:not(.nav-ready) .guide-header-inner { flex-wrap: wrap; padding-block: 8px; }
   html:not(.nav-ready) .guide-nav { position: static; display: flex; flex-wrap: wrap; width: 100%; gap: 2px; padding: 0; border: 0; box-shadow: none; }

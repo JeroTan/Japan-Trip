@@ -36,6 +36,17 @@
 .etiquette-steps td:last-child { border-inline-end: 1px solid var(--line); }
 .etiquette-steps tbody:last-child td { border-bottom: 1px solid var(--line); }
 .etiquette-sources .jt-link { display: inline; }
+.howto-guide { max-width: 54rem; }
+.howto-guide .jt-section > p, .howto-controls p { max-width: 74ch; }
+.howto-guide [lang="ja"] { white-space: nowrap; }
+.howto-steps { margin: 1rem 0; padding-inline-start: 1.65rem; }
+.howto-steps li { padding: .25rem 0 .5rem .25rem; }
+.howto-steps li::marker { color: var(--accent); font-weight: 700; }
+.howto-note { background: var(--guide-sage); padding: 1rem 1.25rem; border-inline-start: 3px solid var(--ink); }
+.howto-controls > section { margin-top: 1.25rem; padding: clamp(1rem, 3vw, 1.5rem); background: var(--white); border: 1px solid var(--line); border-radius: 6px; }
+.howto-controls h3 { margin: 0; font: 500 clamp(1.35rem, 2.5vw, 1.65rem)/1.2 var(--serif); }
+.howto-controls > section > :last-child { margin-bottom: 0; }
+.howto-sources .jt-link { display: inline; }
 .jt-section-title { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
 .jt-count, .jt-meta, .jt-results-count, .jt-flight-no, .jt-stay-top > span:last-child {
   font-family: var(--mono, ui-monospace, monospace);
