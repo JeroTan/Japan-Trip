@@ -6,6 +6,28 @@ const { chromium } = require('playwright');
 
 const entry = pathToFileURL(path.join(__dirname, '..', 'index.html')).href;
 
+test('payment guides work offline and distinguish debit withdrawals from secured credit purchases', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
+  await page.goto(new URL('how-to.html', entry).href);
+  await page.getByRole('link', { name: 'MariBank debit and ATMs', exact: true }).click({timeout:2500});
+  const debit = page.getByRole('region', {name:'Use MariBank debit in Japan'});
+  assert.ok(await debit.getByRole('heading', {name:'Withdraw yen from your peso balance'}).isVisible());
+  const steps = await debit.innerText();
+  for (const cue of ['Saving', 'six-digit card PIN', 'JPY', 'operator fee']) assert.ok(steps.includes(cue), cue);
+  const photo = debit.locator('figure img');
+  await photo.scrollIntoViewIfNeeded();
+  await photo.evaluate(img => img.decode());
+  assert.ok(await photo.getAttribute('alt'));
+  await page.getByRole('link', { name: 'UnionBank Rewards Secured', exact: true }).click();
+  const credit = page.getByRole('region', {name:'Pay with a Philippine credit card'});
+  const example = await credit.innerText();
+  for (const cue of ['security deposit', 'credit limit', 'cash advance', '₱70.50']) assert.ok(example.includes(cue), cue);
+  assert.ok(await debit.getByRole('link', {name:/Facebook reel/}).isVisible());
+  assert.ok(await debit.getByRole('link', {name:/Reddit report/}).isVisible());
+});
+
 test('a traveler can find the train comparison, ticket options and manaca instructions offline', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
