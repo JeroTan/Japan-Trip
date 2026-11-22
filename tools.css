@@ -36,7 +36,7 @@
 .etiquette-steps td:last-child { border-inline-end: 1px solid var(--line); }
 .etiquette-steps tbody:last-child td { border-bottom: 1px solid var(--line); }
 .etiquette-sources .jt-link { display: inline; }
-.howto-guide { max-width: 54rem; }
+.howto-guide { max-width: 66rem; }
 .howto-guide .jt-section > p, .howto-controls p { max-width: 74ch; }
 .howto-guide [lang="ja"] { white-space: nowrap; }
 .howto-steps { margin: 1rem 0; padding-inline-start: 1.65rem; }
@@ -47,6 +47,29 @@
 .howto-controls h3 { margin: 0; font: 500 clamp(1.35rem, 2.5vw, 1.65rem)/1.2 var(--serif); }
 .howto-controls > section > :last-child { margin-bottom: 0; }
 .howto-sources .jt-link { display: inline; }
+.howto-illustrated { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; gap: clamp(1.2rem, 3.5vw, 2.5rem); margin-block: 1rem; }
+.howto-copy { min-width: 0; }
+.howto-copy > :first-child { margin-top: 0; }
+.howto-copy > :last-child { margin-bottom: 0; }
+.howto-photo { min-width: 0; margin: 0; }
+.howto-image-link { display: block; position: relative; border-radius: 4px; cursor: zoom-in; }
+.howto-image-link img { display: block; width: 100%; height: auto; border-radius: inherit; }
+.howto-enlarge { position: absolute; right: .45rem; bottom: .45rem; padding: .25rem .5rem; border-radius: 3px; color: white; background: #202d2a; font-size: .8rem; font-weight: 600; }
+.howto-image-link:hover .howto-enlarge, .howto-image-link:focus-visible .howto-enlarge { text-decoration: underline; }
+.howto-focus { position: absolute; pointer-events: none; border: 2px solid var(--accent); border-radius: 5px; box-shadow: 0 0 0 1px white; }
+.focus-room-heat { left: 57%; top: 47%; width: 17%; height: 9%; transform: rotate(-12deg); }
+.focus-shower-mixer { left: 29%; top: 47%; width: 6%; height: 8.7%; border-radius: 50%; }
+.focus-bathroom-heat { left: 21.4%; top: 69.2%; width: 13.7%; height: 14%; }
+.focus-seat-temperature { left: 40%; top: 57%; width: 10.7%; height: 18.8%; }
+.howto-photo figcaption { margin-top: .55rem; font-size: .94rem; line-height: 1.5; color: var(--muted); }
+.howto-photo figcaption strong { color: var(--ink); }
+.howto-credits { border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+.howto-credits summary { width: fit-content; padding-block: .8rem; cursor: pointer; }
+.howto-credits ul { padding-inline-start: 1.4rem; }
+.howto-credits li + li { margin-top: .5rem; }
+@media (max-width: 700px) {
+  .howto-illustrated { grid-template-columns: minmax(0, 1fr); }
+}
 .jt-section-title { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
 .jt-count, .jt-meta, .jt-results-count, .jt-flight-no, .jt-stay-top > span:last-child {
   font-family: var(--mono, ui-monospace, monospace);

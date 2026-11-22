@@ -20,6 +20,16 @@ test('the phone menu opens the room and bathroom control instructions', async t 
   for (const name of ['Get warm shower water', 'Warm the bathroom air', 'Warm the toilet seat']) {
     assert.ok(await bath.getByRole('heading', {name}).isVisible());
   }
+  for (const id of ['room-heat', 'warm-shower', 'bathroom-air', 'toilet-seat']) {
+    const section = page.locator('section[aria-labelledby="' + id + '"]');
+    const photo = section.locator('figure img');
+    await photo.scrollIntoViewIfNeeded();
+    await photo.evaluate(image => image.decode());
+    assert.ok(await photo.getAttribute('alt'));
+    const enlarge = section.getByRole('link', {name: /enlarge photo/i});
+    assert.equal(await enlarge.getAttribute('href'), await photo.getAttribute('src'));
+    assert.ok(await section.locator('figcaption').innerText());
+  }
   await page.getByRole('button', {name:'Menu', exact:true}).click();
   assert.equal(await page.getByRole('link', {name:'How to', exact:true}).getAttribute('aria-current'), 'page');
 });
