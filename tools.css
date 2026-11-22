@@ -276,3 +276,23 @@
 @media (max-width: 700px) {
   .souvenir-intro, .souvenir-list { grid-template-columns: 1fr; }
 }
+
+.souvenir-photo { margin: .8rem 0; }
+.souvenir-photo a { display: block; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: #f1f1e9; cursor: zoom-in; }
+.souvenir-photo img { display: block; width: 100%; height: clamp(155px, 17vw, 230px); object-fit: cover; }
+.souvenir-photo.product-view a { background: #fff; }
+.souvenir-photo.product-view img { object-fit: contain; }
+.souvenir-photo figcaption { margin-top: .35rem; color: var(--muted); font-size: .84rem; }
+.train-stations { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; list-style: none; padding: 0; }
+.train-stations li { display: inline-flex; align-items: center; gap: .4rem; font-weight: 650; }
+.train-stations li:not(:last-child)::after { content: "→"; margin-inline-start: .15rem; color: var(--muted); }
+.train-stations b { padding: .15rem .4rem; border: 2px solid #d9a900; border-radius: 4px; background: #fff9d8; color: var(--ink); font: 650 .84rem var(--mono); }
+.train-step-photos { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; max-width: 52rem; margin: .9rem 0; }
+.train-step-photos a { background: var(--guide-sage); }
+.train-step-photos img { height: clamp(170px, 22vw, 260px); object-fit: contain; }
+.train-step-photos figcaption { font-size: .9rem; }
+.train-photo-single { grid-template-columns: minmax(0,25rem); }
+@media (max-width: 540px) {
+  .train-step-photos { grid-template-columns: minmax(0,1fr); }
+  .train-step-photos img { height: 190px; }
+}

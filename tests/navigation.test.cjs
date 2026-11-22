@@ -96,8 +96,9 @@ test('the standalone shopping guide keeps sources at the end and opens nearby sh
   assert.equal(await page.locator('main a[href*="youtu"]').count(), 1);
   assert.equal(await sources.locator('a[href*="youtu"]').count(), 1);
   const items = page.locator('.souvenir-list');
+  assert.equal(await items.locator('li:not(:has(figure img[alt]))').count(), 0);
   assert.doesNotMatch((await items.allInnerTexts()).join(' '), /the video|the creator|timestamp|featured shop/i);
-  for (const id of ['imo-kenpi','ninja-meshi','oao','white-tees','vintage-watches','palm-shaver','bonsai']) {
+  for (const id of ['imo-kenpi','ninja-meshi','oao','white-tees','vintage-watches','palm-shaver','bonsai','paolo-hot-sauce','white-tea-candle','shimbi']) {
     assert.ok(await items.locator('#' + id).isVisible(), id);
   }
   await page.getByRole('link', {name:'RAILYARD in Akihabara'}).click();
@@ -120,6 +121,12 @@ test('the first subway ride links to its approach tunes and distinguishes the JR
   await page.goto(entry('how-to'));
   await page.getByRole('link', {name:'Follow your first ride from Nagoya to Sakae'}).click();
   const commute = page.getByRole('region', {name:'How to ride the train'});
+  assert.equal(await commute.locator('.train-step-photos img').count(), 5);
+  for (const photo of await commute.locator('.train-step-photos img').all()) {
+    await photo.scrollIntoViewIfNeeded();
+    await photo.evaluate(img => img.decode());
+    assert.ok(await photo.getAttribute('alt'));
+  }
   assert.match(await commute.innerText(), /Fushimi \(H09\).*Sakae \(H10\)/);
   await commute.getByRole('link', {name:'Hear the two Higashiyama tunes'}).click();
   assert.ok(page.url().endsWith('etiquette.html#train-jingles'));
