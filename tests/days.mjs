@@ -137,35 +137,40 @@ test("travelers can unfold known stop maps in the agenda and hobby list without 
   const woven = agenda.getByRole("listitem").filter({ has: page.getByRole("heading", { name: "Travel to Woven by Toyota" }) });
   const place = woven.locator("iframe");
   assert.equal(await place.isVisible(), false);
-  await woven.getByText("Map of Woven by Toyota", { exact: true }).click();
+  await woven.locator("summary").click();
   assert.equal(await place.isVisible(), true);
-  const address = new URL(await place.getAttribute("src")).searchParams.get("q");
+  const address = new URL(await place.getAttribute("src")).searchParams.get("daddr");
   assert.match(address, /Nihonbashi Muromachi Mitsui Tower/);
-  const link = woven.getByRole("link", { name: /Open Woven by Toyota in Maps/ });
-  assert.equal(new URL(await link.getAttribute("href")).searchParams.get("query"), address);
+  const link = woven.getByRole("link", { name: /directions/i });
+  assert.equal(new URL(await link.getAttribute("href")).searchParams.get("destination"), address);
   const hobby = page.getByRole("region", { name: "Optional hobby stops" });
-  await hobby.locator("summary").click();
   const shopMap = hobby.locator("iframe");
   assert.equal(await shopMap.isVisible(), true);
-  assert.match(new URL(await shopMap.getAttribute("src")).searchParams.get("q"), /hololive production official shop in Tokyo Station/);
+  assert.match(new URL(await shopMap.getAttribute("src")).searchParams.get("daddr"), /hololive production official shop in Tokyo Station/);
 });
 
-test("Nagoya hobby cards show subway directions from the first hotel", async t => {
-  for (const date of [24, 25]) {
+test("each reachable hobby shop has matching hotel directions and a visible route on every listed day", async t => {
+  for (const [date, hotel, mode, shops] of [
+    [24, 'APA Hotel Nagoya Ekimae', 'transit', ['BOOKOFF SUPER BAZAAR Sakae-SKYLE Store', '#C-pla 名古屋サカエチカ店']],
+    [25, 'APA Hotel Nagoya Ekimae', 'transit', ['BOOKOFF SUPER BAZAAR Sakae-SKYLE Store', '#C-pla 名古屋サカエチカ店']],
+    [26, 'APA Hotel Kayabacho Hatchobori Ekimae', 'walking', ['hololive production official shop in Tokyo Station']],
+    [27, 'Narita Tobu Hotel Airport', 'driving', ['BOOKOFF AEON MALL Narita Store']],
+    [28, 'Narita Tobu Hotel Airport', 'driving', ['BOOKOFF AEON MALL Narita Store']]
+  ]) {
     const page = await openDay(date, { javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
     t.after(() => page.close());
-    for (const shop of ["BOOKOFF SUPER BAZAAR Sakae-SKYLE Store", "#C-pla 名古屋サカエチカ店"]) {
+    for (const shop of shops) {
       const card = page.getByRole("listitem").filter({ has: page.getByRole("checkbox", { name: shop, exact: true }) });
       const link = new URL(await card.getByRole("link", { name: /Directions from hotel/ }).getAttribute("href"));
       const frame = card.locator("iframe");
       assert.ok(await frame.isVisible());
       const embedded = new URL(await frame.getAttribute("src"));
-      assert.equal(link.searchParams.get("origin"), "APA Hotel Nagoya Ekimae");
+      assert.equal(link.searchParams.get("origin"), hotel);
       assert.equal(link.searchParams.get("destination"), shop);
-      assert.equal(link.searchParams.get("travelmode"), "transit");
+      assert.equal(link.searchParams.get("travelmode"), mode);
       assert.equal(embedded.searchParams.get("saddr"), link.searchParams.get("origin"));
       assert.equal(embedded.searchParams.get("daddr"), shop);
-      assert.equal(embedded.searchParams.get("dirflg"), "r");
+      assert.equal(embedded.searchParams.get("dirflg"), {walking:'w', transit:'r', driving:'d'}[mode]);
     }
   }
 });

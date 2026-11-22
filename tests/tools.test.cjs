@@ -81,7 +81,7 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   const transport = await visit(t, 'transport', options);
   assert.ok(await transport.locator('.jt-map-panel iframe').first().isVisible());
   const routes = transport.locator('.jt-map-panel');
-  assert.equal(await routes.count(), 10);
+  assert.equal(await routes.count(), 13);
   const index = transport.locator('.jt-route-index');
   await index.locator('summary').click();
   const direct = index.getByRole('link', {name: 'Nov 28 · Narita hotel to Terminal 2'});
