@@ -36,6 +36,15 @@
 .etiquette-steps td:last-child { border-inline-end: 1px solid var(--line); }
 .etiquette-steps tbody:last-child td { border-bottom: 1px solid var(--line); }
 .etiquette-sources .jt-link { display: inline; }
+.etiquette-rail h3 { margin: 1.8rem 0 .6rem; font: 500 clamp(1.35rem, 2.2vw, 1.75rem)/1.25 var(--serif); }
+.etiquette-fares { max-width: 82ch; padding-left: 1.3rem; }
+.etiquette-fares li + li { margin-top: .8rem; }
+.etiquette-machine-guide { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(1.2rem, 3vw, 2.25rem); margin-block: 1.25rem; align-items: start; }
+.etiquette-machine-guide ol { margin-top: 0; }
+.etiquette-machine-guide small { display: block; margin-top: .4rem; }
+@media (max-width: 700px) {
+  .etiquette-machine-guide { grid-template-columns: minmax(0, 1fr); }
+}
 .howto-guide { max-width: 66rem; }
 .howto-guide .jt-section > p, .howto-controls p { max-width: 74ch; }
 .howto-guide [lang="ja"] { white-space: nowrap; }

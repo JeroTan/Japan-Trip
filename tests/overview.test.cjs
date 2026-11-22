@@ -6,6 +6,28 @@ const { chromium } = require('playwright');
 
 const entry = pathToFileURL(path.join(__dirname, '..', 'index.html')).href;
 
+test('a traveler can find the train comparison, ticket options and manaca instructions offline', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({javaScriptEnabled:false, viewport:{width:375,height:812}});
+  await page.goto(new URL('etiquette.html', entry).href);
+  await page.getByRole('link', {name:'Riding trains', exact:true}).click({timeout:2500});
+  const rail = page.getByRole('region', {name:'Riding trains'});
+  const table = rail.getByRole('table', {name:'From the station entrance to the exit'});
+  const ph = await table.getByRole('columnheader', {name:'In the Philippines'}).boundingBox();
+  const jp = await table.getByRole('columnheader', {name:'In Japan'}).boundingBox();
+  assert.ok(ph.x < jp.x && Math.abs(ph.y - jp.y) < 2);
+  const content = await rail.innerText();
+  for (const word of ['Katipunan', 'elevated', 'Higashiyama', 'manaca', 'Meitetsu', '¥500', '¥1,500', 'credit card', 'Shinkansen']) {
+    assert.ok(content.includes(word), word);
+  }
+  const photo = rail.locator('figure img');
+  await photo.scrollIntoViewIfNeeded();
+  await photo.evaluate(img => img.decode());
+  assert.ok(await photo.getAttribute('alt'));
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+});
+
 test('the phone menu opens the room and bathroom control instructions', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
