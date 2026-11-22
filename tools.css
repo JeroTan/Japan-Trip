@@ -234,6 +234,7 @@
 .jt-script { margin: 16px 0 3px; font-size: clamp(1.22rem, 1.7vw, 1.55rem); line-height: 1.5; }
 .jt-roman, .jt-dialog-roman { color: var(--muted, #52645f); }
 .jt-roman { margin: 0 0 12px; font-size: .91rem; }
+.jt-phrase-note { margin: 0 0 8px; font-size: .91rem; }
 .jt-phrase-actions { gap: 8px; }
 .jt-quiet { color: var(--accent, #b83a2c); border-color: transparent; background: transparent; }
 .jt-empty { padding: 24px; }

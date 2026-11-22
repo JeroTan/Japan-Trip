@@ -121,8 +121,9 @@
         const romaji = element.querySelector('.jt-roman').textContent;
         // Also accept searches that omit long vowels, such as "chukohin".
         const shortVowels = romaji.replace(/([aeiou])\1|ou/gi, pair => pair[0]);
+        const note = element.querySelector('.jt-phrase-note')?.textContent;
         const searchable = searchText([name, heading, plainJapanese(japanese), kana.textContent,
-          romaji, shortVowels].join(' '));
+          romaji, shortVowels, note].join(' '));
         const controls = actions.content.cloneNode(true);
         controls.querySelector('[data-show]').setAttribute('aria-label', 'Show ' + heading + ' in large type');
         controls.querySelector('[data-copy]').setAttribute('aria-label', 'Copy Japanese for ' + heading);

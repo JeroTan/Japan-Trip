@@ -98,12 +98,12 @@ test('all route notes, phrases, entry forms and checklist items are usable with 
   assert.equal(await transport.locator('.jt-ticket').locator('a[href="day24.html"], a[href="day28.html"]').count(), 2);
 
   const phrases = await visit(t, 'phrases', options);
-  assert.equal(await phrases.getByRole('article').count(), 60);
-  assert.equal(await phrases.locator('article .jt-script[lang="ja"]').count(), 60);
-  assert.equal(await phrases.locator('article [lang="ja"]').count(), 60);
+  assert.equal(await phrases.getByRole('article').count(), 69);
+  assert.equal(await phrases.locator('article .jt-script[lang="ja"]').count(), 69);
+  assert.equal(await phrases.locator('article [lang="ja"]').count(), 69);
   const secondhand = phrases.getByRole('article').filter({ hasText: 'Is this secondhand?' });
   assert.equal(await secondhand.locator('ruby rt').textContent(), 'ちゅうこひん');
-  assert.equal(await phrases.locator('article .jt-roman').count(), 60);
+  assert.equal(await phrases.locator('article .jt-roman').count(), 69);
   assert.equal(await secondhand.locator('.jt-roman').textContent(), 'Kore wa chuukohin desu ka?');
   const readings = await phrases.locator('article .jt-roman').allTextContents();
   assert.ok(readings.every(line => /^[\x20-\x7e]+$/.test(line)));
@@ -186,6 +186,16 @@ test('phrase search, situation filter, large display, keyboard focus and Japanes
   await query.focus();
   await query.press('ControlOrMeta+v');
   assert.equal(await query.inputValue(), '荷物を預かっていただけますか。');
+  await page.getByRole('combobox', {name: 'Situation'}).selectOption({label: 'Everyday'});
+  await query.fill('Do you speak English?');
+  assert.ok(await results.getByRole('heading', {name:'Can you speak English?'}).isVisible());
+  await query.fill('がいこくじん');
+  assert.equal(await results.count(), 1);
+  await results.getByRole('button', {name: /Show/}).click();
+  assert.equal(await dialog.locator('.jt-dialog-roman').textContent(), 'Gaikokujin desu.');
+  await page.keyboard.press('Escape');
+  await query.fill('onrii');
+  assert.equal(await results.locator('.jt-script').textContent(), 'イングリッシュ・オンリー');
   await query.fill('zzz');
   assert.match(await page.locator('main').innerText(), /No matching phrases/);
   await page.getByRole('button', {name:'Clear filters'}).click();
