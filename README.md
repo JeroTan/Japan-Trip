@@ -6,7 +6,7 @@ The guide uses the Japan trip workbook as its source. Its flight times are local
 
 ## Editing the guide
 
-Edit the overview in `index.html`, the five dated itineraries in `day24.html` through `day28.html`, and the travel tools in `transport.html`, `phrases.html` and `checklist.html`. Each page contains its own travel information. Route maps show Google directions directly in the page. JavaScript handles controls, phrase search and checklist progress.
+Edit the overview in `index.html`, the five dated itineraries in `day24.html` through `day28.html`, and the travel tools in `transport.html`, `phrases.html`, `etiquette.html` and `checklist.html`. Each page contains its own travel information. Route maps show Google directions directly in the page. JavaScript handles controls, phrase search and checklist progress.
 
 Pushing to `main` publishes the HTML, styles, scripts and assets to GitHub Pages. Every page includes a static `noindex` robots directive. The site and repository are public.
 

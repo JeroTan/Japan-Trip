@@ -5,11 +5,11 @@ const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 
 const entry = name => pathToFileURL(path.join(__dirname, '..', name + '.html')).href;
+const views = ['index', 'day24', 'day25', 'day26', 'day27', 'day28', 'transport', 'phrases', 'etiquette', 'checklist'];
 
 test('all trip views open from a local file at phone and desktop sizes', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
-  const views = ['index', 'day24', 'day25', 'day26', 'day27', 'day28', 'transport', 'phrases', 'checklist'];
   for (const width of [375, 1280]) {
     const page = await browser.newPage({ viewport: { width, height: 840 } });
     await page.route('https://www.google.com/maps**', r => r.fulfill({ body: 'Map' }));
@@ -60,20 +60,22 @@ test('checklist choices stay available across views when device storage is block
   assert.equal(await shop().isChecked(), true);
 });
 
-test('the nine HTML documents contain readable trip content and request no indexing without JavaScript', async t => {
+test('all HTML documents contain readable trip content and request no indexing without JavaScript', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
   const page = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 810 } });
   await page.route('https://www.google.com/maps**', r => r.fulfill({ body: 'Map' }));
   await page.goto(entry('index'));
   assert.equal(await page.locator('.guide-day-cards a[href$=".html"]').count(), 5);
-  for (const view of ['index','day24','day25','day26','day27','day28','transport','phrases','checklist']) {
+  for (const view of views) {
     await page.goto(entry(view));
     const main = page.locator('main');
     assert.ok((await main.innerText()).length > 350, view + ' has static travel content');
     assert.equal(await main.getByRole('heading', {level: 1}).count(), 1);
     assert.match(await page.locator('head meta[name="robots"]').getAttribute('content'), /\bnoindex\b/);
-    assert.equal(await page.getByRole('navigation', {name: 'Main navigation'}).getByRole('link', {name:'Overview'}).isVisible(), true);
+    const navigation = page.getByRole('navigation', {name: 'Main navigation'});
+    assert.equal(await navigation.getByRole('link', {name:'Overview'}).isVisible(), true);
+    assert.equal(await navigation.getByRole('link', {name:'Etiquette'}).getAttribute('href'), 'etiquette.html');
     if (/^day|^transport$/.test(view)) {
       const route = main.locator('iframe[src*="saddr="][src*="daddr="]').first();
       assert.ok(await route.isVisible(), view + ' has embedded directions without toggling a control');

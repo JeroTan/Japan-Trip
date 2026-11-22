@@ -6,6 +6,24 @@ const { chromium } = require('playwright');
 
 const entry = pathToFileURL(path.join(__dirname, '..', 'index.html')).href;
 
+test('the mobile menu opens a side-by-side Philippines and Japan shopping guide', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({viewport:{width:375,height:812}});
+  await page.goto(entry);
+  await page.getByRole('button', {name:'Menu', exact:true}).click();
+  await page.getByRole('navigation', {name:'Main navigation'}).getByRole('link', {name:'Etiquette'}).click({timeout:3000});
+  const table = page.getByRole('table', {name:'Shopping in a store'});
+  const home = await table.getByRole('columnheader', {name:'In the Philippines'}).boundingBox();
+  const away = await table.getByRole('columnheader', {name:'In Japan'}).boundingBox();
+  assert.ok(home.x < away.x && Math.abs(home.y - away.y) < 2);
+  assert.ok(away.x + away.width <= 376);
+  const guide = await table.innerText();
+  for (const cue of ['shelf', 'line', 'cashier', '¥680', '¥320', 'receipt', 'bagging table']) {
+    assert.ok(guide.toLowerCase().includes(cue), cue);
+  }
+});
+
 test('keyboard travelers can skip navigation, choose a date, and use the phone menu and browser back', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
