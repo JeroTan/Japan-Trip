@@ -150,6 +150,26 @@ test("travelers can unfold known stop maps in the agenda and hobby list without 
   assert.match(new URL(await shopMap.getAttribute("src")).searchParams.get("q"), /hololive production official shop in Tokyo Station/);
 });
 
+test("Nagoya hobby cards show subway directions from the first hotel", async t => {
+  for (const date of [24, 25]) {
+    const page = await openDay(date, { javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
+    t.after(() => page.close());
+    for (const shop of ["BOOKOFF SUPER BAZAAR Sakae-SKYLE Store", "#C-pla 名古屋サカエチカ店"]) {
+      const card = page.getByRole("listitem").filter({ has: page.getByRole("checkbox", { name: shop, exact: true }) });
+      const link = new URL(await card.getByRole("link", { name: /Directions from hotel/ }).getAttribute("href"));
+      const frame = card.locator("iframe");
+      assert.ok(await frame.isVisible());
+      const embedded = new URL(await frame.getAttribute("src"));
+      assert.equal(link.searchParams.get("origin"), "APA Hotel Nagoya Ekimae");
+      assert.equal(link.searchParams.get("destination"), shop);
+      assert.equal(link.searchParams.get("travelmode"), "transit");
+      assert.equal(embedded.searchParams.get("saddr"), link.searchParams.get("origin"));
+      assert.equal(embedded.searchParams.get("daddr"), shop);
+      assert.equal(embedded.searchParams.get("dirflg"), "r");
+    }
+  }
+});
+
 test("optional shops retain their original links, dates and saved selections after navigation and reload", async () => {
   const page = await openDay(24);
   page.setDefaultTimeout(2500);
