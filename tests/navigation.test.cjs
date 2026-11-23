@@ -136,14 +136,15 @@ test('the first subway ride links to its approach tunes and distinguishes the JR
   assert.ok(await page.getByText(/the melody signals departure/).isVisible());
 });
 
-test('the How to index follows all nine guides and opens the selected heading by keyboard', async t => {
+test('the How to index follows all ten guides and opens the selected heading by keyboard', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
   const page = await browser.newPage({viewport:{width:1280, height:800}});
   await page.goto(entry('how-to') + '#withdraw-yen');
   const index = page.getByRole('navigation', {name:'On this page'});
   const headings = await page.locator('.howto-heading h2').evaluateAll(nodes => nodes.map(node => '#' + node.id));
-  assert.equal(headings.length, 9);
+  assert.equal(headings.length, 10);
+  assert.ok(headings.includes('#klook-esim'));
   assert.ok(headings.includes('#shibuya-sky'));
   assert.ok(headings.includes('#transit-cards'));
   assert.ok(headings.includes('#airport-duty-free'));
