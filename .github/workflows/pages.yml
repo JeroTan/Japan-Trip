@@ -25,7 +25,7 @@ jobs:
       - name: Prepare the static guide
         run: |
           mkdir public
-          cp index.html day{24..28}.html transport.html toyota.html phrases.html etiquette.html how-to.html items.html checklist.html public/
+          cp index.html day{24..28}.html transport.html toyota.html phrases.html etiquette.html how-to.html food.html items.html checklist.html public/
           cp *.css *.js public/
           cp -R assets public/
       - uses: actions/upload-pages-artifact@v4
