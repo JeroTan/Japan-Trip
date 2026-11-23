@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Field Notes — Japan</title>
+  <desc id="desc">An open notebook forms the slopes of Mount Fuji, with a vermilion sun rising behind its right shoulder.</desc>
+  <style>
+    :root { color: #202d2a; }
+    .sun { fill: #b83a2c; }
+    @media (prefers-color-scheme: dark) {
+      :root { color: #f7f7f0; }
+      .sun { fill: #ff7862; }
+    }
+  </style>
+  <g transform="translate(0 -1)">
+    <path class="sun" d="M39.2 13.1a10.4 10.4 0 1 1 10.2 13c-3.5-3.1-7.1-7.8-10.2-13Z"/>
+    <!-- The snowcap and the two open leaves are cut out of one silhouette. -->
+    <path fill="currentColor" fill-rule="evenodd" d="
+      M2 33.8C13 30.1 21.1 20.2 27.8 9h6.8C41 20.3 50.2 30.1 62 33.8v13.6
+      c-10.2-.2-21 2.8-30 9.1-9-6.3-19.8-9.3-30-9.1Z
+      M24.1 23.1l4.1-2 2.4 2.8 3.4-3.6 4.8 2.2-6.3-9.5h-2.9Z
+      M6.4 36.9v6.3c8.2.6 15.8 2.6 23.4 6.9v-6.6c-6.6-3.9-15.5-6.3-23.4-6.6Z
+      M57.6 36.9c-7.9.3-16.8 2.7-23.4 6.6v6.6c7.6-4.3 15.2-6.3 23.4-6.9Z"/>
+    <path fill="currentColor" d="
+      M2 50.6c11 0 21.2 3.3 30 9.3 8.8-6 19-9.3 30-9.3v3.1
+      c-11.1.5-20.8 3.7-30 10.1-9.2-6.4-18.9-9.6-30-10.1Z"/>
+  </g>
+</svg>

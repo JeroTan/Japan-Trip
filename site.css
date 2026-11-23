@@ -73,8 +73,7 @@ a { color: inherit; }
 .guide-header { position: relative; z-index: 5; border-bottom: 1px solid var(--line); }
 .guide-header-inner { display: flex; min-height: 71px; align-items: stretch; justify-content: space-between; gap: 32px; }
 .guide-brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font-size: 21px; line-height: 1; font-weight: 700; letter-spacing: -.05em; }
-.guide-mark { display: grid; place-items: center; width: 36px; height: 36px; background: var(--accent); color: var(--paper); border-radius: 6px; }
-.guide-mark svg { width: 29px; height: 29px; }
+.guide-mark { display: block; flex: none; width: 40px; height: 40px; }
 .guide-brand-country { border-left: 1px solid #c5ccc1; padding-left: 11px; font: 500 15px/1.25 var(--sans); letter-spacing: .12em; color: var(--muted); }
 .guide-nav { display: flex; align-items: stretch; gap: clamp(25px, 2.55vw, 40px); }
 .guide-nav a {
@@ -216,7 +215,7 @@ a { color: inherit; }
 @media (max-width: 1080px) {
   .guide-header-inner { position: relative; align-items: center; min-height: 61px; gap: 16px; }
   .guide-brand { min-height: 44px; font-size: 20px; }
-  .guide-mark { width: 33px; height: 33px; }
+  .guide-mark { width: 36px; height: 36px; }
   .guide-brand-country { display: inline; font-size: 13px; }
   .guide-menu { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 6px 9px; border: 1px solid transparent; background: none; color: var(--ink); border-radius: 4px; font-size: 14px; font-weight: 600; }
   .guide-menu .guide-icon { width: 17px; height: 17px; }
