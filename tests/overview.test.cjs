@@ -11,7 +11,7 @@ test('payment guides work offline and distinguish debit withdrawals from secured
   t.after(() => browser.close());
   const page = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
   await page.goto(new URL('how-to.html', entry).href);
-  await page.getByRole('link', { name: 'MariBank debit and ATMs', exact: true }).click({timeout:2500});
+  await page.getByRole('link', { name: 'MariBank and ATMs', exact: true }).click({timeout:2500});
   const debit = page.getByRole('region', {name:'Use MariBank debit in Japan'});
   assert.ok(await debit.getByRole('heading', {name:'Withdraw yen from your peso balance'}).isVisible());
   const steps = await debit.innerText();
@@ -20,7 +20,7 @@ test('payment guides work offline and distinguish debit withdrawals from secured
   await photo.scrollIntoViewIfNeeded();
   await photo.evaluate(img => img.decode());
   assert.ok(await photo.getAttribute('alt'));
-  await page.getByRole('link', { name: 'UnionBank Rewards Secured', exact: true }).click();
+  await page.getByRole('link', { name: 'UnionBank credit card', exact: true }).click();
   const credit = page.getByRole('region', {name:'Pay with a Philippine credit card'});
   const example = await credit.innerText();
   for (const cue of ['security deposit', 'credit limit', 'cash advance', '₱70.50']) assert.ok(example.includes(cue), cue);

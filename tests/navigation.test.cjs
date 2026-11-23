@@ -121,10 +121,10 @@ test('the first subway ride links to its approach tunes and distinguishes the JR
   t.after(() => browser.close());
   const page = await browser.newPage({javaScriptEnabled:false, viewport:{width:375,height:812}});
   await page.goto(entry('how-to'));
-  await page.getByRole('link', {name:'Follow your first ride from Nagoya to Sakae'}).click();
+  await page.getByRole('link', {name:'Nagoya subway'}).click();
   const commute = page.getByRole('region', {name:'How to ride the train'});
-  assert.equal(await commute.locator('.train-step-photos img').count(), 5);
-  for (const photo of await commute.locator('.train-step-photos img').all()) {
+  assert.equal(await commute.locator('figure img').count(), 5);
+  for (const photo of await commute.locator('figure img').all()) {
     await photo.scrollIntoViewIfNeeded();
     await photo.evaluate(img => img.decode());
     assert.ok(await photo.getAttribute('alt'));
@@ -134,4 +134,21 @@ test('the first subway ride links to its approach tunes and distinguishes the JR
   assert.ok(page.url().endsWith('etiquette.html#train-jingles'));
   assert.equal(await page.locator('a[href$=".wmv"]').count(), 2);
   assert.ok(await page.getByText(/the melody signals departure/).isVisible());
+});
+
+test('the How to index follows all six guides and opens the selected heading by keyboard', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({viewport:{width:1280, height:800}});
+  await page.goto(entry('how-to') + '#withdraw-yen');
+  const index = page.getByRole('navigation', {name:'On this page'});
+  const headings = await page.locator('.howto-heading h2').evaluateAll(nodes => nodes.map(node => '#' + node.id));
+  assert.equal(headings.length, 6);
+  assert.deepEqual(await index.getByRole('link').evaluateAll(links => links.map(link => link.hash)), headings);
+  await index.locator('[href="#maribank"][aria-current="location"]').waitFor();
+  const train = index.getByRole('link', {name:'Nagoya subway'});
+  await train.focus();
+  await page.keyboard.press('Enter');
+  await index.locator('[href="#train-commute"][aria-current="location"]').waitFor();
+  assert.equal(await page.locator(':focus').getAttribute('id'), 'train-commute');
 });

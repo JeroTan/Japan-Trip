@@ -8,8 +8,9 @@
   <title>How to · Japan field guide</title>
   <link rel="icon" type="image/svg+xml" sizes="any" href="assets/field-notes.svg">
   <link rel="stylesheet" href="site.css?v=7769d9ed44">
-  <link rel="stylesheet" href="tools.css">
+  <link rel="stylesheet" href="tools.css?v=b7b8ec1a41">
   <script defer src="app.js"></script>
+  <script defer src="how-to.js"></script>
 </head>
 <body>
   <svg class="guide-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -38,55 +39,59 @@
     <div class="jt-view howto-guide">
       <header class="jt-header">
         <h1>How to</h1>
-        <p>Use the photos to match the labels on your hotel controls. The layout may differ in your room.</p>
-        <p>Taking the subway? <a href="#train-commute">Follow your first ride from Nagoya to Sakae</a>.</p>
-        <p>For shopping and cash, jump to <a href="#maribank">MariBank debit and ATMs</a>, <a href="#credit-card">UnionBank Rewards Secured</a> or <a href="#tax-refund">Japan’s shopping tax refund</a>.</p>
       </header>
-      <section class="jt-section" aria-labelledby="room-heat">
-        <h2 id="room-heat">Warm your hotel room</h2>
-        <div class="howto-illustrated">
-          <figure class="howto-photo">
-            <a class="howto-image-link" href="assets/hotel-controls/room-heat.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of room heater remote">
-              <img src="assets/hotel-controls/room-heat.webp" width="933" height="1010" alt="Japanese air-conditioner remote with a long orange power button and a row of three mode buttons underneath." decoding="async">
-              <span class="howto-focus focus-room-heat" aria-hidden="true"></span>
-              <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
-            </a>
-            <figcaption>Under the orange power button, the right-hand button marked <strong lang="ja">暖房</strong> selects heat.</figcaption>
-          </figure>
-          <div class="howto-copy">
-            <p>At <strong>APA Hotel Nagoya Ekimae</strong> and <strong>APA Hotel Kayabacho Hatchobori Ekimae</strong>, look for the air-conditioning controls on the bedside panel. If your room has a key-card power slot by the door, insert your room key first.</p>
-            <ol class="howto-steps">
-              <li><strong>Switch the unit on.</strong> Look for ON/OFF or <span lang="ja"><ruby>運転<rt>うんてん</rt></ruby>／<ruby>停止<rt>ていし</rt></ruby></span>. If the display is already on, leave it on.</li>
-              <li><strong>Select heat if the panel offers a mode button.</strong> Press Mode or <span lang="ja"><ruby>運転切換<rt>うんてんきりかえ</rt></ruby></span> until the display shows <strong lang="ja"><ruby>暖房<rt>だんぼう</rt></ruby></strong> (heat). If there is a dedicated Heat button, press it once.</li>
-              <li><strong>Set the temperature above the current room temperature.</strong> Use the ▲ or + beside <span lang="ja"><ruby>設定温度<rt>せっていおんど</rt></ruby></span>. If the room is 19°C, try 22°C. Give it a few minutes to blow warm air, then adjust one degree at a time. Press ON/OFF when you’re finished.</li>
-            </ol>
+      <nav class="howto-contents" aria-labelledby="howto-contents-title">
+        <h2 id="howto-contents-title">On this page</h2>
+        <ul>
+          <li><a href="#room-heat">Room heater</a></li>
+          <li><a href="#shower-and-bathroom">Shower and bathroom</a></li>
+          <li><a href="#train-commute">Nagoya subway</a></li>
+          <li><a href="#maribank">MariBank and ATMs</a></li>
+          <li><a href="#credit-card">UnionBank credit card</a></li>
+          <li><a href="#tax-refund">Shopping tax refund</a></li>
+        </ul>
+      </nav>
+      <div class="howto-chapters">
+        <section class="jt-section" aria-labelledby="room-heat">
+          <header class="howto-heading">
+            <h2 id="room-heat" tabindex="-1">Warm your hotel room</h2>
+            <p>At <strong>APA Hotel Nagoya Ekimae</strong> and <strong>APA Hotel Kayabacho Hatchobori Ekimae</strong>, look for the air-conditioning controls on the bedside panel. Use the photos to match the labels. The layout may differ in your room. If your room has a key-card power slot by the door, insert your room key first.</p>
+          </header>
+          <div class="howto-illustrated">
+            <div class="howto-copy">
+              <ol class="howto-steps">
+                <li><strong>Switch the unit on.</strong> Look for ON/OFF or <span lang="ja"><ruby>運転<rt>うんてん</rt></ruby>／<ruby>停止<rt>ていし</rt></ruby></span>. If the display is already on, leave it on.</li>
+                <li><strong>Select heat if the panel offers a mode button.</strong> Press Mode or <span lang="ja"><ruby>運転切換<rt>うんてんきりかえ</rt></ruby></span> until the display shows <strong lang="ja"><ruby>暖房<rt>だんぼう</rt></ruby></strong> (heat). If there is a dedicated Heat button, press it once.</li>
+                <li><strong>Set the temperature above the current room temperature.</strong> Use the ▲ or + beside <span lang="ja"><ruby>設定温度<rt>せっていおんど</rt></ruby></span>. If the room is 19°C, try 22°C. Give it a few minutes to blow warm air, then adjust one degree at a time. Press ON/OFF when you’re finished.</li>
+              </ol>
+            </div>
+            <figure class="howto-photo howto-portrait">
+              <a class="howto-image-link" href="assets/hotel-controls/room-heat.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of room heater remote">
+                <img src="assets/hotel-controls/room-heat.webp" width="933" height="1010" alt="Japanese air-conditioner remote with a long orange power button and a row of three mode buttons underneath." decoding="async">
+                <span class="howto-focus focus-room-heat" aria-hidden="true"></span>
+                <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+              </a>
+              <figcaption>Under the orange power button, the right-hand button marked <strong lang="ja">暖房</strong> selects heat.</figcaption>
+            </figure>
           </div>
-        </div>
-        <aside class="howto-note">
-          <strong>Only fan speeds, or no Heat option?</strong> Some hotels set heating and cooling for the whole building. Narita Tobu Hotel Airport has described its system as centrally managed. Ask reception whether heating is on for your room or whether they can bring an extra blanket.
-        </aside>
-        <p class="jt-footnote howto-sources">Room controls:
-          <a class="jt-link" href="https://www.apahotel.com/hotel/tokai/aichi/nagoyaekimae/pamphlet/">APA Nagoya</a>,
-          <a class="jt-link" href="https://www.apahotel.com/hotel/syutoken/tokyo/kayabacho-hatchobori-ekimae/pamphlet/">APA Kayabacho</a>,
-          <a class="jt-link" href="https://www.ikyu.com/en-us/00081249/review/1001701812/">Narita Tobu’s reply about heating</a>.
-        </p>
-      </section>
+          <aside class="howto-note">
+            <strong>Only fan speeds, or no Heat option?</strong> Some hotels set heating and cooling for the whole building. Narita Tobu Hotel Airport has described its system as centrally managed. Ask reception whether heating is on for your room or whether they can bring an extra blanket.
+          </aside>
+          <p class="jt-footnote howto-sources">Room controls:
+            <a class="jt-link" href="https://www.apahotel.com/hotel/tokai/aichi/nagoyaekimae/pamphlet/">APA Nagoya</a>,
+            <a class="jt-link" href="https://www.apahotel.com/hotel/syutoken/tokyo/kayabacho-hatchobori-ekimae/pamphlet/">APA Kayabacho</a>,
+            <a class="jt-link" href="https://www.ikyu.com/en-us/00081249/review/1001701812/">Narita Tobu’s reply about heating</a>.
+          </p>
+        </section>
 
-      <section class="jt-section" aria-labelledby="shower-and-bathroom">
-        <h2 id="shower-and-bathroom">Use the shower and warm the bathroom</h2>
-        <p>For warmer water, start at the faucet. To warm the CR itself, look for a separate bathroom heater panel. The toilet may have its own seat-temperature setting.</p>
-        <div class="howto-controls">
+        <section class="jt-section" aria-labelledby="shower-and-bathroom">
+          <header class="howto-heading">
+            <h2 id="shower-and-bathroom" tabindex="-1">Use the shower and warm the bathroom</h2>
+            <p>For warmer water, start at the faucet. To warm the CR itself, look for a separate bathroom heater panel. The toilet may have its own seat-temperature setting.</p>
+          </header>
           <section aria-labelledby="warm-shower">
             <h3 id="warm-shower">Get warm shower water</h3>
             <div class="howto-illustrated">
-              <figure class="howto-photo">
-                <a class="howto-image-link" href="assets/hotel-controls/shower-mixer.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of shower mixer">
-                  <img src="assets/hotel-controls/shower-mixer.webp" width="1152" height="864" alt="A bath mixer with a 40 mark on the left temperature dial, a flow control on the right and a small shower selector below." decoding="async" loading="lazy">
-                  <span class="howto-focus focus-shower-mixer" aria-hidden="true"></span>
-                  <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
-                </a>
-                <figcaption>Find <strong>40</strong> on the left temperature dial. The small selector underneath has the shower and tap symbols.</figcaption>
-              </figure>
               <div class="howto-copy">
                 <ol class="howto-steps">
                   <li><strong>Point the showerhead into the tub or drain.</strong> On a temperature dial, start on the cool side of the 40°C mark. On a single mixer lever, start toward blue or C. If there are two taps, open cold first and add hot gradually.</li>
@@ -95,11 +100,27 @@
                   <li><strong>Turn the water off at the mixer.</strong> Return the flow control to OFF or <span lang="ja"><ruby>止<rt>とめ</rt></ruby></span> and check that the spray has stopped. With two separate taps, close hot first, then cold.</li>
                 </ol>
               </div>
+              <figure class="howto-photo">
+                <a class="howto-image-link" href="assets/hotel-controls/shower-mixer.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of shower mixer">
+                  <img src="assets/hotel-controls/shower-mixer.webp" width="1152" height="864" alt="A bath mixer with a 40 mark on the left temperature dial, a flow control on the right and a small shower selector below." decoding="async" loading="lazy">
+                  <span class="howto-focus focus-shower-mixer" aria-hidden="true"></span>
+                  <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                </a>
+                <figcaption>Find <strong>40</strong> on the left temperature dial. The small selector underneath has the shower and tap symbols.</figcaption>
+              </figure>
             </div>
           </section>
           <section aria-labelledby="bathroom-air">
             <h3 id="bathroom-air">Warm the bathroom air</h3>
             <div class="howto-illustrated">
+              <div class="howto-copy">
+                <ol class="howto-steps">
+                  <li><strong>Find the heater panel.</strong> Look near the bathroom door for <span lang="ja"><ruby>暖房<rt>だんぼう</rt></ruby></span> or <span lang="ja"><ruby>浴室暖房<rt>よくしつだんぼう</rt></ruby></span>.</li>
+                  <li><strong>Select heat with dry hands.</strong> Set a timer if offered and close the door while the room warms. If the panel offers a pre-bath mode (<span lang="ja"><ruby>入浴前<rt>にゅうよくまえ</rt></ruby></span>), use that before you get in.</li>
+                  <li><strong>Press Stop when finished.</strong></li>
+                </ol>
+                <p class="howto-note"><span lang="ja"><ruby>換気<rt>かんき</rt></ruby></span> runs the exhaust fan. If the only switches are the light and fan, ask the front desk whether that bathroom has a heater. A separate bathroom-air heater is unconfirmed for your three bookings.</p>
+              </div>
               <figure class="howto-photo">
                 <a class="howto-image-link" href="assets/hotel-controls/bathroom-heat.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of bathroom heater panel">
                   <img src="assets/hotel-controls/bathroom-heat.webp" width="1101" height="1010" alt="MAX bathroom wall panel with four square mode buttons along the bottom and a separate stop button above." decoding="async" loading="lazy">
@@ -108,15 +129,20 @@
                 </a>
                 <figcaption>On the bottom row, <strong lang="ja">暖房</strong> at far left heats the air. <strong lang="ja">換気</strong> at far right runs the fan. The red-bordered <span lang="ja">停止</span> button above stops the unit.</figcaption>
               </figure>
-              <div class="howto-copy">
-                <p>Look for a wall panel near the bathroom door. <strong>If it has <span lang="ja"><ruby>暖房<rt>だんぼう</rt></ruby></span> or <span lang="ja"><ruby>浴室暖房<rt>よくしつだんぼう</rt></ruby></span></strong>, select it with dry hands, set a timer if offered, and close the door while the room warms. If the panel offers a pre-bath mode (<span lang="ja"><ruby>入浴前<rt>にゅうよくまえ</rt></ruby></span>), use that before you get in. Press Stop when finished.</p>
-                <p><span lang="ja"><ruby>換気<rt>かんき</rt></ruby></span> runs the exhaust fan. If the only switches are the light and fan, ask the front desk whether that bathroom has a heater. A separate bathroom-air heater is unconfirmed for your three bookings.</p>
-              </div>
             </div>
           </section>
           <section aria-labelledby="toilet-seat">
             <h3 id="toilet-seat">Warm the toilet seat</h3>
             <div class="howto-illustrated">
+              <div class="howto-copy">
+                <p>Your two APA hotels list heated bidet seats.</p>
+                <ol class="howto-steps">
+                  <li><strong>Find the seat control.</strong> Look on the toilet’s side panel or wall remote for <strong lang="ja"><ruby>便座温度<rt>べんざおんど</rt></ruby></strong> (seat temperature), sometimes shortened to <span lang="ja"><ruby>便座<rt>べんざ</rt></ruby></span>.</li>
+                  <li><strong>Choose a temperature.</strong> If adjustable, select <span lang="ja"><ruby>低<rt>てい</rt></ruby></span> (low) and give the seat time to warm.</li>
+                  <li><strong>Turn off seat heat.</strong> Choose <span lang="ja"><ruby>切<rt>きり</rt></ruby></span> or OFF.</li>
+                </ol>
+                <p>On this panel, <span lang="ja"><ruby>温水<rt>おんすい</rt></ruby></span> sets the bidet spray’s water temperature. If you can’t find a seat setting, ask reception to show you the control for your model.</p>
+              </div>
               <figure class="howto-photo">
                 <a class="howto-image-link" href="assets/hotel-controls/seat-temperature.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of toilet-seat temperature controls">
                   <img src="assets/hotel-controls/seat-temperature.webp" width="974" height="566" alt="Close-up of a TOTO remote with separate seat and water buttons below three temperature-level lights." decoding="async" loading="lazy">
@@ -125,24 +151,96 @@
                 </a>
                 <figcaption>Under <span lang="ja">温度設定</span>, <strong lang="ja">便座</strong> adjusts the seat. The next button to the right, <strong lang="ja">温水</strong>, adjusts the bidet water.</figcaption>
               </figure>
-              <div class="howto-copy">
-                <p>Your two APA hotels list heated bidet seats. Look on the toilet’s side panel or wall remote for <strong lang="ja"><ruby>便座温度<rt>べんざおんど</rt></ruby></strong> (seat temperature), sometimes shortened to <span lang="ja"><ruby>便座<rt>べんざ</rt></ruby></span>. If adjustable, select <span lang="ja"><ruby>低<rt>てい</rt></ruby></span> (low) to start and give the seat time to warm. Choose <span lang="ja"><ruby>切<rt>きり</rt></ruby></span> or OFF to turn seat heat off.</p>
-                <p>On this panel, <span lang="ja"><ruby>温水<rt>おんすい</rt></ruby></span> sets the bidet spray’s water temperature. If you can’t find a seat setting, ask reception to show you the control for your model.</p>
-              </div>
             </div>
           </section>
-        </div>
-        <p class="jt-footnote howto-sources">Equipment guides:
-          <a class="jt-link" href="https://www3.apahotel.com/other/service/">APA bathroom fittings</a>,
-          <a class="jt-link" href="https://qa.toto.jp/faq_detail.htm?category=&amp;id=190724&amp;page=1">TOTO bathroom heating</a>,
-          <a class="jt-link" href="https://search.toto.jp/tr/D07J70R_202412.pdf">TOTO seat and spray settings (PDF)</a>.
-        </p>
-      </section>
-      <section class="jt-section" aria-labelledby="maribank">
-        <h2 id="maribank">Use MariBank debit in Japan</h2>
-        <p>For a shop purchase or yen from an ATM, bring your <strong>physical MariBank Philippines Mastercard</strong> and have enough pesos in your savings balance for the purchase or withdrawal plus any fee.</p>
+          <p class="jt-footnote howto-sources">Equipment guides:
+            <a class="jt-link" href="https://www3.apahotel.com/other/service/">APA bathroom fittings</a>,
+            <a class="jt-link" href="https://qa.toto.jp/faq_detail.htm?category=&amp;id=190724&amp;page=1">TOTO bathroom heating</a>,
+            <a class="jt-link" href="https://search.toto.jp/tr/D07J70R_202412.pdf">TOTO seat and spray settings (PDF)</a>.
+          </p>
+        </section>
 
-        <div class="howto-controls">
+        <section class="jt-section" aria-labelledby="train-commute">
+          <header class="howto-heading">
+            <h2 id="train-commute" tabindex="-1">How to ride the train</h2>
+            <p>Your first subway ride is a simple one to practice. From APA Hotel Nagoya Ekimae, it’s <strong>two stops to Sakae, with no transfer</strong>. The line letter, station numbers and final destination are printed on station signs.</p>
+          </header>
+          <ol class="train-stations" aria-label="Higashiyama Line from Nagoya to Sakae">
+            <li><b>H08</b> Nagoya</li>
+            <li><b>H09</b> Fushimi</li>
+            <li><b>H10</b> Sakae</li>
+          </ol>
+          <ol class="howto-steps">
+            <li>
+              <div class="howto-illustrated">
+                <div class="howto-copy"><p><strong>Find the yellow H at Nagoya Station.</strong> Walk from the hotel to the Taiko-dori side of the station, then follow the public passage and signs for Subway / Higashiyama Line. Allow time to cross the station. If stairs are difficult, follow the elevator symbol or show staff your destination, Sakae (栄). <a href="transport.html#nagoya-sakae">Open the hotel-to-Sakae directions</a>.</p></div>
+                <figure class="howto-photo howto-portrait">
+                  <a class="howto-image-link" target="_blank" rel="noopener" href="assets/transit/nagoya-higashiyama-sign.webp" aria-label="Enlarge photo · Nagoya · 名古屋. Look for this station name and the yellow line color.">
+                    <img src="assets/transit/nagoya-higashiyama-sign.webp" width="637" height="850" alt="Nagoya station-name board with a yellow stripe on the Higashiyama Line." loading="lazy" decoding="async">
+                    <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                  </a>
+                  <figcaption>Nagoya · 名古屋. Look for this station name and the yellow line color.</figcaption>
+                </figure>
+              </div>
+            </li>
+            <li>
+              <div class="howto-illustrated">
+                <div class="howto-copy"><p><strong>Choose one way to pay per person.</strong> You can use a loaded <strong>manaca</strong>, a supported contactless bank card or a paper ticket. For a <strong>¥210 adult single ticket</strong>, choose English at the ticket machine, select the fare, pay in yen cash and take the ticket and change. <a href="etiquette.html#manaca">See the machine and how to buy a manaca</a>.</p></div>
+                <figure class="howto-photo">
+                  <a class="howto-image-link" target="_blank" rel="noopener" href="assets/transit/nagoya-ticket-machine.webp" aria-label="Enlarge photo · Choose English on the left to buy a paper ticket.">
+                    <img src="assets/transit/nagoya-ticket-machine.webp" width="1300" height="982" alt="Nagoya subway ticket machine with an English button and fare options." loading="lazy" decoding="async">
+                    <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                  </a>
+                  <figcaption>Choose English on the left to buy a paper ticket.</figcaption>
+                </figure>
+              </div>
+            </li>
+            <li>
+              <div class="howto-illustrated">
+                <div class="howto-copy"><p><strong>Go through the gate.</strong> With manaca, tap the IC pad like you would a beep card. With a supported bank card, tap the bank-card reader at a marked gate. With a paper ticket, insert it in the gate and pick it up as you pass.</p></div>
+                <figure class="howto-photo">
+                  <a class="howto-image-link" target="_blank" rel="noopener" href="assets/transit/nagoya-subway-gates.webp" aria-label="Enlarge photo · At Tsurumai Station, the yellow floor panel marks an IC-only lane. Look for the matching payment symbol at your gate.">
+                    <img src="assets/transit/nagoya-subway-gates.webp" width="960" height="696" alt="Nagoya subway gates with paper-ticket and IC-card lanes marked on the floor." loading="lazy" decoding="async">
+                    <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                  </a>
+                  <figcaption>At Tsurumai Station, the yellow floor panel marks an IC-only lane. Look for the matching payment symbol at your gate.</figcaption>
+                </figure>
+              </div>
+            </li>
+            <li>
+              <div class="howto-illustrated">
+                <div class="howto-copy"><p><strong>At Nagoya (H08), board toward Fujigaoka.</strong> Look for platform 1 and check the destination display. Queue by the door marks and leave the middle clear. When you hear an approach tune, stay behind the line. Let people off, then board once the doors are open. <a href="etiquette.html#train-jingles">Hear the two Higashiyama tunes</a>.</p></div>
+                <figure class="howto-photo">
+                  <a class="howto-image-link" target="_blank" rel="noopener" href="assets/transit/nagoya-higashiyama-platform.webp" aria-label="Enlarge photo · At Nagoya, check the overhead display and wait beside the door markings.">
+                    <img src="assets/transit/nagoya-higashiyama-platform.webp" width="960" height="640" alt="Higashiyama Line platform at Nagoya Station with platform doors and an overhead departure display." loading="lazy" decoding="async">
+                    <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                  </a>
+                  <figcaption>At Nagoya, check the overhead display and wait beside the door markings.</figcaption>
+                </figure>
+              </div>
+            </li>
+            <li>
+              <div class="howto-illustrated">
+                <div class="howto-copy"><p><strong>Stay on at Fushimi (H09). Get off at Sakae (H10).</strong> Check the display above the door or listen for “Sakae.” For the East Gate, use elevator A at the east end of the Higashiyama platform. Tap out with the same card or device you used to enter. With a single ticket, insert it at the exit gate, which keeps it. If the gate stops you, show the attendant your card or ticket. <a href="https://www.kotsu.city.nagoya.jp/rp/reader/trp0000625.htm">Sakae platform and elevator guide</a>.</p></div>
+                <figure class="howto-photo howto-portrait">
+                  <a class="howto-image-link" target="_blank" rel="noopener" href="assets/transit/sakae-higashiyama-sign.webp" aria-label="Enlarge photo · Sakae · 栄. Get off here for the shopping district.">
+                    <img src="assets/transit/sakae-higashiyama-sign.webp" width="637" height="850" alt="Sakae station-name board with 栄 and the yellow Higashiyama stripe." loading="lazy" decoding="async">
+                    <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                  </a>
+                  <figcaption>Sakae · 栄. Get off here for the shopping district.</figcaption>
+                </figure>
+              </div>
+            </li>
+            <li><strong>To get back to the hotel, reverse the direction.</strong> At Sakae take the yellow H from platform 2 toward <strong>Takabata</strong>. Pass Fushimi, get off at Nagoya and follow Taiko-dori Exit signs. For a paper fare, buy a new ticket for the return.</li>
+          </ol>
+        </section>
+
+        <section class="jt-section" aria-labelledby="maribank">
+          <header class="howto-heading">
+            <h2 id="maribank" tabindex="-1">Use MariBank debit in Japan</h2>
+            <p>For a shop purchase or yen from an ATM, bring your <strong>physical MariBank Philippines Mastercard</strong> and have enough pesos in your savings balance for the purchase or withdrawal plus any fee.</p>
+          </header>
+
           <section aria-labelledby="maribank-store">
             <h3 id="maribank-store">Pay at a shop</h3>
             <ol class="howto-steps">
@@ -150,7 +248,7 @@
               <li id="maribank-checkout"><strong>Tap your MariBank debit card.</strong> Check the yen total and choose Card. A contactless payment can go through without a PIN. If the screen says <strong>Approved</strong>, you’re done. If it says <strong>Insert card</strong>, insert the chip. Enter your <strong>six-digit MariBank card PIN</strong> on the keypad only if prompted. Choose <strong>JPY</strong> if a currency choice appears.</li>
               <li><strong>After payment:</strong> Take your card and receipt. Keep the JPY receipt and check the posted peso amount in the app. MariBank lists <strong>no added fee on overseas in-store purchases</strong> with the physical debit card. Overseas online merchant payments have a separate 2% fee, including purchases billed in PHP.</li>
             </ol>
-            <p id="checkout-cash"><strong>Prefer cash if a PIN is requested?</strong> Tell the cashier “Cash, please.” Wait for them to confirm the pending card payment is cancelled before handing over yen. This works the same way for MariBank debit and UnionBank credit.</p>
+            <p id="checkout-cash" class="howto-note"><strong>Prefer cash if a PIN is requested?</strong> Tell the cashier “Cash, please.” Wait for them to confirm the pending card payment is cancelled before handing over yen. This works the same way for MariBank debit and UnionBank credit.</p>
             <p class="jt-footnote howto-sources"><a class="jt-link" href="https://www.maribank.ph/help-center/article/10271-can-i-disable-overseas-or-online-payments-from-my-maribank-debit-card">MariBank card controls</a> · <a class="jt-link" href="https://www.maribank.ph/help-center/article/10269-how-can-i-change-my-card-pin">Card PIN</a> · <a class="jt-link" href="https://www.maribank.ph/help-center/article/10255">In-store and online fees</a>.</p>
           </section>
 
@@ -158,13 +256,6 @@
             <h3 id="withdraw-yen">Withdraw yen from your peso balance</h3>
             <p>You can leave your money in PHP. In Japan, request the amount of <strong>yen you want to receive</strong>. The ATM dispenses yen and the peso equivalent comes out of MariBank savings. If you’re carrying Philippine banknotes instead, take them to a currency-exchange counter that accepts PHP.</p>
             <div class="howto-illustrated">
-              <figure class="howto-photo">
-                <a class="howto-image-link" href="assets/payments/seven-bank-atm.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of a Seven Bank ATM">
-                  <img src="assets/payments/seven-bank-atm.webp" width="455" height="540" loading="lazy" decoding="async" alt="Red Seven Bank ATM with the Seven Bank logo and an illuminated ATM sign above the machine.">
-                  <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
-                </a>
-                <figcaption>Look for the Seven Bank sign. This example is in Tokyo. On arrival at <strong>Nagoya Centrair T2</strong>, exit customs on 1F and take the elevator to the public departures lobby on 2F for a Seven Bank ATM. <a href="https://www.centrair.jp/en/service/atm.html">Airport ATM directory</a>.</figcaption>
-              </figure>
               <div class="howto-copy">
                 <ol class="howto-steps">
                   <li><strong>Insert your MariBank card</strong> at a Seven Bank ATM displaying Mastercard. Choose <strong>English → Withdrawal → Saving</strong> if it asks for the account. Seven Bank also shows a Skip option if you’re unsure. For MariBank, ATM cash comes from savings even if your combo card was in Credit Mode.</li>
@@ -173,133 +264,89 @@
                   <li>Collect the yen, card and receipt. Check the savings transaction in the app. MariBank currently lists <strong>₱0</strong> for an international ATM withdrawal and <strong>₱50</strong> for an international ATM balance inquiry. A Japanese operator can charge its own withdrawal fee.</li>
                 </ol>
               </div>
+              <figure class="howto-photo howto-portrait">
+                <a class="howto-image-link" href="assets/payments/seven-bank-atm.webp" target="_blank" rel="noopener" aria-label="Enlarge photo of a Seven Bank ATM">
+                  <img src="assets/payments/seven-bank-atm.webp" width="455" height="540" loading="lazy" decoding="async" alt="Red Seven Bank ATM with the Seven Bank logo and an illuminated ATM sign above the machine.">
+                  <span class="howto-enlarge" aria-hidden="true">Enlarge photo ↗</span>
+                </a>
+                <figcaption>Look for the Seven Bank sign. This example is in Tokyo. On arrival at <strong>Nagoya Centrair T2</strong>, exit customs on 1F and take the elevator to the public departures lobby on 2F for a Seven Bank ATM. <a href="https://www.centrair.jp/en/service/atm.html">Airport ATM directory</a>.</figcaption>
+              </figure>
             </div>
             <p class="howto-note"><strong>Example withdrawal:</strong> If the conversion were ₱0.40 per yen and the ATM displayed zero fee, withdrawing ¥10,000 would use about ₱4,000. The illustration uses a made-up rate. Your posted debit uses the applicable rate and any fee you accepted.</p>
             <p class="jt-footnote howto-sources"><a class="jt-link" href="https://www.sevenbank.co.jp/intlcard/service2.html">Seven Bank’s illustrated ATM steps</a> · <a class="jt-link" href="https://www.maribank.ph/fees-rates">MariBank fee schedule</a> · <a class="jt-link" href="https://www.maribank.ph/help-center/article/10390-can-i-do-atm-withdrawals-using-credit-mode">Combo card ATM rules</a>.</p>
           </section>
-        </div>
-        <p class="jt-footnote howto-sources"><strong>Traveler reports.</strong> One Filipino traveler reported successful tap payments and yen withdrawals in Japan. A creator also reported a fee-free withdrawal at a Japanese 7-Eleven in a reel that contains a referral code. These were individual transactions. Check the fee on your own ATM screen. <a class="jt-link" href="https://www.reddit.com/r/MariBankPH/comments/1w9t554/maribank_overseas/">Reddit report</a> · <a class="jt-link" href="https://www.facebook.com/reel/4344198965825482">Public Facebook reel</a>.</p>
-      </section>
+          <p class="jt-footnote howto-sources"><strong>Traveler reports.</strong> One Filipino traveler reported successful tap payments and yen withdrawals in Japan. A creator also reported a fee-free withdrawal at a Japanese 7-Eleven in a reel that contains a referral code. These were individual transactions. Check the fee on your own ATM screen. <a class="jt-link" href="https://www.reddit.com/r/MariBankPH/comments/1w9t554/maribank_overseas/">Reddit report</a> · <a class="jt-link" href="https://www.facebook.com/reel/4344198965825482">Public Facebook reel</a>.</p>
+        </section>
 
-      <section class="jt-section" aria-labelledby="credit-card">
-        <h2 id="credit-card">Pay with a Philippine credit card</h2>
-        <p>With the <strong>UnionBank Rewards Secured Credit Card</strong>, your security deposit backs your credit limit. For example, the bank’s advertised 90% limit on a ₱20,000 deposit gives you ₱18,000 in credit. A shop purchase uses that available credit, and you still pay the monthly statement. <a href="https://www.unionbankph.com/rewards-secured">UnionBank’s secured card</a> · <a href="https://www.unionbankph.com/securedcard">Secured-card terms</a>.</p>
-        <ol class="howto-steps">
-          <li><strong>Before paying:</strong> Activate the physical card, check your available credit in UnionBank Online, and make sure international in-store purchases are enabled. Match the Visa or Mastercard logo on your card to the logo at the counter. Have your card PIN ready in case the reader asks. <a href="https://www.unionbankph.com/cards/credit-card/features/credit-card-security-and-protection/taptolock">UnionBank card controls</a>.</li>
-          <li id="unionbank-checkout"><strong>Tap your UnionBank credit card.</strong> Check the yen total and choose Card. If the tap shows <strong>Approved</strong>, you’re done without a PIN. The reader can still ask you to insert the chip and enter your <strong>UnionBank credit card PIN</strong> on the keypad. If you prefer, <a href="#checkout-cash">switch to cash before approval</a>. Choose <strong>one-time payment</strong> if offered installments and <strong>JPY</strong> if offered a currency choice. Save the receipt and check the posted PHP amount.</li>
-          <li><strong>At billing time:</strong> Pay the full statement balance by the due date to avoid purchase interest on a normally paid-in-full account. The pledged deposit stays with the bank as collateral. For yen cash, use the MariBank debit procedure above. Withdrawing against an eligible UnionBank credit line is a <strong>cash advance</strong>, with a ₱200 bank fee, possible ATM fees and interest from the withdrawal date. <a href="https://www.unionbankph.com/cash-advance">UnionBank cash advance terms</a>.</li>
-        </ol>
-        <aside class="howto-note"><strong>What might a ¥5,000 purchase cost?</strong> If your issued card is <strong>UnionBank Rewards Visa Platinum</strong>, the published foreign-currency charge is up to <strong>3.525%</strong> of the converted amount. Using the same illustrative ₱0.40 rate, ¥5,000 converts to ₱2,000. At 3.525%, the fee is ₱70.50, for a total of ₱2,070.50. Check the exact card name on your statement before applying this example. Paying in PHP at a foreign terminal can still incur UnionBank’s 1% cross-border fee, on top of the merchant’s conversion.</aside>
-        <p class="jt-footnote howto-sources">Fee references checked November 22, 2026. <a class="jt-link" href="https://www.unionbankph.com/cards-fees/">UnionBank fee table</a> · <a class="jt-link" href="https://www.unionbankph.com/fxfees">Foreign transaction FAQ</a>. A traveler also described using a Rewards Visa Platinum in Japan. Their post leaves the secured status unspecified. <a class="jt-link" href="https://www.reddit.com/r/PHCreditCards/comments/1n7f806/comment/nc779wq/">Traveler’s Reddit report</a>.</p>
-      </section>
-      <section class="jt-section" aria-labelledby="tax-refund">
-        <h2 id="tax-refund">How to claim Japan’s shopping tax refund</h2>
-        <p class="howto-note"><strong>TL;DR</strong> For your November 24–28, 2026 trip, pay the full price and register the purchase at the shop. At Narita Terminal 2, complete Customs confirmation <strong>before giving Cebu Pacific your bags</strong>. The shop or its refund provider then handles the payout.</p>
+        <section class="jt-section" aria-labelledby="credit-card">
+          <header class="howto-heading">
+            <h2 id="credit-card" tabindex="-1">Pay with a Philippine credit card</h2>
+            <p>With the <strong>UnionBank Rewards Secured Credit Card</strong>, your security deposit backs your credit limit. For example, the bank’s advertised 90% limit on a ₱20,000 deposit gives you ₱18,000 in credit. A shop purchase uses that available credit, and you still pay the monthly statement. <a href="https://www.unionbankph.com/rewards-secured">UnionBank’s secured card</a> · <a href="https://www.unionbankph.com/securedcard">Secured-card terms</a>.</p>
+          </header>
+          <ol class="howto-steps">
+            <li><strong>Before paying:</strong> Activate the physical card, check your available credit in UnionBank Online, and make sure international in-store purchases are enabled. Match the Visa or Mastercard logo on your card to the logo at the counter. Have your card PIN ready in case the reader asks. <a href="https://www.unionbankph.com/cards/credit-card/features/credit-card-security-and-protection/taptolock">UnionBank card controls</a>.</li>
+            <li id="unionbank-checkout"><strong>Tap your UnionBank credit card.</strong> Check the yen total and choose Card. If the tap shows <strong>Approved</strong>, you’re done without a PIN. The reader can still ask you to insert the chip and enter your <strong>UnionBank credit card PIN</strong> on the keypad. If you prefer, <a href="#checkout-cash">switch to cash before approval</a>. Choose <strong>one-time payment</strong> if offered installments and <strong>JPY</strong> if offered a currency choice. Save the receipt and check the posted PHP amount.</li>
+            <li><strong>At billing time:</strong> Pay the full statement balance by the due date to avoid purchase interest on a normally paid-in-full account. The pledged deposit stays with the bank as collateral. For yen cash, use the MariBank debit procedure above. Withdrawing against an eligible UnionBank credit line is a <strong>cash advance</strong>, with a ₱200 bank fee, possible ATM fees and interest from the withdrawal date. <a href="https://www.unionbankph.com/cash-advance">UnionBank cash advance terms</a>.</li>
+          </ol>
+          <aside class="howto-note"><strong>What might a ¥5,000 purchase cost?</strong> If your issued card is <strong>UnionBank Rewards Visa Platinum</strong>, the published foreign-currency charge is up to <strong>3.525%</strong> of the converted amount. Using the same illustrative ₱0.40 rate, ¥5,000 converts to ₱2,000. At 3.525%, the fee is ₱70.50, for a total of ₱2,070.50. Check the exact card name on your statement before applying this example. Paying in PHP at a foreign terminal can still incur UnionBank’s 1% cross-border fee, on top of the merchant’s conversion.</aside>
+          <p class="jt-footnote howto-sources">Fee references checked November 22, 2026. <a class="jt-link" href="https://www.unionbankph.com/cards-fees/">UnionBank fee table</a> · <a class="jt-link" href="https://www.unionbankph.com/fxfees">Foreign transaction FAQ</a>. A traveler also described using a Rewards Visa Platinum in Japan. Their post leaves the secured status unspecified. <a class="jt-link" href="https://www.reddit.com/r/PHCreditCards/comments/1n7f806/comment/nc779wq/">Traveler’s Reddit report</a>.</p>
+        </section>
 
-        <h3>At the shop</h3>
-        <ol class="howto-steps">
-          <li><strong>Bring your original passport.</strong> If Japan admits you as a non-resident with <strong>Temporary Visitor</strong> status, bring the passport with your landing permission sticker when shopping. If you use an automated entry gate, ask immigration for the stamp or sticker before leaving arrivals.</li>
-          <li><strong>Ask before paying.</strong> At a participating shop, say <span lang="ja"><ruby>免税<rt>めんぜい</rt></ruby>はできますか？</span> (<i>Menzei wa dekimasu ka?</i>, “Do you offer tax-free shopping?”). You need at least <strong>¥5,000 before tax at the same shop on the same day</strong>. Combine purchases across shops only if their shared tax-free counter says they qualify.</li>
-          <li><strong>Show your passport and register the sale.</strong> Use the tax-free register or the shop’s service counter. Pay the tax-inclusive price and keep the receipt and refund slip. Follow the shop’s instructions to register a payout method. For example, UNIQLO gives you a QR code for J-TaxRefund, where you verify your passport and choose how to receive the money. <a href="https://www.uniqlo.com/jp/ja/special-feature/tax-free">UNIQLO’s illustrated instructions</a>.</li>
-        </ol>
-        <p><strong>What could you get back?</strong> Suppose your UNIQLO clothes cost ¥5,000 before tax. At 10%, you pay <strong>¥5,500</strong>. The tax is ¥500. UNIQLO lists a fee of about 10% of that tax, so the estimated refund is <strong>about ¥450</strong>. Other shops may charge different fees.</p>
-        <p><strong>Keep everything on a refund receipt together.</strong> Buy gummies you’ll eat in Japan on a separate, ordinary receipt. Customs checks each transaction as a whole. Even one missing item can cost the refund on that entire receipt. If you used any of the tax-free food, drinks or cosmetics, tell a customs officer at the counter before using the kiosk. <a href="https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00027.html">Japan Tourism Agency’s traveler FAQ</a>.</p>
+        <section class="jt-section" aria-labelledby="tax-refund">
+          <header class="howto-heading">
+            <h2 id="tax-refund" tabindex="-1">How to claim Japan’s shopping tax refund</h2>
+            <p>For your November 24–28, 2026 trip, pay the full price and register the purchase at the shop. At Narita Terminal 2, complete Customs confirmation <strong>before giving Cebu Pacific your bags</strong>. The shop or its refund provider then handles the payout.</p>
+          </header>
 
-        <h3 id="tax-refund-at-narita">Before bag drop at Narita T2</h3>
-        <div class="howto-illustrated">
-          <figure class="howto-photo">
-            <a class="howto-image-link" href="https://www.customs.go.jp/kaigairyoko/taxrefund/map/AIR_01_01_02.svg" target="_blank" rel="noopener noreferrer" aria-label="Enlarge the Narita Terminal 2 customs floor map">
-              <img src="https://www.customs.go.jp/kaigairyoko/taxrefund/map/AIR_01_01_02.svg" width="3774" height="2264" loading="lazy" decoding="async" alt="Narita Terminal 2 third-floor departure lobby. Blue symbols mark the tax refund kiosks and Customs inspection area.">
-              <span class="howto-enlarge" aria-hidden="true">Enlarge floor map ↗</span>
-            </a>
-            <figcaption>Japan Customs’ map shows the confirmation kiosks outlined in red on <strong>3F, before security</strong>. <a href="https://www.narita-airport.jp/en/map/?poi=21483798">Open Customs Tax Refund on Narita’s indoor map</a>.</figcaption>
-          </figure>
-          <div class="howto-copy">
-            <ol class="howto-steps">
-              <li><strong>Go to Customs Tax Refund with your bags.</strong> For your 19:00 flight on November 28, leave time for inspection and airline bag drop. Keep your passport, receipts and <strong>all the goods</strong> accessible, including purchases you plan to check. Customs confirmation must happen within 90 days of purchase.</li>
-              <li><strong>Scan your passport at the kiosk.</strong> You can also use <a href="https://services.digital.go.jp/en/visit-japan-web/">Visit Japan Web</a> in the departure lobby on the dedicated <b>Customs_WiFi_For_TaxRefund</b> network. The kiosk works without a phone. <a href="https://www.customs.go.jp/kaigairyoko/taxrefund/vjw.html">Japan Customs’ Wi-Fi details</a>.</li>
-              <li><strong>Read the result before handing over your suitcase.</strong> <strong>Green</strong> means Customs confirmation is complete. <strong>Red</strong> means take your passport and goods to the inspection area and finish with the officer. Then continue to bag drop and security.</li>
-            </ol>
+          <h3>At the shop</h3>
+          <ol class="howto-steps">
+            <li><strong>Bring your original passport.</strong> If Japan admits you as a non-resident with <strong>Temporary Visitor</strong> status, bring the passport with your landing permission sticker when shopping. If you use an automated entry gate, ask immigration for the stamp or sticker before leaving arrivals.</li>
+            <li><strong>Ask before paying.</strong> At a participating shop, say <span lang="ja"><ruby>免税<rt>めんぜい</rt></ruby>はできますか？</span> (<i>Menzei wa dekimasu ka?</i>, “Do you offer tax-free shopping?”). You need at least <strong>¥5,000 before tax at the same shop on the same day</strong>. Combine purchases across shops only if their shared tax-free counter says they qualify.</li>
+            <li><strong>Show your passport and register the sale.</strong> Use the tax-free register or the shop’s service counter. Pay the tax-inclusive price and keep the receipt and refund slip. Follow the shop’s instructions to register a payout method. For example, UNIQLO gives you a QR code for J-TaxRefund, where you verify your passport and choose how to receive the money. <a href="https://www.uniqlo.com/jp/ja/special-feature/tax-free">UNIQLO’s illustrated instructions</a>.</li>
+          </ol>
+          <p class="howto-note"><strong>What could you get back?</strong> Suppose your UNIQLO clothes cost ¥5,000 before tax. At 10%, you pay <strong>¥5,500</strong>. The tax is ¥500. UNIQLO lists a fee of about 10% of that tax, so the estimated refund is <strong>about ¥450</strong>. Other shops may charge different fees.</p>
+          <p><strong>Keep everything on a refund receipt together.</strong> Buy gummies you’ll eat in Japan on a separate, ordinary receipt. Customs checks each transaction as a whole. Even one missing item can cost the refund on that entire receipt. If you used any of the tax-free food, drinks or cosmetics, tell a customs officer at the counter before using the kiosk. <a href="https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00027.html">Japan Tourism Agency’s traveler FAQ</a>.</p>
+
+          <h3 id="tax-refund-at-narita">Before bag drop at Narita T2</h3>
+          <div class="howto-illustrated">
+            <div class="howto-copy">
+              <ol class="howto-steps">
+                <li><strong>Go to Customs Tax Refund with your bags.</strong> For your 19:00 flight on November 28, leave time for inspection and airline bag drop. Keep your passport, receipts and <strong>all the goods</strong> accessible, including purchases you plan to check. Customs confirmation must happen within 90 days of purchase.</li>
+                <li><strong>Scan your passport at the kiosk.</strong> You can also use <a href="https://services.digital.go.jp/en/visit-japan-web/">Visit Japan Web</a> in the departure lobby on the dedicated <b>Customs_WiFi_For_TaxRefund</b> network. The kiosk works without a phone. <a href="https://www.customs.go.jp/kaigairyoko/taxrefund/vjw.html">Japan Customs’ Wi-Fi details</a>.</li>
+                <li><strong>Read the result before handing over your suitcase.</strong> <strong>Green</strong> means Customs confirmation is complete. <strong>Red</strong> means take your passport and goods to the inspection area and finish with the officer. Then continue to bag drop and security.</li>
+              </ol>
+            </div>
+            <figure class="howto-photo">
+              <a class="howto-image-link" href="https://www.customs.go.jp/kaigairyoko/taxrefund/map/AIR_01_01_02.svg" target="_blank" rel="noopener noreferrer" aria-label="Enlarge the Narita Terminal 2 customs floor map">
+                <img src="https://www.customs.go.jp/kaigairyoko/taxrefund/map/AIR_01_01_02.svg" width="3774" height="2264" loading="lazy" decoding="async" alt="Narita Terminal 2 third-floor departure lobby. Blue symbols mark the tax refund kiosks and Customs inspection area.">
+                <span class="howto-enlarge" aria-hidden="true">Enlarge floor map ↗</span>
+              </a>
+              <figcaption>Japan Customs’ map shows the confirmation kiosks outlined in red on <strong>3F, before security</strong>. <a href="https://www.narita-airport.jp/en/map/?poi=21483798">Open Customs Tax Refund on Narita’s indoor map</a>.</figcaption>
+            </figure>
           </div>
-        </div>
 
-        <h3>Receive the refund</h3>
-        <p><strong>Card, bank or app:</strong> follow the provider’s instructions on your refund slip. Timing varies by shop. If the money hasn’t arrived by the provider’s stated date, contact the shop or provider with your receipt. <strong>Cash:</strong> if the shop offers yen cash at Narita, use the payout kiosk that supports its provider. T2 has cash kiosks both before and after security, with different operators. Check the operator before passing security. <a href="https://www.narita-airport.jp/en/service/exchange/taxrefund/">Narita cash kiosks and supported providers</a>.</p>
-        <p class="jt-footnote howto-sources">Rules checked November 23, 2026. Japan introduced this refund method on November 1, 2026. <a class="jt-link" href="https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00028.html">Japan Tourism Agency’s tax-free shopping guide</a> · <a class="jt-link" href="https://www.customs.go.jp/kaigairyoko/taxrefund/C-details.html">Japan Customs departure procedure</a> · <a class="jt-link" href="day28.html#to-terminal-2">Your airport transfer and flight</a>.</p>
-      </section>
+          <h3>Receive the refund</h3>
+          <p><strong>Card, bank or app:</strong> follow the provider’s instructions on your refund slip. Timing varies by shop. If the money hasn’t arrived by the provider’s stated date, contact the shop or provider with your receipt. <strong>Cash:</strong> if the shop offers yen cash at Narita, use the payout kiosk that supports its provider. T2 has cash kiosks both before and after security, with different operators. Check the operator before passing security. <a href="https://www.narita-airport.jp/en/service/exchange/taxrefund/">Narita cash kiosks and supported providers</a>.</p>
+          <p class="jt-footnote howto-sources">Rules checked November 23, 2026. Japan introduced this refund method on November 1, 2026. <a class="jt-link" href="https://www.mlit.go.jp/kankocho/tax-free/page01_000001_00028.html">Japan Tourism Agency’s tax-free shopping guide</a> · <a class="jt-link" href="https://www.customs.go.jp/kaigairyoko/taxrefund/C-details.html">Japan Customs departure procedure</a> · <a class="jt-link" href="day28.html#to-terminal-2">Your airport transfer and flight</a>.</p>
+        </section>
 
-      <section class="jt-section" aria-labelledby="train-commute">
-        <h2 id="train-commute">How to ride the train</h2>
-        <p>Your first subway ride is a simple one to practice. From APA Hotel Nagoya Ekimae, it’s <strong>two stops to Sakae, with no transfer</strong>. The line letter, station numbers and final destination are printed on station signs.</p>
-        <ol class="train-stations" aria-label="Higashiyama Line from Nagoya to Sakae">
-          <li><b>H08</b> Nagoya</li>
-          <li><b>H09</b> Fushimi</li>
-          <li><b>H10</b> Sakae</li>
-        </ol>
-        <ol class="howto-steps">
-          <li><strong>Find the yellow H at Nagoya Station.</strong> Walk from the hotel to the Taiko-dori side of the station, then follow the public passage and signs for Subway / Higashiyama Line. Allow time to cross the station. If stairs are difficult, follow the elevator symbol or show staff your destination, Sakae (栄). <a href="transport.html#nagoya-sakae">Open the hotel-to-Sakae directions</a>.</li>
-          <li><strong>Choose one way to pay per person.</strong> With a loaded <strong>manaca</strong>, tap the IC pad like you would a beep card. With a supported contactless bank card, tap the bank-card reader at a marked gate. For a <strong>¥210 adult single ticket</strong>, choose English at the ticket machine, select the fare, pay in yen cash and take the ticket and change. Insert the ticket in the gate and pick it up as you pass. <a href="etiquette.html#manaca">See the machine and how to buy a manaca</a>.
-            <div class="train-step-photos">
-                <figure class="howto-photo">
-                  <a class="howto-image-link" href="assets/transit/nagoya-ticket-machine.webp" aria-label="Enlarge photo · Choose English on the left to buy a paper ticket.">
-                    <img src="assets/transit/nagoya-ticket-machine.webp" width="1300" height="982" alt="Nagoya subway ticket machine with an English button and fare options." loading="lazy" decoding="async">
-                  </a>
-                  <figcaption>Choose English on the left to buy a paper ticket.</figcaption>
-                </figure>
-                <figure class="howto-photo">
-                  <a class="howto-image-link" href="assets/transit/nagoya-subway-gates.webp" aria-label="Enlarge photo · At Tsurumai Station, the yellow floor panel marks an IC-only lane. Look for the matching payment symbol at your gate.">
-                    <img src="assets/transit/nagoya-subway-gates.webp" width="960" height="696" alt="Nagoya subway gates with paper-ticket and IC-card lanes marked on the floor." loading="lazy" decoding="async">
-                  </a>
-                  <figcaption>At Tsurumai Station, the yellow floor panel marks an IC-only lane. Look for the matching payment symbol at your gate.</figcaption>
-                </figure>
-            </div>
-          </li>
-          <li><strong>At Nagoya (H08), board toward Fujigaoka.</strong> Look for platform 1 and check the destination display. Queue by the door marks and leave the middle clear. When you hear an approach tune, stay behind the line. Let people off, then board once the doors are open. <a href="etiquette.html#train-jingles">Hear the two Higashiyama tunes</a>.
-            <div class="train-step-photos">
-                <figure class="howto-photo">
-                  <a class="howto-image-link" href="assets/transit/nagoya-higashiyama-platform.webp" aria-label="Enlarge photo · At Nagoya, check the overhead display and wait beside the door markings.">
-                    <img src="assets/transit/nagoya-higashiyama-platform.webp" width="960" height="640" alt="Higashiyama Line platform at Nagoya Station with platform doors and an overhead departure display." loading="lazy" decoding="async">
-                  </a>
-                  <figcaption>At Nagoya, check the overhead display and wait beside the door markings.</figcaption>
-                </figure>
-                <figure class="howto-photo">
-                  <a class="howto-image-link" href="assets/transit/nagoya-higashiyama-sign.webp" aria-label="Enlarge photo · Nagoya · 名古屋. Look for this station name and the yellow line color.">
-                    <img src="assets/transit/nagoya-higashiyama-sign.webp" width="637" height="850" alt="Nagoya station-name board with a yellow stripe on the Higashiyama Line." loading="lazy" decoding="async">
-                  </a>
-                  <figcaption>Nagoya · 名古屋. Look for this station name and the yellow line color.</figcaption>
-                </figure>
-            </div>
-          </li>
-          <li><strong>Stay on at Fushimi (H09). Get off at Sakae (H10).</strong> Check the display above the door or listen for “Sakae.” For the East Gate, use elevator A at the east end of the Higashiyama platform. Tap out with the same card or device you used to enter. With a single ticket, insert it at the exit gate, which keeps it. If the gate stops you, show the attendant your card or ticket. <a href="https://www.kotsu.city.nagoya.jp/rp/reader/trp0000625.htm">Sakae platform and elevator guide</a>.
-            <div class="train-step-photos train-photo-single">
-                <figure class="howto-photo">
-                  <a class="howto-image-link" href="assets/transit/sakae-higashiyama-sign.webp" aria-label="Enlarge photo · Sakae · 栄. Get off here for the shopping district.">
-                    <img src="assets/transit/sakae-higashiyama-sign.webp" width="637" height="850" alt="Sakae station-name board with 栄 and the yellow Higashiyama stripe." loading="lazy" decoding="async">
-                  </a>
-                  <figcaption>Sakae · 栄. Get off here for the shopping district.</figcaption>
-                </figure>
-            </div>
-          </li>
-          <li><strong>To get back to the hotel, reverse the direction.</strong> At Sakae take the yellow H from platform 2 toward <strong>Takabata</strong>. Pass Fushimi, get off at Nagoya and follow Taiko-dori Exit signs. For a paper fare, buy a new ticket for the return.</li>
-        </ol>
-      </section>
-
-      <details class="howto-credits">
-        <summary>Photo credits and licenses</summary>
-        <ul>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Subway_Nagoya-STA_Higashiyama-Line_Platform1.jpg">Subway Nagoya-STA Higashiyama-Line Platform1</a> by MaedaAkihiko. Resized and converted to WebP. <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Nagoya_Station_Sign_(Higashiyama_Line).jpg">Nagoya Station Sign (Higashiyama Line)</a> by そらみみ. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Sakae_Station_Sign_(Higashiyama_Line).jpg">Sakae Station Sign (Higashiyama Line)</a> by そらみみ. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Ticketgates.JPG">Ticketgates</a> by アレックス. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:NGO_Nakamura_Subway_Nagoya_Sta_ticket_machine_20230316_165140.jpg">Nagoya ticket machine</a> by 円周率３パーセント. Cropped and resized. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Seven_Bank_ATM,_Toyosu_Front,_Tokyo_-_Jul_3,_2025.jpg">Seven Bank ATM at Toyosu Front, Tokyo</a> by Nori Norisa, 2025. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Air_conditioner_remote_-_Japan_-_2024_sept_8.jpeg">Room heater remote</a> by Nesnad. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Thermostaatkraan.jpg">Thermostatic shower mixer</a> by M.Minderhoud at Dutch Wikipedia. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:MAX---MR-103HM_001.jpg">MAX bathroom heater panel</a> by RuinDig/Yuki Uchida. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
-          <li><a href="https://commons.wikimedia.org/wiki/File:Toto_Washlet_TCF8WW88_control_panel,_top_view.jpg">TOTO toilet-seat control panel</a> by Benlisquare. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
-        </ul>
-        <p>The hotel-control photos include a highlight over the relevant button or dial. The adapted photos retain their respective licenses.</p>
-      </details>
+        <details class="howto-credits">
+          <summary>Photo credits and licenses</summary>
+          <ul>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Subway_Nagoya-STA_Higashiyama-Line_Platform1.jpg">Subway Nagoya-STA Higashiyama-Line Platform1</a> by MaedaAkihiko. Resized and converted to WebP. <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Nagoya_Station_Sign_(Higashiyama_Line).jpg">Nagoya Station Sign (Higashiyama Line)</a> by そらみみ. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Sakae_Station_Sign_(Higashiyama_Line).jpg">Sakae Station Sign (Higashiyama Line)</a> by そらみみ. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Ticketgates.JPG">Ticketgates</a> by アレックス. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:NGO_Nakamura_Subway_Nagoya_Sta_ticket_machine_20230316_165140.jpg">Nagoya ticket machine</a> by 円周率３パーセント. Cropped and resized. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Seven_Bank_ATM,_Toyosu_Front,_Tokyo_-_Jul_3,_2025.jpg">Seven Bank ATM at Toyosu Front, Tokyo</a> by Nori Norisa, 2025. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Air_conditioner_remote_-_Japan_-_2024_sept_8.jpeg">Room heater remote</a> by Nesnad. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Thermostaatkraan.jpg">Thermostatic shower mixer</a> by M.Minderhoud at Dutch Wikipedia. Resized and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:MAX---MR-103HM_001.jpg">MAX bathroom heater panel</a> by RuinDig/Yuki Uchida. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
+            <li><a href="https://commons.wikimedia.org/wiki/File:Toto_Washlet_TCF8WW88_control_panel,_top_view.jpg">TOTO toilet-seat control panel</a> by Benlisquare. Cropped and converted to WebP. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</li>
+          </ul>
+          <p>The hotel-control photos include a highlight over the relevant button or dial. The adapted photos retain their respective licenses.</p>
+        </details>
+      </div>
     </div>
   </main>
 </body>
