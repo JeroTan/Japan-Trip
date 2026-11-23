@@ -152,3 +152,31 @@ test('the How to index follows all six guides and opens the selected heading by 
   await index.locator('[href="#train-commute"][aria-current="location"]').waitFor();
   assert.equal(await page.locator(':focus').getAttribute('id'), 'train-commute');
 });
+
+test('the phone menu stays open when the page finishes loading after a tap', async t => {
+  const browser = await chromium.launch(process.env.CHROME_PATH ? {executablePath: process.env.CHROME_PATH} : {});
+  t.after(() => browser.close());
+  const page = await browser.newPage({viewport: {width: 844, height: 390}});
+  let releaseImage;
+  const imageReady = new Promise(resolve => { releaseImage = resolve; });
+  await page.route('https://guide.test/slow-image', async route => {
+    await imageReady;
+    await route.fulfill({contentType: 'image/svg+xml', body: '<svg xmlns="http://www.w3.org/2000/svg"/>'});
+  });
+  await page.addInitScript(() => {
+    document.addEventListener('DOMContentLoaded', () => {
+      const image = new Image();
+      image.hidden = true;
+      image.src = 'https://guide.test/slow-image';
+      document.body.append(image);
+    });
+  });
+  await page.goto(entry('phrases'), {waitUntil: 'domcontentloaded'});
+  const menu = page.getByRole('button', {name: 'Menu', exact: true});
+  await menu.click();
+  await page.evaluate(() => window.addEventListener('pageshow', () => { document.body.dataset.shown = 'true'; }, {once: true}));
+  releaseImage();
+  await page.waitForSelector('body[data-shown]', {timeout: 3000});
+  assert.equal(await menu.getAttribute('aria-expanded'), 'true');
+  assert.ok(await page.getByRole('navigation', {name: 'Main navigation'}).getByRole('link', {name:'Checklist'}).isVisible());
+});

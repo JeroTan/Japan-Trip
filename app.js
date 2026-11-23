@@ -44,8 +44,8 @@
   }
   main.addEventListener('change', rememberControls);
   main.addEventListener('input', rememberControls);
-  window.addEventListener('pageshow', () => {
-    setMenu(false);
+  window.addEventListener('pageshow', event => {
+    if (event.persisted) setMenu(false);
     const saved = history.state?.guideControls;
     if (!saved) return;
     for (const [id, value] of Object.entries(saved)) {
