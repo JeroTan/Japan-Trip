@@ -7,10 +7,10 @@
   <meta name="theme-color" content="#f7f7f0">
   <title>Japanese phrasebook · Japan field guide</title>
   <link rel="icon" type="image/svg+xml" sizes="any" href="assets/field-notes.svg">
-  <link rel="stylesheet" href="site.css?v=7769d9ed44">
-  <link rel="stylesheet" href="tools.css">
+  <link rel="stylesheet" href="site.css?v=e05b8a5e06">
+  <link rel="stylesheet" href="tools.css?v=12ae3f308e">
   <script defer src="trip.js"></script>
-  <script defer src="tools.js"></script>
+  <script defer src="tools.js?v=3df9f7aa1a"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
@@ -52,9 +52,12 @@
           </select>
         </label>
       </div>
-      <p class="jt-results-count" role="status" id="jt-results-count" hidden></p>
+      <div class="jt-filter-status" hidden>
+        <p class="jt-results-count" role="status" id="jt-results-count"></p>
+        <button type="button" class="jt-btn jt-quiet" data-clear hidden>Clear filters</button>
+      </div>
 
-      <section class="jt-section jt-phrase-group">
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="everyday">
         <h2 id="everyday">Everyday</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
@@ -171,8 +174,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>Trains &amp; taxis</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="trains-and-taxis">
+        <h2 id="trains-and-taxis">Trains &amp; taxis</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>Which platform does this train leave from?</h3>
@@ -222,8 +225,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>At the airport</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="airport">
+        <h2 id="airport">At the airport</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>Where is the Cebu Pacific counter?</h3>
@@ -258,8 +261,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>At the hotel</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="hotel">
+        <h2 id="hotel">At the hotel</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>I have a reservation</h3>
@@ -299,8 +302,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>Food &amp; dining</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="dining">
+        <h2 id="dining">Food &amp; dining</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>A table for four, please</h3>
@@ -345,8 +348,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>Shopping</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="shopping">
+        <h2 id="shopping">Shopping</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>How much is this?</h3>
@@ -381,8 +384,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>Business visits</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="business">
+        <h2 id="business">Business visits</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>Nice to meet you</h3>
@@ -417,8 +420,8 @@
         </div>
       </section>
 
-      <section class="jt-section jt-phrase-group">
-        <h2>Getting help</h2>
+      <section class="jt-section jt-chapter jt-phrase-group" aria-labelledby="getting-help">
+        <h2 id="getting-help">Getting help</h2>
         <div class="jt-phrase-grid">
           <article class="jt-phrase">
             <h3>Please help me</h3>
@@ -461,7 +464,6 @@
       <div class="jt-empty" hidden>
         <h2>No matching phrases</h2>
         <p>Try another word or choose a different situation.</p>
-        <button type="button" class="jt-btn" data-clear>Clear filters</button>
       </div>
       <p class="jt-footnote"><a class="jt-link" href="https://www.japan.travel/en/plan/japanese-language/" target="_blank" rel="noopener noreferrer">JNTO language guide <span aria-hidden="true">↗</span></a></p>
 

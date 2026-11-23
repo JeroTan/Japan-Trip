@@ -19,7 +19,7 @@
 .jt-section { margin: 0 0 clamp(32px, 4vw, 54px); }
 .jt-section h2, .jt-empty h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); }
 .jt-section > h2, .jt-section-title { margin-bottom: 16px; }
-.etiquette-guide { max-width: 66rem; }
+.etiquette-guide { max-width: 66rem; margin-inline: auto; }
 .etiquette-guide .jt-section > p { max-width: 72ch; }
 .etiquette-steps {
   width: 100%;
@@ -54,14 +54,24 @@
   margin-inline: auto;
 }
 .howto-guide > .jt-header { grid-column: 1 / -1; margin: 0 0 1.5rem; }
-.howto-contents { position: sticky; top: 1rem; border-top: 2px solid var(--ink); padding-top: 1rem; }
-.howto-contents h2 { margin: 0 0 .5rem; font: 650 .94rem/1.4 var(--sans); }
-.howto-contents ul { list-style: none; margin: 0; padding: 0; }
-.howto-contents a { display: flex; align-items: center; min-height: 44px; padding: .5rem 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: .94rem; text-decoration: none; }
-.howto-contents a[aria-current="location"] { color: var(--accent); font-weight: 700; }
-.howto-contents a:hover, .howto-contents a:focus-visible { color: var(--accent); text-decoration: underline; }
+.howto-contents { position: sticky; top: 1rem; }
+.jt-topics { border-top: 2px solid var(--ink); padding-top: 1rem; }
+.jt-topics h2 { margin: 0 0 .5rem; font: 650 .94rem/1.4 var(--sans); }
+.jt-topics ul { list-style: none; margin: 0; padding: 0; }
+.jt-topics a { display: flex; align-items: center; min-height: 44px; padding: .5rem 0; border-bottom: 1px solid var(--line); color: var(--ink); font-size: .94rem; text-decoration: none; }
+.jt-topics a[aria-current="location"] { color: var(--accent); font-weight: 700; }
+.jt-topics a:hover, .jt-topics a:focus-visible { color: var(--accent); text-decoration: underline; }
+.jt-topics-inline { margin-top: 1.25rem; }
+.jt-topics-inline ul { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+.jt-topics li { display: grid; }
+.souvenir-intro .jt-topics ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 650px) {
+  .jt-topics-inline ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+}
+.jt-chapter, .jt-chapter [id] { scroll-margin-top: 1rem; }
 .howto-chapters { min-width: 0; }
-.howto-chapters > .jt-section { border-top: 2px solid var(--ink); padding-top: 1.25rem; margin: 0 0 clamp(2.5rem, 5vw, 4.5rem); }
+.jt-chapter, .howto-chapters > .jt-section { border-top: 2px solid var(--ink); padding-top: 1.25rem; }
+.howto-chapters > .jt-section { margin: 0 0 clamp(2.5rem, 5vw, 4.5rem); }
 .howto-heading { margin-bottom: 1.5rem; }
 .howto-heading h2 { text-wrap: balance; }
 .howto-heading p { color: var(--muted); margin: .65rem 0 0; }
@@ -105,7 +115,6 @@
   .howto-guide { display: block; }
   .howto-contents { position: static; margin-bottom: 2rem; }
   .howto-contents ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
-  .howto-contents li { display: grid; }
 }
 @media (max-width: 650px) {
   .howto-illustrated { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
@@ -147,7 +156,8 @@
 }
 .jt-view select { cursor: pointer; }
 .jt-route-index { padding: 10px clamp(16px, 3vw, 32px); }
-.jt-route-index summary, .jt-hotel-map summary {
+.jt-route-index summary {
+  min-height: 44px;
   width: fit-content;
   padding-block: 9px;
   color: var(--accent, #b83a2c);
@@ -258,7 +268,8 @@
 .jt-footnote + .jt-section { margin-top: 34px; }
 .jt-filters { display: grid; grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); align-items: end; border-top: 3px solid var(--accent, #b83a2c); }
 .jt-filters label { display: grid; gap: 6px; }
-.jt-results-count { margin: 12px 0 20px; }
+.jt-filter-status { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-block: .3rem .7rem; }
+.jt-results-count { margin: 0; }
 .jt-phrase h3 { font: 650 1rem/1.35 var(--sans, system-ui, sans-serif); margin: 0; }
 .jt-script, .jt-dialog-ja { font-family: "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif; }
 .jt-view ruby { ruby-position: over; }

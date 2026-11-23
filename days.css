@@ -63,7 +63,7 @@
 .jd-schedule, .jd-shop-column { min-width: 0; }
 .jd-guide h2 { font: 500 2.1rem/1.18 var(--serif); letter-spacing: -.035em; }
 .jd-full-day { margin-top: 6px; }
-.jd-full-day summary, .jd-stop-map summary {
+.jd-full-day summary {
   width: fit-content;
   min-height: 44px;
   padding: 11px 2px;

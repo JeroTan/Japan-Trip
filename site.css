@@ -48,6 +48,17 @@ a { color: inherit; }
 #main-content { min-height: 60vh; }
 #main-content:focus { outline: none; }
 #main-content[data-view]:not([data-view="overview"]) { padding-block: clamp(20px, 3.3vw, 48px) clamp(32px, 4vw, 58px); }
+/* Map disclosures use the same marker and touch target throughout the guide. */
+:is(.jd-stop-map, .food-route, .jt-hotel-map) > summary {
+  width: fit-content;
+  min-height: 44px;
+  padding-block: .65rem;
+  color: var(--ink);
+  font: 650 .94rem/1.5 var(--sans);
+  cursor: pointer;
+}
+:is(.jd-stop-map, .food-route, .jt-hotel-map) > summary::marker { color: var(--accent); }
+:is(.jd-stop-map, .food-route, .jt-hotel-map) > summary:hover { text-decoration: underline; text-underline-offset: .2em; }
 .guide-symbols { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }
 .guide-icon {
   width: 20px;
@@ -223,10 +234,19 @@ a { color: inherit; }
   .guide-menu-close, .guide-menu[aria-expanded="true"] .guide-menu-open { display: none; }
   .guide-menu[aria-expanded="true"] .guide-menu-close { display: inline; }
   .guide-nav { display: none; position: absolute; inset: 100% 0 auto; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; padding: 6px; box-shadow: 0 10px 24px #17261e1c; }
-  .guide-nav-open { display: grid; gap: 0; }
+  .guide-nav-open {
+    display: grid;
+    gap: 0;
+    max-height: calc(100vh - 70px);
+    max-height: calc(100dvh - 70px);
+    overflow-y: auto;
+  }
   .guide-nav a { min-height: 44px; padding: 6px 13px; }
   .guide-nav a[aria-current] { background: var(--guide-sage); border-radius: 2px; }
   .guide-nav a[aria-current]::after { inset: 9px auto 9px 0; height: auto; width: 3px; }
+}
+@media (min-width: 560px) and (max-width: 1080px) and (max-height: 550px) {
+  .guide-nav-open { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 680px) {
   :root { --guide-gutter: clamp(16px, 5vw, 26px); }

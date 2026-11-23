@@ -103,6 +103,7 @@
     const query = main.querySelector('#jt-query');
     const situation = main.querySelector('#jt-situation');
     const resultCount = main.querySelector('#jt-results-count');
+    const clearFilters = main.querySelector('[data-clear]');
     const empty = main.querySelector('.jt-empty');
     const dialog = main.querySelector('dialog');
     const actions = main.querySelector('#jt-phrase-actions');
@@ -148,14 +149,15 @@
       }
       resultCount.textContent = total + (total === 1 ? ' phrase' : ' phrases');
       empty.hidden = total !== 0;
+      clearFilters.hidden = !query.value && !situation.value;
     }
 
     query.addEventListener('input', filter);
     situation.addEventListener('change', filter);
-    empty.querySelector('button').addEventListener('click', () => {
+    clearFilters.addEventListener('click', () => {
       query.value = '';
       situation.value = '';
-      filter();
+      query.dispatchEvent(new Event('input', {bubbles: true}));
       query.focus();
     });
 
@@ -198,7 +200,7 @@
     window.addEventListener('pageshow', filter);
     filter();
     main.querySelector('.jt-filters').hidden = false;
-    resultCount.hidden = false;
+    main.querySelector('.jt-filter-status').hidden = false;
   }
 
   switch (main?.dataset.view) {

@@ -209,3 +209,22 @@ test('phrase search, situation filter, large display, keyboard focus and Japanes
   await results.getByRole('button', {name: /Show/}).click();
   assert.equal(await dialog.locator('.jt-dialog-roman').textContent(), 'Kore wa chuukohin desu ka?');
 });
+
+test('clearing a matching phrase search also resets the situation on return', async t => {
+  const page = await visit(t, 'phrases');
+  const query = page.getByRole('searchbox');
+  const situation = page.getByRole('combobox', {name: 'Situation'});
+  const results = page.getByRole('article');
+  const total = await results.count();
+  await situation.selectOption({label: 'Everyday'});
+  await query.fill('gaikokujin');
+  assert.equal(await results.count(), 1);
+  await page.getByRole('button', {name: 'Clear filters'}).click();
+  assert.ok(await query.evaluate(field => field === document.activeElement));
+  await page.getByRole('navigation', {name: 'Main navigation'}).getByRole('link', {name: 'Checklist'}).click();
+  await page.goBack();
+  assert.equal(await query.inputValue(), '');
+  assert.equal(await situation.inputValue(), '');
+  assert.equal(await results.count(), total);
+  assert.equal(await page.getByRole('button', {name: 'Clear filters'}).count(), 0);
+});
