@@ -100,7 +100,7 @@ test('the standalone shopping guide keeps sources at the end and opens nearby sh
   const items = page.locator('.souvenir-list');
   assert.equal(await items.locator('li:not(:has(figure img[alt]))').count(), 0);
   assert.doesNotMatch((await items.allInnerTexts()).join(' '), /the video|the creator|timestamp|featured shop/i);
-  for (const id of ['imo-kenpi','ninja-meshi','oao','white-tees','vintage-watches','palm-shaver','bonsai','paolo-hot-sauce','white-tea-candle','shimbi']) {
+  for (const id of ['imo-kenpi','ninja-meshi','oao','white-tees','vintage-watches','palm-shaver','bonsai','paolo-hot-sauce','white-tea-candle','shimbi','steam-eye-mask','kuru-toga','stationery','campus','thermos','zojirushi','horinishi','matcha-kitkat','sake-kitkat','tokyo-banana','pocky','baton-dor','woven-amulet']) {
     assert.ok(await items.locator('#' + id).isVisible(), id);
   }
   await page.getByRole('link', {name:'RAILYARD in Akihabara'}).click();
@@ -136,14 +136,15 @@ test('the first subway ride links to its approach tunes and distinguishes the JR
   assert.ok(await page.getByText(/the melody signals departure/).isVisible());
 });
 
-test('the How to index follows all six guides and opens the selected heading by keyboard', async t => {
+test('the How to index follows all seven guides and opens the selected heading by keyboard', async t => {
   const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   t.after(() => browser.close());
   const page = await browser.newPage({viewport:{width:1280, height:800}});
   await page.goto(entry('how-to') + '#withdraw-yen');
   const index = page.getByRole('navigation', {name:'On this page'});
   const headings = await page.locator('.howto-heading h2').evaluateAll(nodes => nodes.map(node => '#' + node.id));
-  assert.equal(headings.length, 6);
+  assert.equal(headings.length, 7);
+  assert.ok(headings.includes('#airport-duty-free'));
   assert.deepEqual(await index.getByRole('link').evaluateAll(links => links.map(link => link.hash)), headings);
   await index.locator('[href="#maribank"][aria-current="location"]').waitFor();
   const train = index.getByRole('link', {name:'Nagoya subway'});

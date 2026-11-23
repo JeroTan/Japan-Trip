@@ -48,6 +48,16 @@ a { color: inherit; }
 #main-content { min-height: 60vh; }
 #main-content:focus { outline: none; }
 #main-content[data-view]:not([data-view="overview"]) { padding-block: clamp(20px, 3.3vw, 48px) clamp(32px, 4vw, 58px); }
+.brand-mark {
+  display: inline-block;
+  width: 1.12em;
+  height: 1.12em;
+  max-width: 22px;
+  max-height: 22px;
+  margin-inline-end: .22em;
+  vertical-align: -.17em;
+  object-fit: contain;
+}
 /* Map disclosures use the same marker and touch target throughout the guide. */
 :is(.jd-stop-map, .food-route, .jt-hotel-map) > summary {
   width: fit-content;
