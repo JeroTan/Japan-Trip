@@ -48,6 +48,20 @@ a { color: inherit; }
 #main-content { min-height: 60vh; }
 #main-content:focus { outline: none; }
 #main-content[data-view]:not([data-view="overview"]) { padding-block: clamp(20px, 3.3vw, 48px) clamp(32px, 4vw, 58px); }
+.trip-distance, .rail-code {
+  display: inline-block;
+  font: 700 .78rem/1.45 var(--sans);
+  vertical-align: .08em;
+}
+.trip-distance { padding: .12rem .5rem; border: 1px solid #a8b6a6; border-radius: 3px; background: var(--guide-sage); color: var(--ink); white-space: nowrap; }
+.trip-distance[data-band="closest"] { background: #d9ebdd; border-color: #99b5a0; }
+.trip-distance[data-band="commute"] { background: #e5eef4; border-color: #a3b9c9; }
+.trip-distance[data-band="far"], .trip-distance[data-band="very-far"] { background: #f7e9d7; border-color: #cab390; }
+.rail-code { min-width: 1.55em; padding: .02em .22em; border: 2px solid var(--rail-colour); border-radius: 50%; background: white; color: #1d2826; text-align: center; }
+.rail-higashiyama { --rail-colour: #c79e00; }
+.rail-hibiya { --rail-colour: #828b99; }
+.rail-tozai { --rail-colour: #0099b9; }
+.rail-ginza { --rail-colour: #ed9115; }
 .brand-mark {
   display: inline-block;
   width: 1.12em;
