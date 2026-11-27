@@ -154,8 +154,6 @@ test("each reachable hobby shop has matching hotel directions and a visible rout
     [24, 'APA Hotel Nagoya Ekimae', 'transit', ['BOOKOFF SUPER BAZAAR Sakae-SKYLE Store', '#C-pla 名古屋サカエチカ店']],
     [25, 'APA Hotel Nagoya Ekimae', 'transit', ['BOOKOFF SUPER BAZAAR Sakae-SKYLE Store', '#C-pla 名古屋サカエチカ店']],
     [26, 'APA Hotel Kayabacho Hatchobori Ekimae', 'walking', ['hololive production official shop in Tokyo Station']],
-    [27, 'Narita Tobu Hotel Airport', 'driving', ['BOOKOFF AEON MALL Narita Store']],
-    [28, 'Narita Tobu Hotel Airport', 'driving', ['BOOKOFF AEON MALL Narita Store']]
   ]) {
     const page = await openDay(date, { javaScriptEnabled: false, viewport: { width: 375, height: 812 } });
     t.after(() => page.close());
@@ -194,13 +192,17 @@ test("optional shops retain their original links, dates and saved selections aft
     await page.getByRole("checkbox", { name: /hololive/ }).waitFor();
     assert.deepEqual(await links(), ["https://maps.app.goo.gl/XmUaUJQs5mVGn9ur7"]);
     await dates.getByRole("link", { name: /27 November/ }).click();
-    await page.getByRole("checkbox", { name: /AEON MALL Narita/ }).waitFor();
-    assert.deepEqual(await links(), ["https://maps.app.goo.gl/7sSh4HaFAaSLP11Q9"]);
+    await page.getByRole("region", { name: "After dinner in Narita" }).waitFor();
+    assert.equal(await hobby.count(), 0);
+    const route = page.getByRole("combobox", { name: "Route leg", exact: true });
+    await route.selectOption({ label: "Narita Tobu → AEON Mall Narita" });
+    const directions = new URL(await page.locator(".jd-directions").getAttribute("href"));
+    assert.match(directions.searchParams.get("destination"), /^AEON Mall Narita/);
+    assert.equal(new URL(await page.locator(".jd-route-map").getAttribute("src")).searchParams.get("daddr"), directions.searchParams.get("destination"));
     await dates.getByRole("link", { name: /28 November/ }).click();
-    await page.getByRole("checkbox", { name: /Fa-So-La/ }).waitFor();
-    assert.deepEqual(await links(), ["https://maps.app.goo.gl/7sSh4HaFAaSLP11Q9", "https://maps.app.goo.gl/q1QRgKrXWirfr7PM9"]);
-    assert.match(await hobby.innerText(), /after international security in Terminal 1/i);
-    assert.match(await hobby.innerText(), /Terminal 2 ticket/i);
+    await page.getByRole("region", { name: "At Terminal 2" }).waitFor();
+    assert.equal(await hobby.count(), 0);
+    assert.doesNotMatch(await page.locator("main").innerText(), /BOOKOFF|AKIHABARA/i);
     await dates.getByRole("link", { name: /24 November/ }).click();
     await box.waitFor();
     assert.equal(await box.isChecked(), false);
